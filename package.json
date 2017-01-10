@@ -4,9 +4,10 @@
   "description": "The react frontend for ozz",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node_modules/.bin/babel-node --presets 'react,es2015' src/server.js"
+    "dev": "nodemon --watch server --exec babel-node -- server/devIndex.js",
+    "start": "NODE_ENV=production node_modules/.bin/babel-node --presets 'react,es2015' src/server/index.js"
   },
-  "author": "",
+  "author": "Akshay Kulkarni",
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.11.4",
@@ -22,6 +23,10 @@
   "devDependencies": {
     "babel-loader": "^6.2.10",
     "http-server": "^0.9.0",
-    "webpack": "^1.13.3"
+    "nodemon": "^1.11.0",
+    "react-hot-loader": "^1.3.1",
+    "webpack": "^1.13.3",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-hot-middleware": "^2.15.0"
   }
 }
