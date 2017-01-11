@@ -3,6 +3,7 @@ import map from 'lodash/map';
 import classnames from 'classnames';
 import validateInput from '../../../server/shared/validations/signup';
 import TextFieldGroup from '../common/TextFieldGroup';
+import { browserHistory } from 'react-router';
 
 import timezones from '../../data/timezones';
 
@@ -44,7 +45,9 @@ class SignupForm extends React.Component{
 
         if (this.isValid()){
             this.props.userSignupRequest(this.state).then(
-                () => {},
+                () => {
+                    browserHistory.push('/');
+                },
                 ( error ) => this.setState({ errors: error.response.data, isLoading:false})
             );
         }
@@ -74,6 +77,7 @@ class SignupForm extends React.Component{
                     label="Email"
                     onChange={this.onChange}
                     value={this.state.email}
+                    type="email"
                     field="email"
                 />
 
@@ -82,6 +86,7 @@ class SignupForm extends React.Component{
                     label="Password"
                     onChange={this.onChange}
                     value={this.state.password}
+                    type="password"
                     field="password"
                 />
 
@@ -90,6 +95,7 @@ class SignupForm extends React.Component{
                     label="Password Confirmation"
                     onChange={this.onChange}
                     value={this.state.passwordConfirmation}
+                    type="password"
                     field="passwordConfirmation"
                 />
 
