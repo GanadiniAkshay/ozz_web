@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch server --exec babel-node -- server/devIndex.js",
-    "build":"NODE_ENV=production node_modules/.bin/webpack -p",
+    "build": "NODE_ENV=production node_modules/.bin/webpack -p",
     "start": "babel-node -- server/index.js"
   },
   "author": "Akshay Kulkarni",
@@ -16,6 +16,8 @@
     "babel-core": "^6.13.2",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
+    "body-parser": "^1.15.2",
+    "classnames": "^2.2.5",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "lodash": "^4.17.4",
@@ -24,7 +26,8 @@
     "react-redux": "^5.0.2",
     "react-router": "^2.6.1",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "validator": "^6.2.1"
   },
   "devDependencies": {
     "babel-loader": "^6.2.10",
