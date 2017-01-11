@@ -23,7 +23,11 @@ app.use(webpackMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-app.get('/*',(req,res) => {
+app.get('/',(req,res) => {
+    res.sendFile(path.join(__dirname, './landing.html'));
+});
+
+app.get('*',(req,res) => {
     res.sendFile(path.join(__dirname, './index.html'));
 });
 
