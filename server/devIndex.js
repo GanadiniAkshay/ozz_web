@@ -23,9 +23,8 @@ app.use(webpackMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-app.get('/',(req,res) => {
-    res.sendFile(path.join(__dirname, './landing.html'));
-});
+// define the folder that will be used for static assets
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*',(req,res) => {
     res.sendFile(path.join(__dirname, './index.html'));

@@ -7,14 +7,12 @@ import { browserHistory, Link } from 'react-router';
 
 import timezones from '../../data/timezones';
 
-class SignupForm extends React.Component{
+class LoginForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            name: '',
             email: '',
             password: '',
-            passwordConfirmation: '',
             errors: {},
             isLoading: false
         }
@@ -67,13 +65,6 @@ class SignupForm extends React.Component{
         return (
             <form onSubmit={this.onSubmit}>
 
-                <TextFieldGroup
-                    error={errors.name}
-                    label="Name"
-                    onChange={this.onChange}
-                    value={this.state.name}
-                    field="name"
-                />
 
                 <TextFieldGroup
                     error={errors.email}
@@ -93,24 +84,16 @@ class SignupForm extends React.Component{
                     field="password"
                 />
 
-                <TextFieldGroup
-                    error={errors.passwordConfirmation}
-                    label="Password Confirmation"
-                    onChange={this.onChange}
-                    value={this.state.passwordConfirmation}
-                    type="password"
-                    field="passwordConfirmation"
-                />
 
 
                 <div className="form-group">
                     <button disabled={this.state.isLoading} className="ctas-button" style={{'background':'#58488a','color':'white'}}>
-                        Sign Up
+                        Login
                     </button><br/><br/>
                     <p>
-                        Already have an account? &emsp;
-                        <Link to="/login" style={{'textDecoration':'underline','color':'#58488a'}}>
-                         Login
+                        Don't have an account? &emsp;
+                        <Link to="/signup" style={{'textDecoration':'underline','color':'#58488a'}}>
+                         Signup
                         </Link>
                     </p>
                 </div>
@@ -119,9 +102,9 @@ class SignupForm extends React.Component{
     }
 }
 
-SignupForm.propTypes = {
+LoginForm.propTypes = {
     userSignupRequest: React.PropTypes.func.isRequired,
     addFlashMessage: React.PropTypes.func.isRequired
 }
 
-export default SignupForm;
+export default LoginForm;

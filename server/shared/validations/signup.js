@@ -4,8 +4,8 @@ import isEmpty from 'lodash/isEmpty';
 export default function validateInput(data){
     let errors = {};
 
-    if (Validator.isEmpty(data.username)){
-        errors.username = 'Username is required';
+    if (Validator.isEmpty(data.name)){
+        errors.name = 'Name is required';
     }
 
     if (Validator.isEmpty(data.email)){
@@ -27,11 +27,7 @@ export default function validateInput(data){
     if (!Validator.equals(data.password,data.passwordConfirmation)){
         errors.passwordConfirmation = 'Passwords must match';
     }
-
-    if (Validator.isEmpty(data.timezone)){
-        errors.timezone = 'Timezone is required';
-    }
-
+    
     return {
         errors,
         isValid: isEmpty(errors)

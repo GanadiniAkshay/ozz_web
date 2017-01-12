@@ -30,6 +30,19 @@ body {
     line-height: 40px;
   }
 }
+.headingLogo{
+	text-align: center;
+	color: white;
+	font-weight: 100;
+	font-size: 50px;
+	line-height: 68px;
+}
+@media (max-width: 900px) {
+.headingLogo {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
 .subheading {
   font-size: 30px;
   line-height: 40px;
@@ -40,6 +53,13 @@ body {
     font-size: 26px;
     line-height: 35px;
   }
+}
+.tagline{
+	font-size:26px;
+	line-height: 35px;
+	font-weight: 500;
+	color: white;
+	text-align: center;
 }
 .paragraph {
   font-size: 17px;

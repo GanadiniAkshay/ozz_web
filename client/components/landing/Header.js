@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router'; 
 
 export default () => {
     return (
@@ -6,17 +7,17 @@ export default () => {
             <div className="container-lrg">
                 <div className="col-12 spread">
                     <div>
-                        <a className="logo">
+                        <Link className="logo" to="/"> 
                             OZZ.ai
-                        </a>
+                        </Link>
                     </div>
                     <div>
-                        <a className="nav-link" href="#">
-                            Twitter
-                        </a>
-                        <a className="nav-link" href="#">
-                            Facebook
-                        </a>
+                        <Link className="nav-link" to="/login">
+                            Login
+                        </Link>
+                        <Link className="nav-link" to="/signup">
+                            Signup
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -29,9 +30,9 @@ export default () => {
                         Automated Testing<div>Smart Analytics</div><div>Continuous Learning</div>
                     </h2>
                     <div className="ctas">
-                        <a className="ctas-button" href="">
-                        Sign Up
-                        </a>
+                        <Link className="ctas-button" to="/signup">
+                            Sign Up
+                        </Link>
                     </div>
                 </div>
                 <div className="col-6 sidedevices">

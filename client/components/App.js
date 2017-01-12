@@ -1,14 +1,18 @@
 import React from 'react';
-import NavigationBar from './NavigationBar';
-import FlashMessagesList from './flash/FlashMessagesList';
+import Header from './landing/Header';
+import Features from './landing/Features';
+import SocialProof from './landing/SocialProof';
+import Footer from './landing/Footer';
 
 class App extends React.Component {
     render(){
+        document.body.style.backgroundColor = 'white';
         return (
-            <div className="container">
-                <NavigationBar />
-                <FlashMessagesList />
-                {this.props.children}
+            <div className="fluid-container">
+                <Header />
+                <Features/>
+                <SocialProof />
+                <Footer />
             </div>
         );
     }
