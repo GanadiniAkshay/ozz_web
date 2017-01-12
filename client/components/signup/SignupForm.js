@@ -15,8 +15,7 @@ class SignupForm extends React.Component{
             email: '',
             password: '',
             passwordConfirmation: '',
-            errors: {},
-            isLoading: false
+            errors: {}
         }
 
     
@@ -40,19 +39,15 @@ class SignupForm extends React.Component{
     }
 
     onSubmit(e){
-        this.setState({ errors: {}, isLoading:true });
+        this.setState({ errors: {}});
         e.preventDefault();
 
         if (this.isValid()){
             this.props.userSignupRequest(this.state).then(
                 () => {
-                    this.props.addFlashMessage({
-                        type:'success',
-                        text:'You signed up successfully. Welcome!'
-                    })
                     browserHistory.push('/');
                 },
-                ( error ) => this.setState({ errors: error.response.data, isLoading:false})
+                ( error ) => this.setState({ errors: error.response.data})
             );
         }
         
@@ -104,7 +99,7 @@ class SignupForm extends React.Component{
 
 
                 <div className="form-group">
-                    <button disabled={this.state.isLoading} className="ctas-button" style={{'background':'#58488a','color':'white'}}>
+                    <button className="btn btn-primary btn-lg" style={{'background':'#58488a','color':'white'}}>
                         Sign Up
                     </button><br/><br/>
                     <p>
@@ -120,8 +115,7 @@ class SignupForm extends React.Component{
 }
 
 SignupForm.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired,
-    addFlashMessage: React.PropTypes.func.isRequired
+    userSignupRequest: React.PropTypes.func.isRequired
 }
 
 export default SignupForm;

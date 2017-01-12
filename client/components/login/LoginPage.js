@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'; 
-import { userSignupRequest } from '../../actions/signupActions';
-import { addFlashMessage } from '../../actions/flashMessages'; 
+import { userLoginRequest } from '../../actions/loginActions';
 
 import LoginForm from './LoginForm';
 
 class LoginPage extends React.Component{
     render(){
         document.body.style.backgroundColor = '#ABA0CB';
-        const { userSignupRequest, addFlashMessage } = this.props;
+        const { userLoginRequest } = this.props;
         return(
             <div className="fluid-container" style={{'marginTop':'5%'}}>
                 <div className="row">
@@ -24,8 +23,7 @@ class LoginPage extends React.Component{
                         <h3 style={{'color':'#ABA0CB'}}>Log in to your account</h3>
                         <br/>
                         <LoginForm  
-                            userSignupRequest={userSignupRequest} 
-                            addFlashMessage={addFlashMessage}
+                            userLoginRequest={userLoginRequest}
                         />
                     </div>
                 </div>
@@ -35,8 +33,7 @@ class LoginPage extends React.Component{
 }
 
 LoginPage.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired,
-    addFlashMessage: React.PropTypes.func.isRequired
+    userLoginRequest: React.PropTypes.func.isRequired
 }
 
-export default connect(null, { userSignupRequest, addFlashMessage })(LoginPage);
+export default connect(null, { userLoginRequest })(LoginPage);
