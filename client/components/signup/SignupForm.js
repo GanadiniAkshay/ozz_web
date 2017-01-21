@@ -28,7 +28,6 @@ class SignupForm extends React.Component{
     }
 
     isValid(){
-        console.log(this.state);
         const { errors, isValid } = validateInput(this.state);
 
         if (!isValid){
@@ -44,10 +43,10 @@ class SignupForm extends React.Component{
 
         if (this.isValid()){
             this.props.userSignupRequest(this.state).then(
-                () => {
+                (data) => {
                     browserHistory.push('/');
                 },
-                ( error ) => this.setState({ errors: error.response.data})
+                ( error ) => this.setState({ errors: error.response.data.errors || error.response.data  })
             );
         }
         

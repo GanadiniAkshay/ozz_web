@@ -32,7 +32,7 @@ class LoginForm extends React.Component{
                 () => {
                     browserHistory.push('/');
                 },
-                ( error ) => this.setState({ errors: error.response.data })
+                ( error ) => this.setState({ errors: error.response.data.errors || error.response.data })
             );
     }
 
