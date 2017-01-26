@@ -7,8 +7,18 @@
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <link rel="stylesheet" type="text/css" href="/css/devices.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="shortcut icon" href="/img/favicon-comment.ico" type="image/x-icon">
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">-->
   <style>
+      html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
     a {
       color: inherit;
     }
@@ -22,13 +32,66 @@
       color:black;
       text-decoration: none;
     }
+
+    /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #000;
+   }
+
+   .input-field input[type=email]:focus + label {
+     color: #000;
+   }
+   
+   .input-field input[type=password]:focus + label {
+     color: #000;
+   }
+
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #ABA0CB;
+     box-shadow: 0 1px 0 0 #ABA0CB;
+   }
+
+   .input-field input[type=email]:focus {
+     border-bottom: 1px solid #ABA0CB;
+     box-shadow: 0 1px 0 0 #ABA0CB;
+   }
+
+   .input-field input[type=password]:focus {
+     border-bottom: 1px solid #ABA0CB;
+     box-shadow: 0 1px 0 0 #ABA0CB;
+   }
+
+   header, main, footer {
+      padding-left: 240px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }
+
+    .side-nav a:hover{
+      color:#ABA0CB
+    }
+
+    .side-nav .collapsible-body>ul:not(.collapsible)>li.active, .side-nav.fixed .collapsible-body>ul:not(.collapsible)>li.active {
+      background-color: #ABA0CB;
+    }
+
+    .dropdown-content li > a, .dropdown-content li > span {
+      color: #ABA0CB;
+    }
   </style>
 </head>
 
 <body>
   <div id="app"></div>
-
-  <script src="bundle.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script src="/bundle.js"></script>
 </body>
 
 </html>

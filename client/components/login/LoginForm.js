@@ -10,9 +10,9 @@ class LoginForm extends React.Component{
         super(props);
         this.state = {
             email: '',
+            button:"login",
             password: '',
-            errors: {},
-            isLoading: false
+            errors: {}
         }
 
     
@@ -25,14 +25,14 @@ class LoginForm extends React.Component{
     }
 
     onSubmit(e){
-        this.setState({ errors: {}, isLoading:true });
+        this.setState({ errors: {}, button:"logging in..." });
         e.preventDefault();
 
         this.props.userLoginRequest(this.state).then(
                 () => {
                     browserHistory.push('/');
                 },
-                ( error ) => this.setState({ errors: error.response.data.errors || error.response.data })
+                ( error ) => this.setState({ errors: error.response.data.errors || error.response.data, button:"login" })
             );
     }
 
@@ -40,7 +40,7 @@ class LoginForm extends React.Component{
         const { errors } = this.state;
 
         return (
-            <form onSubmit={this.onSubmit}>
+            <form className="col s8 offset-s2" onSubmit={this.onSubmit}>
 
 
                 <TextFieldGroup
@@ -64,8 +64,8 @@ class LoginForm extends React.Component{
 
 
                 <div className="form-group">
-                    <button className="ctas-button" style={{'background':'#58488a','color':'white'}}>
-                        Login
+                    <button className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>
+                        {this.state.button} <i className="material-icons right">send</i>
                     </button><br/><br/>
                     <p>
                         Don't have an account? &emsp;

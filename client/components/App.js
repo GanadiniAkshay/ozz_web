@@ -1,8 +1,12 @@
 import React from 'react';
+import { browserHistory, Link } from 'react-router';
+
 import Header from './landing/Header';
 import Features from './landing/Features';
 import SocialProof from './landing/SocialProof';
 import Footer from './landing/Footer';
+
+import Navbar from './home/Navbar';
 
 import { connect } from 'react-redux';
 import { logout } from '../actions/loginActions';
@@ -10,20 +14,18 @@ import { logout } from '../actions/loginActions';
 class App extends React.Component {
     constructor(props){
         super(props);
-
-        this.logout = this.logout.bind(this);
     }
 
-    logout(e){
-        e.preventDefault();
-        this.props.logout();
+    componentWillMount(){
+        const { isAuthenticated } = this.props.auth;
+
+        if (isAuthenticated){
+            browserHistory.push('/bots');
+        }
     }
 
     render(){
         document.body.style.backgroundColor = 'white';
-
-        const { isAuthenticated } = this.props.auth;
-
         const landing = (
             <div>
                 <Header />
@@ -33,16 +35,9 @@ class App extends React.Component {
             </div>
         );
 
-        const home = (
-            <div>
-                <h1>This is home</h1>
-                <a href="#" onClick={this.logout}>Logout</a>
-            </div>
-        );
-
         return (
             <div className="fluid-container">
-                { isAuthenticated ? home : landing}
+                {landing}
             </div>
         );
     }

@@ -13,6 +13,7 @@ class SignupForm extends React.Component{
         this.state = {
             name: '',
             email: '',
+            button:"sign up",
             password: '',
             passwordConfirmation: '',
             errors: {}
@@ -31,14 +32,14 @@ class SignupForm extends React.Component{
         const { errors, isValid } = validateInput(this.state);
 
         if (!isValid){
-            this.setState({ errors })
+            this.setState({ errors, button:"sign up" })
         }
 
         return isValid;
     }
 
     onSubmit(e){
-        this.setState({ errors: {}});
+        this.setState({ errors: {}, button:"signing up..."});
         e.preventDefault();
 
         if (this.isValid()){
@@ -46,7 +47,7 @@ class SignupForm extends React.Component{
                 (data) => {
                     browserHistory.push('/');
                 },
-                ( error ) => this.setState({ errors: error.response.data.errors || error.response.data  })
+                ( error ) => this.setState({ errors: error.response.data.errors || error.response.data, button:"sign up"  })
             );
         }
         
@@ -96,10 +97,10 @@ class SignupForm extends React.Component{
                     field="passwordConfirmation"
                 />
 
-
-                <div className="form-group">
-                    <button className="btn btn-primary btn-lg" style={{'background':'#58488a','color':'white'}}>
-                        Sign Up
+                <br/><br/>
+                <div className="input-field">
+                    <button className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white'}}>
+                        {this.state.button} <i className="material-icons right">send</i>
                     </button><br/><br/>
                     <p>
                         Already have an account? &emsp;

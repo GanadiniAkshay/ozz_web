@@ -8,6 +8,7 @@ import rootReducer from './rootReducer';
 import { setCurrentUser } from './actions/loginActions';
 import jwt from 'jsonwebtoken';
 
+
 import setAuthorizationToken from './utils/setAuthorizationToken';
 
 import routes from './routes';
@@ -23,10 +24,9 @@ const store = createStore(
 if (localStorage.jwtToken){
     setAuthorizationToken(localStorage.jwtToken);
     store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)));
-    //store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)));
 }
 
 render(
     <Provider store={store}>
-        <Router history={browserHistory} routes={routes} />
+        <Router history={browserHistory} routes={routes}/>
     </Provider>, document.getElementById('app'));

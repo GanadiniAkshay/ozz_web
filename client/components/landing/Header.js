@@ -39,7 +39,7 @@ export default () => {
                     <div className="computerwrapper">
                         <div className="computer">
                             <div className="mask">
-                                <img className="mask-img" src="img/webapp.svg"/>
+                                <img className="mask-img" src="img/main.png"/>
                             </div>
                         </div>
                     </div>

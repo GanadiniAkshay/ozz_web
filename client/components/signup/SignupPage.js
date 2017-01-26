@@ -20,28 +20,27 @@ class SignupPage extends React.Component{
                 </div>
                 <div className="row">
                     <div className="tagline">
-                        <h2>Sign up for free and make your chatbots smarter</h2>
+                        <h4>Sign up for free and make your chatbots smarter</h4>
                     </div>
                 </div>
-                <br/>
                 <div className="row">
-                    <div className="col-md-10 col-md-offset-1" style={{'background':'white'}}>
+                    <div className="col s10 offset-s1" style={{'background':'white'}}>
                         <br/>
                         <div className="row">
-                            <div className="col-md-4 col-md-offset-1">
+                            <div className="col s4 offset-s1">
                                 <br/><br/>
                                 <SignupForm  
                                     userSignupRequest={userSignupRequest}
                                 />
                                 <br/><br/>
                             </div>
-                            <div className="col-md-4 col-md-offset-1">
-                                <h3 style={{'color':'#ABA0CB'}}>Automated Testing</h3><br/>
-                                <p>Run tests with auto expanded test cases to make sure your bot is ready.</p>
-                                <h3 style={{'color':'#ABA0CB'}}>Smart Analytics</h3><br/>
-                                <p>Get actionable insights and custom text analytics on your conversation data.</p>
-                                <h3 style={{'color':'#ABA0CB'}}>Continuous Learning</h3>
+                            <div className="col s4 offset-s1" style={{"marginTop":"5%"}}>
+                                <h4 style={{'color':'#ABA0CB'}}>Continuous Learning</h4>
                                 <p>Make your bot continuously learn from incoming conversations automatically.</p>
+                                <h4 style={{'color':'#ABA0CB'}}>Automated Testing</h4>
+                                <p>Run tests with auto expanded test cases to make sure your bot is ready.</p>
+                                <h4 style={{'color':'#ABA0CB'}}>Smart Analytics</h4>
+                                <p>Get actionable insights and custom text analytics on your conversation data.</p>
                             </div>
                         </div>
                         <br/>

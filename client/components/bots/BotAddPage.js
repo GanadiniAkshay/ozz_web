@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router'; 
-import { userLoginRequest } from '../../actions/loginActions';
+import { Link } from 'react-router';
 
-import LoginForm from './LoginForm';
 
-class LoginPage extends React.Component{
+import BotAddForm from './BotAddForm';
+
+import { createBot } from '../../actions/botActions';
+
+class BotAddPage extends React.Component{
     render(){
         document.body.style.backgroundColor = '#ABA0CB';
         const { userLoginRequest } = this.props;
@@ -19,12 +21,10 @@ class LoginPage extends React.Component{
                     </div>
                 </div>
                 <div className="row" style={{'marginTop':'5%'}}>
-                    <div className="col s6 offset-s3" style={{'background':'white','textAlign':'center'}}>
-                        <h4 style={{'color':'#ABA0CB'}}>Log in to your account</h4>
+                    <div className="col s6 offset-s3" style={{'background':'white'}}>
+                        <h4 style={{'color':'#ABA0CB','textAlign':'center'}}>Add your bot</h4>
                         <br/>
-                        <LoginForm  
-                            userLoginRequest={userLoginRequest}
-                        />
+                        <BotAddForm user={this.props.user} createBot={this.props.createBot}/>
                     </div>
                 </div>
             </div>
@@ -32,8 +32,17 @@ class LoginPage extends React.Component{
     }
 }
 
-LoginPage.propTypes = {
-    userLoginRequest: React.PropTypes.func.isRequired
+
+function mapStateToProps(state){
+    return {
+        user : state.auth.user
+    };
 }
 
-export default connect(null, { userLoginRequest })(LoginPage);
+BotAddPage.propTypes = {
+    user: React.PropTypes.object.isRequired,
+    createBot: React.PropTypes.func.isRequired
+}
+
+
+export default connect(mapStateToProps, {createBot})(BotAddPage);
