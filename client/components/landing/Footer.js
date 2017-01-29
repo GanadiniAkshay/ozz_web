@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 export default () => {
  return(
@@ -6,15 +7,15 @@ export default () => {
       <div className="container-sml">
         <div className="col-12 text-center">
           <div>
-            <a className="nav-link">
+            <a className="nav-link" href="https://twitter.com/ozz_ai" target="_blank">
               Twitter
             </a>
-            <a className="nav-link">
+            <a className="nav-link" href="https://www.facebook.com/ozzai-361093794245516/" target="_blank">
               Facebook
             </a>
-            <a className="nav-link">
+            <Link className="nav-link" to="/contact">
               Contact
-            </a>
+            </Link>
             <a className="nav-link">
               TOS
             </a>
@@ -25,7 +26,7 @@ export default () => {
           <br/>
           <div>
             <span>
-              © 2016 Compute Studios.
+              © 2017 Ozz.
             </span>
           </div>
         </div>

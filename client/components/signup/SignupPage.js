@@ -14,7 +14,7 @@ class SignupPage extends React.Component{
                 <div className="row">
                     <div className="headingLogo">
                         <Link to="/">
-                            <h1><b>OZZ.ai</b></h1>
+                            <img src="/img/logo_white_full.png" alt="ozz_logo" height="100px" style={{"marginTop":"10px"}}/> 
                         </Link>
                     </div>
                 </div>

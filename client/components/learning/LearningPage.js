@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Navbar from '../home/Navbar';
+import Navbar from '../navbar/Navbar';
 
 class LearningPage extends React.Component{
     render(){

@@ -6,7 +6,7 @@ import Features from './landing/Features';
 import SocialProof from './landing/SocialProof';
 import Footer from './landing/Footer';
 
-import Navbar from './home/Navbar';
+import Navbar from './navbar/Navbar';
 
 import { connect } from 'react-redux';
 import { logout } from '../actions/loginActions';
@@ -30,7 +30,6 @@ class App extends React.Component {
             <div>
                 <Header />
                 <Features/>
-                <SocialProof />
                 <Footer />
             </div>
         );

@@ -1,23 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getBots } from '../../actions/botActions';
 import { browserHistory} from 'react-router';
 
-import Navbar from '../home/Navbar';
+import { getBots, setActiveBot, updateBot } from '../../actions/botActions';
+
+import Navbar from '../navbar/Navbar';
 
 class Bot extends React.Component{
     constructor(props){
         super(props);
     }
 
-
     componentWillMount(){
-        this.props.getBots(this.state).then(
+        var that = this;
+        this.props.getBots().then(
             () => {
-                var current_bots = this.props.bots.bots;
+                var current_bots =  this.props.bots.bots;
+                
                 if (current_bots.length > 0){
-                    browserHistory.push('/bots/'+current_bots[0].name+'/learning');
+                    that.setState({'isBase':false});
+
+                    
+                    var max_time = Math.max.apply(Math, current_bots.map(function(o){return o.used}));
+                    var activeBot = current_bots.find(function(o){ return o.used == max_time});
+
+                    console.log(current_bots);
+
+                    this.props.setActiveBot(activeBot);
+                    this.props.updateBot(activeBot);
+                    browserHistory.push("/bots/" + activeBot.name + "/learning");
                 }
             }
         );
@@ -33,14 +45,21 @@ class Bot extends React.Component{
     }
 }
 
+
 Bot.propTypes = {
+    getBots: React.PropTypes.func.isRequired,
+    setActiveBot: React.PropTypes.func.isRequired,
+    updateBot: React.PropTypes.func.isRequired,
+    activeBot: React.PropTypes.object.isRequired,
     bots: React.PropTypes.object.isRequired
 }
 
-function mapStatetoProps(state){
+function mapStateToProps(state){
     return {
-        bots: state.bots
-    };
+        bots: state.bots,
+        activeBot: state.activeBot
+    }
 }
 
-export default connect(mapStatetoProps, { getBots })(Bot);
+
+export default connect(mapStateToProps, { getBots, setActiveBot, updateBot })(Bot);

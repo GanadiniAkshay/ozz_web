@@ -1,30 +1,43 @@
 import React from 'react';
+import { Link } from 'react-router'; 
 
 export default () => {
     return (
         <div>
-        <div className="feature4">
+    <div className="feature3">
       <div className="container-lrg flex">
-        <div className="col-5 centervertical">
+        <div className="col-4">
+          <b className="emoji">
+            🤖
+          </b>
           <h3 className="subheading">
-            Brilliant Domain Names.
+            Supports Multiple Platforms
           </h3>
-          <p className="paragraph">
-            Launchaco instantly shows you the most relevant domain names. Followed by hundreds of new gtlds. Get your .gold domain name today!
+          <p className="paragraph-1">
+            You can use ozz to retrain models on wit.ai, api.ai, luis.ai (coming soon) and custom models (coming soon).<div>Ozz is also language agnoistic.</div>
           </p>
         </div>
-        <div className="col-1">
+        <div className="col-4">
+          <b className="emoji">
+            📭
+          </b>
+          <h3 className="subheading">
+            Smart&nbsp;<div>Inbox</div>
+          </h3>
+          <p className="paragraph-1">
+            Apart from just unclassified intents, ozz.ai also looks at the conversation to identify intents that have been misclassified and need to be retrained.
+          </p>
         </div>
-        <div className="col-6">
-          <div className="sidedevices">
-            <div className="browserwrapper">
-              <div className="browser">
-                <div className="mask">
-                  <img className="mask-img" src="img/webapp.svg"/>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="col-4">
+          <b className="emoji">
+            🖥
+          </b>
+          <h3 className="subheading">
+            Easy to&nbsp;<div>Integrate</div>
+          </h3>
+          <p className="paragraph-1">
+            Ozz makes it simple to integrate the learning tool with simple to use http API and language specific SDKs. It doesn't take more than 5 lines of code.
+          </p>
         </div>
       </div>
     </div>
@@ -32,49 +45,17 @@ export default () => {
       <div className="container-sml">
         <div className="col-12 text-center">
           <h3 className="heading">
-            Brilliant Domain Names.
+            Pricing
           </h3>
           <p className="paragraph">
-            Launchaco instantly shows you the most relevant domain names. Followed by hundreds of new gtlds. Get your .gold domain name today!
+            Ozz is <b>free</b> to use as long as we are in beta. 
+            <br/><br/>
+            Want a private learning model or have us do the NLP training for you? 
           </p>
-        </div>
-      </div>
-      <div className="container-lrg centerdevices col-12">
-        <div className="browserwrapper">
-          <div className="browser">
-            <div className="mask">
-              <img className="mask-img" src="img/webapp.svg"/>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div className="feature4">
-      <div className="container-lrg flex">
-        <div className="col-5 centervertical">
-          <h3 className="subheading">
-            Brilliant Domain Names.
-          </h3>
-          <p className="paragraph">
-            Launchaco instantly shows you the most relevant domain names. Followed by hundreds of new gtlds. Get your .gold domain name today!
-          </p>
-        </div>
-        <div className="col-1">
-        </div>
-        <div className="col-6">
-          <div className="sidedevices">
-            <div className="browseriphone">
-              <div className="iphone">
-                <div className="mask">
-                  <img className="mask-img" src="img/mobileapp.svg"/>
-                </div>
-              </div>
-              <div className="browser">
-                <div className="mask">
-                  <img className="mask-img" src="img/webapp.svg"/>
-                </div>
-              </div>
-            </div>
+          <div className="ctas">
+              <Link className="ctas-button" to="/contact" style={{"background":"#ABA0CB","color":"white"}}>
+                  Contact Us
+              </Link>
           </div>
         </div>
       </div>

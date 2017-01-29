@@ -2,7 +2,8 @@ import React from 'react'
 import remove from 'lodash/remove'
 import { browserHistory, Link } from 'react-router';
 
-import { getBots } from '../../actions/botActions';
+import { getBots, setActiveBot } from '../../actions/botActions';
+
 import { connect } from 'react-redux';
 import { logout } from '../../actions/loginActions';
 
@@ -10,12 +11,9 @@ import { logout } from '../../actions/loginActions';
 class Navbar extends React.Component{
     constructor(props){
         super(props);
-
-        var url_path = window.location.pathname.split('/');
-        var bot_name = url_path[2];
-
+        
         this.state = {
-            bot_name: bot_name
+            'isBase':true
         }
 
         this.logout = this.logout.bind(this);
@@ -28,11 +26,29 @@ class Navbar extends React.Component{
     }
 
     componentWillMount(){
-        this.props.getBots(this.state).then(
-            () => {
-                var current_bots =  this.props.bots.bots;
-            }
-        );
+        var that = this;
+        var current_bots =  this.props.bots.bots;
+
+        if (current_bots.length > 0){
+            that.setState({'isBase':false});
+        }
+        // this.props.getBots(this.state).then(
+        //     () => {
+        //         var current_bots =  this.props.bots.bots;
+        //         if (current_bots.length > 0){
+        //             
+
+        //             var max_time = Math.max.apply(Math, current_bots.map(function(o){return o.used}));
+        //             var activeBot = current_bots.find(function(o){ return o.used == max_time});
+        //             this.props.setActiveBot(activeBot);
+        //             browserHistory.push("/bots/" + this.props.activeBot.name + "/learning");
+        //         }
+        //     }
+        // );
+    }
+
+    update(){
+        this.forceUpdate();
     }
 
     componentDidMount(){
@@ -40,32 +56,30 @@ class Navbar extends React.Component{
         $(".button-collapse").sideNav();
         // Initialize collapsible (uncomment the line below if you use the dropdown variation)
         $('.collapsible').collapsible();
-
-        var element_id = this.props.active;
-        var top_id = element_id.split('_')[0];
-
-        $('#' + element_id).addClass('active');
-        $('#' + top_id).addClass('active');
     }
 
     render(){
-        const active_select = (<a className="collapsible-header active waves-affect" id="app"><b></b><i className="material-icons">arrow_drop_down</i></a>);
-        const inactive_select = (<a className="collapsible-header waves-affect" id="app"><b>{this.state.bot_name}</b><i className="material-icons">arrow_drop_down</i></a>);
+        document.body.style.backgroundColor = '#fff';
+        var  current_bots = this.props.bots.bots.slice();
 
-        var  current_bots = this.props.bots.bots;
+        const learning_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}}>Dashboard</Link>);
+        const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learning"} >Dashboard</Link>);
+
+        const settings_inactive = (<Link to="/bots" className="collapsible-header waves-affect" id="settings" onClick={e => {e.preventDefault()}}>Settings<i className="material-icons">settings</i></Link>);
+        const settings_active = (<Link to={"/bots/" + this.props.activeBot.name + "/settings"} className="collapsible-header waves-affect" id="settings">Settings<i className="material-icons">settings</i></Link>);
+        
 
     
         for (var i=0;i<current_bots.length;i++){
-            if (current_bots[i].name == this.state.bot_name){
+            if (current_bots[i].name == this.props.activeBot.name){
                 current_bots.splice(i,1);
                 break;
             }
         }
 
-        console.log(current_bots);
         const elements = current_bots.map((current_bot) => {
             return (<li key={current_bot.id}>
-                        <Link to="#!">{current_bot.name}</Link>
+                        <Link to={"/bots/" + current_bot.name + "/learning"} onClick={this.update} >{current_bot.name}</Link>
                     </li>)
         });
 
@@ -80,7 +94,7 @@ class Navbar extends React.Component{
         const application_select = (
             <ul className="collapsible collapsible-accordion">
                 <li className="bold">
-                    {this.state.bot_name? inactive_select: active_select}
+                    <a className="collapsible-header waves-affect" id="app"><b>{(this.props.bots.bots.length == 0)? '': this.props.activeBot.name}</b><i className="material-icons">arrow_drop_down</i></a>
                     <div className="collapsible-body">
                         {app_list}
                     </div>
@@ -92,7 +106,9 @@ class Navbar extends React.Component{
             <header style={{"overflow":"scroll"}}>
                     <nav style={{"background":"#ABA0CB"}}>
                         <ul id="slide-out" className="side-nav fixed">
-                            <li><Link to="/"><h1 style={{"color":"#ABA0CB"}}>OZZ.ai</h1></Link></li><br/>
+                            <li>
+                                <img src="/img/logo_color_full.png" alt="ozz logo" height="80px" style={{"marginLeft":"20%","marginTop":"5%","padding":"0"}}/>
+                            </li>
                             <li><div className="divider"></div></li>
                             <li>
                                 {application_select}
@@ -104,41 +120,20 @@ class Navbar extends React.Component{
                                         <a className="collapsible-header waves-affect" id="learning">Continuous Learning<i className="material-icons">speaker_notes</i></a>
                                         <div className="collapsible-body">
                                         <ul>
-                                            <li id="learning_dashboard"><Link to={"/bots/" + this.state.bot_name + "/learning"} >Dashboard</Link></li>
+                                            <li id="learning_dashboard">
+                                                {(current_bots.length == 0)? learning_inactive : learning_active}
+                                            </li>
                                         </ul>
                                         </div>
                                     </li>
                                     <li className="bold">
-                                        <a className="collapsible-header waves-affect" id="testing">Automated Testing<i className="material-icons">done_all</i></a>
-                                        <div className="collapsible-body">
-                                        <ul>
-                                            <li id="testing_dashboard"><Link to={"/bots/" + this.state.bot_name + "/testing"}>Dashboard</Link></li>
-                                            <li id="testing_tests"><Link to={"/bots/" + this.state.bot_name + "/testing/test_cases"}>Test Cases</Link></li>
-                                            <li id="testing_flows"><Link to={"/bots/" + this.state.bot_name + "/testing/flows"}>Flows</Link></li>
-                                        </ul>
-                                        </div>
-                                    </li>
-                                    <li className="bold">
-                                        <a className="collapsible-header waves-affect" id="analytics">Analytics<i className="material-icons">insert_chart</i></a>
-                                        <div className="collapsible-body">
-                                        <ul>
-                                            <li id="analytics_dashboard"><Link to={"/bots/" + this.state.bot_name + "/analytics"}>Dashboard</Link></li>
-                                            <li id="analytics_takeover"><Link to={"/bots/" + this.state.bot_name + "/analytics/takeover"}>Takeover</Link></li>
-                                            <li id="analytics_custom"><Link to={"/bots/" + this.state.bot_name + "/analytics/custom"}>Custom</Link></li>
-                                        </ul>
-                                        </div>
-                                    </li>
-                                    <li className="bold">
-                                        <Link to={"/bots/" + this.state.bot_name + "/settings"} className="collapsible-header waves-affect" id="settings">Settings<i className="material-icons">settings</i></Link>
+                                        {this.isBase ? settings_inactive : settings_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
                                 </ul>
-                            </li>
-                            <br/><br/>
+                            </li><br/>
                             <li><div className="divider"></div></li>
-                            <li><a href="#!">Web Plugin<i className="material-icons">personal_video</i></a></li>
-                            <li><a href="#!">Showcase<i className="material-icons">whatshot</i></a></li>
                             <li><a href="#!">Docs<i className="material-icons">content_paste</i></a></li>
                             <li><a href="#!">Account<i className="material-icons">account_box</i></a></li>
                             <li><a href="#!" onClick={this.logout}>Logout<i className="material-icons">settings_power</i></a></li>
@@ -154,13 +149,16 @@ Navbar.propTypes = {
     active:React.PropTypes.string.isRequired,
     logout: React.PropTypes.func.isRequired,
     getBots: React.PropTypes.func.isRequired,
+    setActiveBot: React.PropTypes.func.isRequired,
+    activeBot: React.PropTypes.object.isRequired,
     bots: React.PropTypes.object.isRequired
 }
 
 function mapStateToProps(state){
     return {
-        bots: state.bots
+        bots: state.bots,
+        activeBot: state.activeBot.activeBot
     }
 }
 
-export default connect(mapStateToProps, { logout, getBots })(Navbar);
+export default connect(mapStateToProps, { logout, getBots, setActiveBot })(Navbar);

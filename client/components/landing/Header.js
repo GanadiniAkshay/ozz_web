@@ -7,8 +7,8 @@ export default () => {
             <div className="container-lrg">
                 <div className="col-12 spread">
                     <div>
-                        <Link className="logo" to="/"> 
-                            OZZ.ai
+                        <Link className="logo" to="/">
+                            <img src="/img/logo_white_full.png" alt="ozz_logo" height="80px"/> 
                         </Link>
                     </div>
                     <div>
@@ -26,8 +26,8 @@ export default () => {
                     <h1 className="heading">
                         Make your Chatbots<div>Smarter</div>
                     </h1>
-                    <h2 className="paragraph ">
-                        Automated Testing<div>Smart Analytics</div><div>Continuous Learning</div>
+                    <h2 className="paragraph">
+                        Use Continuous Learning to constanly improve your NLP models
                     </h2>
                     <div className="ctas">
                         <Link className="ctas-button" to="/signup">

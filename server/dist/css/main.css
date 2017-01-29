@@ -62,6 +62,12 @@ body {
 	text-align: center;
 }
 .paragraph {
+  font-size: 27px;
+  line-height: 32px;
+  font-weight: 100;
+}
+
+.paragraph-1 {
   font-size: 17px;
   line-height: 32px;
   font-weight: 100;
@@ -325,5 +331,37 @@ p.paragraph {
 	}
 }
 
+.feature3 {
+	padding: 90px 0;
+	border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.feature3 .emoji {
+	font-size: 55px;
+	color: black
+}
+@media (max-width: 750px) {
+  .feature3 .emoji {
+    font-size: 40px;
+  }
+  .feature3 .flex {
+  	flex-wrap: wrap;
+  }
+  .feature3 .col-4:nth-of-type(1) {
+  	width: 100%;
+  	margin-bottom: 30px;
+  }
+  .feature3 .col-4:not(:nth-of-type(1)) {
+  	width: 50%;
+  }
+}
+@media (max-width: 500px) {
+	.feature3 .col-4:nth-of-type(1) {
+		margin-bottom: 0;
+	}
+  .feature3 .col-4:not(:nth-of-type(1)) {
+  	width: 100%;
+  	margin-top: 30px;
+  }
+}
 
    

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Navbar from '../home/Navbar';
+import Navbar from '../navbar/Navbar';
 
 class LearningSettingsPage extends React.Component{
     render(){

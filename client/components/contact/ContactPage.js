@@ -1,14 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router'; 
-import { userLoginRequest } from '../../actions/loginActions';
 
-import LoginForm from './LoginForm';
+import ContactForm from './ContactForm';
 
-class LoginPage extends React.Component{
+class ContactPage extends React.Component{
     render(){
         document.body.style.backgroundColor = '#ABA0CB';
-        const { userLoginRequest } = this.props;
         return(
             <div className="fluid-container" style={{'marginTop':'5%'}}>
                 <div className="row">
@@ -19,12 +16,10 @@ class LoginPage extends React.Component{
                     </div>
                 </div>
                 <div className="row" style={{'marginTop':'5%'}}>
-                    <div className="col s6 offset-s3" style={{'background':'white','textAlign':'center'}}>
-                        <h4 style={{'color':'#ABA0CB'}}>Log in to your account</h4>
+                    <div className="col s6 offset-s3" style={{'background':'white'}}>
+                        <h4 style={{'color':'#ABA0CB','textAlign':'center'}}>Contact Us</h4>
                         <br/>
-                        <LoginForm  
-                            userLoginRequest={userLoginRequest}
-                        />
+                        <ContactForm/>
                     </div>
                 </div>
             </div>
@@ -32,8 +27,6 @@ class LoginPage extends React.Component{
     }
 }
 
-LoginPage.propTypes = {
-    userLoginRequest: React.PropTypes.func.isRequired
-}
 
-export default connect(null, { userLoginRequest })(LoginPage);
+
+export default ContactPage;
