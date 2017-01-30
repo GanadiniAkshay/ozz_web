@@ -1,11 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router'; 
+import { Link, browserHistory } from 'react-router'; 
 import { userLoginRequest } from '../../actions/loginActions';
 
 import LoginForm from './LoginForm';
 
 class LoginPage extends React.Component{
+    componentWillMount(){
+            if (this.props.isAuthenticated){
+                browserHistory.push('/bots');
+            }
+    }
+
     render(){
         document.body.style.backgroundColor = '#ABA0CB';
         const { userLoginRequest } = this.props;
@@ -33,7 +39,15 @@ class LoginPage extends React.Component{
 }
 
 LoginPage.propTypes = {
-    userLoginRequest: React.PropTypes.func.isRequired
+    userLoginRequest: React.PropTypes.func.isRequired,
+    isAuthenticated: React.PropTypes.bool.isRequired
 }
 
-export default connect(null, { userLoginRequest })(LoginPage);
+
+function mapStateToProps(state){
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    };
+}
+
+export default connect(mapStateToProps, { userLoginRequest })(LoginPage);

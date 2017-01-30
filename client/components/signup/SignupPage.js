@@ -1,11 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router'; 
+import { Link, browserHistory } from 'react-router'; 
 import { userSignupRequest } from '../../actions/signupActions';
 
 import SignupForm from './SignupForm';
 
 class SignupPage extends React.Component{
+    componentWillMount(){
+            if (this.props.isAuthenticated){
+                browserHistory.push('/bots');
+            }
+    }
+
     render(){
         document.body.style.backgroundColor = '#ABA0CB';
         const { userSignupRequest} = this.props;
@@ -52,7 +58,14 @@ class SignupPage extends React.Component{
 }
 
 SignupPage.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired
+    userSignupRequest: React.PropTypes.func.isRequired,
+    isAuthenticated: React.PropTypes.bool.isRequired
 }
 
-export default connect(null, { userSignupRequest })(SignupPage);
+function mapStateToProps(state){
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    };
+}
+
+export default connect(mapStateToProps, { userSignupRequest })(SignupPage);
