@@ -66,7 +66,12 @@ class LoginForm extends React.Component{
                 <div className="form-group">
                     <button className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>
                         {this.state.button} <i className="material-icons right">send</i>
-                    </button><br/><br/>
+                    </button>
+                    <br/><br/>
+                    <Link to="/forgot_password" style={{'textDecoration':'underline','color':'#58488a'}}>
+                         Forgot Password
+                    </Link>
+                    <br/><br/>
                     <p>
                         Don't have an account? &emsp;
                         <Link to="/signup" style={{'textDecoration':'underline','color':'#58488a'}}>

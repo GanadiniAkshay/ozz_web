@@ -35,7 +35,6 @@ export function createBot(payload){
 }
 
 export function updateBot(paylod){
-    console.log('udpating');
     return dispatch => {
         return axios.put('https://api.ozz.ai/bots/' + paylod.id, paylod).then(res => {
             dispatch(getBots);

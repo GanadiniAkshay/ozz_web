@@ -1,12 +1,14 @@
 import React from 'react';
 import classnames from 'classnames';
 
-const TextFieldGroup = ({ field, value, label, error, type, onChange }) => {
+const TextFieldGroup = ({ field, value, label, error, type, onChange, disabled, id }) => {
     return (
         <div className="input-field">
             
             <input 
+                id = {id}
                 value={value}
+                disabled={disabled}
                 onChange={onChange}
                 type={type} 
                 name={field} 

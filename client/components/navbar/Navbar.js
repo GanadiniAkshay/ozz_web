@@ -62,8 +62,8 @@ class Navbar extends React.Component{
         document.body.style.backgroundColor = '#fff';
         var  current_bots = this.props.bots.bots.slice();
 
-        const learning_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}}>Dashboard</Link>);
-        const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learning"} >Dashboard</Link>);
+        const learning_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} id="learning">Continuous Learning<i className="material-icons">speaker_notes</i></Link>);
+        const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learning"} id="learning">Continuous Learning<i className="material-icons">speaker_notes</i></Link>);
 
         const settings_inactive = (<Link to="/bots" className="collapsible-header waves-affect" id="settings" onClick={e => {e.preventDefault()}}>Settings<i className="material-icons">settings</i></Link>);
         const settings_active = (<Link to={"/bots/" + this.props.activeBot.name + "/settings"} className="collapsible-header waves-affect" id="settings">Settings<i className="material-icons">settings</i></Link>);
@@ -117,13 +117,8 @@ class Navbar extends React.Component{
                             <li className="no-padding">
                                 <ul className="collapsible collapsible-accordion">
                                     <li className="bold">
-                                        <a className="collapsible-header waves-affect" id="learning">Continuous Learning<i className="material-icons">speaker_notes</i></a>
+                                        {(current_bots.length == 0)? learning_inactive : learning_active}
                                         <div className="collapsible-body">
-                                        <ul>
-                                            <li id="learning_dashboard">
-                                                {(current_bots.length == 0)? learning_inactive : learning_active}
-                                            </li>
-                                        </ul>
                                         </div>
                                     </li>
                                     <li className="bold">

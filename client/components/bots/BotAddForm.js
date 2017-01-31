@@ -15,9 +15,7 @@ class BotAddForm extends React.Component{
             button:"Add",
             platform: '',
             nlp_platform:'',
-            errors: {},
-            options: [  { value: 'one', label: 'One' },
-                        { value: 'two', label: 'Two' }]
+            errors: {}
         }
         
         this.onChange = this.onChange.bind(this);
@@ -76,8 +74,8 @@ class BotAddForm extends React.Component{
             payload['user_id'] = this.props.user.id;
             payload['platform'] = this.state.platform;
             payload['nlp_platform'] = this.state.nlp_platform;
-            payload['app_secret'] = 'none';
-            payload['webhook'] = 'none';
+            payload['app_secret'] = '';
+            payload['webhook'] = '';
 
             this.props.createBot(payload).then(
                 () => {browserHistory.push('/')}
