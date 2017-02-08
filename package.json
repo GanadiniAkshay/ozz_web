@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch server --exec babel-node -- server/devIndex.js",
     "build": "NODE_ENV=production node_modules/.bin/webpack -p",
-    "start": "babel-node -- server/server.js"
+    "start": "node server.js"
   },
   "author": "Akshay Kulkarni",
   "license": "ISC",
