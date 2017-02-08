@@ -11,6 +11,7 @@
   "author": "Akshay Kulkarni",
   "license": "ISC",
   "dependencies": {
+    "applicationinsights": "^0.18.0",
     "axios": "^0.15.3",
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",

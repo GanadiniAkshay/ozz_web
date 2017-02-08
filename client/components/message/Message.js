@@ -72,16 +72,14 @@ class Message extends React.Component{
         }
 
         if (this.props.nlp == 'wit'){
-            var url = 'https://api.wit.ai/entities/intent/values?v=20160526';
+            var url = 'https://api.ozz.ai/wit?sat='+this.props.token;
             var body = {
                     "value":name,
                     "expressions":this.state.utterances
             }
 
-            var headers = {'headers':{'Authorization':'Bearer ' + this.props.token}};
-
             if (flag){
-                axios.post(url,body,headers).then(
+                axios.post(url,body).then(
                     () => {
                         this.setState({hidden:"true"});
                         this.props.addIntent(name);
@@ -94,7 +92,7 @@ class Message extends React.Component{
                 )
             }
         } else if (this.props.nlp == 'api'){
-            var url = 'http://localhost:5000/api?dat=' + this.props.token,intent_body,headers;
+            var url = 'https://api.ozz.ai/api?dat=' + this.props.token,intent_body,headers;
             var headers = {'headers':{'Authorization':'Bearer ' + this.props.token}};
 
             var userSays = [];
@@ -130,14 +128,14 @@ class Message extends React.Component{
         this.setState({button:'Retraining...'});
         
         if (this.props.nlp == 'wit'){
-            var url = 'https://api.wit.ai/entities/intent/values/' + this.state.intent + '/expressions?v=20160526';
+            var url = 'https://api.ozz.ai/wit?intent=' + this.state.intent + '&sat=' + this.props.token;
             var body = {'expression':this.props.message};
 
             var headers = {'headers':{'Authorization':'Bearer ' + this.props.token}};
 
             
 
-            axios.post(url,body,headers).then(
+            axios.put(url,body,headers).then(
                 (res) => {
                     this.setState({button:'Retrain',hidden:"true"});
                     Materialize.toast('Retrained', 1000, 'rounded'); 
@@ -149,7 +147,7 @@ class Message extends React.Component{
             
             var url = "https://api.api.ai/v1/intents/" + intent_id + "?v=20150910"
             var headers = {'headers':{'Authorization':'Bearer ' + this.props.token}};
-
+                        
             axios.get(url,headers).then(
                 (res)=>{
                     var intent_body = res.data;
@@ -157,7 +155,7 @@ class Message extends React.Component{
                     intent_body['templates'].push(this.props.message);
                     intent_body['userSays'].push({'data':[{'text':this.props.message}]});
                     
-                    axios.put('http://api.ozz.ai/api?intent_id=' + intent_id + '&dat=' + this.props.token,intent_body,headers).then(
+                    axios.put('https://api.ozz.ai/api?intent_id=' + intent_id + '&dat=' + this.props.token,intent_body,headers).then(
                         (res) => {
                             this.setState({button:'Retrain',hidden:"true"});
                             Materialize.toast('Retrained', 1000, 'rounded'); 

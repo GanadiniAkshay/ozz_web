@@ -62,7 +62,7 @@ class LearningPage extends React.Component{
                             this.setState({intent_loader:false, nlp_there:false})
                         }else{
                             if (this.state.nlp == 'api'){
-                                axios.get('https://api.api.ai/v1/intents?v=20150910',{'headers':{'Authorization':'Bearer ' + this.state.nlp_app_secret}}).then(
+                                axios.get('https://api.ozz.ai/api?dat='+this.state.nlp_app_secret).then(
                                     (res) => {
                                         var intent_ids = {};
                                         var intents = [];
@@ -78,7 +78,7 @@ class LearningPage extends React.Component{
                                     (error) => {console.log(error)}
                                 )
                             } else if (this.state.nlp == 'wit'){
-                                axios.get('https://api.wit.ai/entities/intent?v=20160526',{'headers':{'Authorization':'Bearer ' + this.state.nlp_app_secret}}).then(
+                                axios.get('https://api.ozz.ai/wit?sat='+this.state.nlp_app_secret).then(
                                     (res) => {
                                         var intents = [];
                                         for (var i=0;i<res.data.values.length;i++){

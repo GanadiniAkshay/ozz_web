@@ -3,6 +3,9 @@ var path = require('path');
 
 var app = express();
 
+var appinsights = require('applicationinsights');
+appinsights.setup('1d424a55-c0b7-45b0-81f6-bf45c69cf17e').start();
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/server/views'));
 
