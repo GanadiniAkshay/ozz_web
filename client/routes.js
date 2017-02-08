@@ -14,7 +14,8 @@ import ResetPage from './components/forgot/ResetPage';
 import Bot from './components/bots/Bot';
 import BotAddPage from './components/bots/BotAddPage';
 
-
+import TosPage from './components/terms/TosPage';
+import PrivacyPage from './components/terms/PrivacyPage';
 
 import LearningPage from './components/learning/LearningPage';
 
@@ -31,6 +32,8 @@ export default (
         <Route path="signup" component={SignupPage} />
         <Route path="login"  component={LoginPage} />
         <Route path="contact" component={ContactPage} />
+        <Route path="tos" component={TosPage} />
+        <Route path="privacy" component={PrivacyPage} />
         <Route path="forgot_password" component={ForgotPage} />
         <Route path="reset_password" component={ResetPage} />
         <Route path="bots" component={requireAuth(Bot)}/>

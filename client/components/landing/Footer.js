@@ -16,12 +16,12 @@ export default () => {
             <Link className="nav-link" to="/contact">
               Contact
             </Link>
-            <a className="nav-link">
+            <Link className="nav-link" to="/tos">
               TOS
-            </a>
-            <a className="nav-link">
+            </Link>
+            <Link className="nav-link" to="/privacy">
               Privacy
-            </a>
+            </Link>
           </div>
           <br/>
           <div>
