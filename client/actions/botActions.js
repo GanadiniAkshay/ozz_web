@@ -29,7 +29,7 @@ export function getBots(event){
 export function createBot(payload){
     return dispatch => {
         return axios.post('https://api.ozz.ai/bots',payload).then(res => {
-            dispatch(getBots(payload))
+            dispatch(setActiveBot(payload))
         })
     }
 }
@@ -37,7 +37,7 @@ export function createBot(payload){
 export function updateBot(paylod){
     return dispatch => {
         return axios.put('https://api.ozz.ai/bots/' + paylod.id, paylod).then(res => {
-            dispatch(getBots);
+            dispatch(setActiveBot(paylod));
         })
     }
 }

@@ -2,8 +2,6 @@ import React from 'react'
 import remove from 'lodash/remove'
 import { browserHistory, Link } from 'react-router';
 
-import { getBots, setActiveBot } from '../../actions/botActions';
-
 import { connect } from 'react-redux';
 import { logout } from '../../actions/loginActions';
 
@@ -32,19 +30,6 @@ class Navbar extends React.Component{
         if (current_bots.length > 0){
             that.setState({'isBase':false});
         }
-        // this.props.getBots(this.state).then(
-        //     () => {
-        //         var current_bots =  this.props.bots.bots;
-        //         if (current_bots.length > 0){
-        //             
-
-        //             var max_time = Math.max.apply(Math, current_bots.map(function(o){return o.used}));
-        //             var activeBot = current_bots.find(function(o){ return o.used == max_time});
-        //             this.props.setActiveBot(activeBot);
-        //             browserHistory.push("/bots/" + this.props.activeBot.name + "/learning");
-        //         }
-        //     }
-        // );
     }
 
     update(){
@@ -62,8 +47,8 @@ class Navbar extends React.Component{
         document.body.style.backgroundColor = '#fff';
         var  current_bots = this.props.bots.bots.slice();
 
-        const learning_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} id="learning">Continuous Learning<i className="material-icons">speaker_notes</i></Link>);
-        const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learning"} id="learning">Continuous Learning<i className="material-icons">speaker_notes</i></Link>);
+        const learning_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="learning">Continuous Learning<i className="material-icons">speaker_notes</i></Link>);
+        const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learning"} className="collapsible-header waves-affect" id="learning">Continuous Learning<i className="material-icons">speaker_notes</i></Link>);
 
         const settings_inactive = (<Link to="/bots" className="collapsible-header waves-affect" id="settings" onClick={e => {e.preventDefault()}}>Settings<i className="material-icons">settings</i></Link>);
         const settings_active = (<Link to={"/bots/" + this.props.activeBot.name + "/settings"} className="collapsible-header waves-affect" id="settings">Settings<i className="material-icons">settings</i></Link>);
@@ -79,7 +64,7 @@ class Navbar extends React.Component{
 
         const elements = current_bots.map((current_bot) => {
             return (<li key={current_bot.id}>
-                        <Link to={"/bots/" + current_bot.name + "/learning"} onClick={this.update} >{current_bot.name}</Link>
+                        <a href={"/bots/" + current_bot.name + "/learning"} onClick={this.update} >{current_bot.name}</a>
                     </li>)
         });
 
@@ -117,12 +102,12 @@ class Navbar extends React.Component{
                             <li className="no-padding">
                                 <ul className="collapsible collapsible-accordion">
                                     <li className="bold">
-                                        {(current_bots.length == 0)? learning_inactive : learning_active}
+                                        {learning_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
                                     <li className="bold">
-                                        {this.isBase ? settings_inactive : settings_active}
+                                        {settings_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
@@ -130,7 +115,6 @@ class Navbar extends React.Component{
                             </li><br/>
                             <li><div className="divider"></div></li>
                             <li><a href="#!">Docs<i className="material-icons">content_paste</i></a></li>
-                            <li><a href="#!">Account<i className="material-icons">account_box</i></a></li>
                             <li><a href="#!" onClick={this.logout}>Logout<i className="material-icons">settings_power</i></a></li>
                         </ul>
                         <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only"><i className="material-icons">menu</i></a>
@@ -143,8 +127,6 @@ class Navbar extends React.Component{
 Navbar.propTypes = {
     active:React.PropTypes.string.isRequired,
     logout: React.PropTypes.func.isRequired,
-    getBots: React.PropTypes.func.isRequired,
-    setActiveBot: React.PropTypes.func.isRequired,
     activeBot: React.PropTypes.object.isRequired,
     bots: React.PropTypes.object.isRequired
 }
@@ -156,4 +138,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, { logout, getBots, setActiveBot })(Navbar);
+export default connect(mapStateToProps, { logout })(Navbar);

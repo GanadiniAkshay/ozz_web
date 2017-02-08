@@ -23,13 +23,14 @@ export default function(ComposedComponent){
                     var bot_name = url_path[2];
 
                     var activeBot = current_bots.find(function(o){ return o.name == bot_name});
-
-                    if (!activeBot){
-                        browserHistory.push('/bots');
-                    }else{
-                        this.props.updateBot(activeBot);
-                        this.props.setActiveBot(activeBot);
-                    }
+                    var that = this;
+                    setTimeout(function(){
+                        if(activeBot){
+                            that.props.updateBot(activeBot);
+                        }else{
+                            browserHistory.push('/bots');
+                        }  
+                    },100);
                 }
             );
         }

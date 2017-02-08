@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router'; 
 import { userLoginRequest } from '../../actions/loginActions';
+import { getBots } from '../../actions/botActions';
 
 import LoginForm from './LoginForm';
 
@@ -14,7 +15,7 @@ class LoginPage extends React.Component{
 
     render(){
         document.body.style.backgroundColor = '#ABA0CB';
-        const { userLoginRequest } = this.props;
+        const { userLoginRequest, getBots, user, bots, activeBot } = this.props;
         return(
             <div className="fluid-container" style={{'marginTop':'5%'}}>
                 <div className="row">
@@ -29,7 +30,7 @@ class LoginPage extends React.Component{
                         <h4 style={{'color':'#ABA0CB'}}>Log in to your account</h4>
                         <br/>
                         <LoginForm  
-                            userLoginRequest={userLoginRequest}
+                            userLoginRequest={userLoginRequest} getBots={getBots} user={user} bots={bots} activeBot={activeBot}
                         />
                     </div>
                 </div>
@@ -40,14 +41,21 @@ class LoginPage extends React.Component{
 
 LoginPage.propTypes = {
     userLoginRequest: React.PropTypes.func.isRequired,
-    isAuthenticated: React.PropTypes.bool.isRequired
+    getBots: React.PropTypes.func.isRequired,
+    isAuthenticated: React.PropTypes.bool.isRequired,
+    user:React.PropTypes.object.isRequired,
+    bots:React.PropTypes.object.isRequired,
+    activeBot:React.PropTypes.object.isRequired
 }
 
 
 function mapStateToProps(state){
     return {
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthenticated: state.auth.isAuthenticated,
+        user: state.auth.user,
+        bots: state.bots,
+        activeBot: state.activeBot.activeBot
     };
 }
 
-export default connect(mapStateToProps, { userLoginRequest })(LoginPage);
+export default connect(mapStateToProps, { userLoginRequest, getBots })(LoginPage);

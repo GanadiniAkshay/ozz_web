@@ -31,7 +31,7 @@ export default () => {
                     </h2>
                     <div className="ctas">
                         <Link className="ctas-button" to="/signup">
-                            Sign Up
+                            Get Started for Free
                         </Link>
                     </div>
                 </div>
@@ -39,7 +39,7 @@ export default () => {
                     <div className="computerwrapper">
                         <div className="computer">
                             <div className="mask">
-                                <img className="mask-img" src="img/main.png"/>
+                                <img className="mask-img" src="img/demo.gif"/>
                             </div>
                         </div>
                     </div>

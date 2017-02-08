@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import map from 'lodash/map';
 import classnames from 'classnames';
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -11,12 +12,14 @@ class ContactForm extends React.Component{
         this.state = {
             email: '',
             name:'',
+            message:'',
             button:"send",
             errors: {}
         }
 
     
         this.onChange = this.onChange.bind(this);
+        this.onTextChange = this.onTextChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -24,9 +27,47 @@ class ContactForm extends React.Component{
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    onTextChange(){
+        var textarea = $('#message').val();
+        this.setState({'message':textarea})
+    }
+
+    validate(data){
+        var errors = {}
+        var isValid = true;
+        if (data.name == ''){
+            errors.name = 'Name is required'
+            isValid = false
+        }
+
+        if(data.email == ''){
+            errors.email = 'Email is required'
+            isValid = false
+        }
+
+        if(data.message == ''){
+            errors.message = 'Message is required'
+            isValid = false
+        }
+        
+        return { isValid, errors }
+    }
+
     onSubmit(e){
         this.setState({ errors: {}, button:"sending" });
         e.preventDefault();
+
+         const {isValid, errors } = this.validate(this.state);
+
+         if (!isValid){
+             this.setState({errors:errors, button:'send'});
+         } else{
+             var messageData = {'name':this.state.name,'email':this.state.email,'message':this.state.message} 
+             axios.post('https://api.ozz.ai/contact',messageData).then(
+                 () => {this.setState({button:'send'})},
+                 (error) => { this.setState({button:'send'})}
+             )
+         }
     }
 
     render(){
@@ -40,7 +81,7 @@ class ContactForm extends React.Component{
                     error={errors.name}
                     label="Name"
                     onChange={this.onChange}
-                    value={this.state.email}
+                    value={this.state.name}
                     type="text"
                     field="name"
                 />
@@ -55,8 +96,9 @@ class ContactForm extends React.Component{
                 />
 
                 <div className="input-field">
-                    <textarea id="textarea1" className="materialize-textarea"></textarea>
+                    <textarea id="message" className="materialize-textarea" value={this.state.message} onChange={this.onTextChange}></textarea>
                     <label>Message</label>
+                    <span style={{'color':'red'}}>{this.state.errors.message}</span>
                 </div>
 
 

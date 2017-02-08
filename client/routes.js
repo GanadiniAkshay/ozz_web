@@ -33,16 +33,10 @@ export default (
         <Route path="contact" component={ContactPage} />
         <Route path="forgot_password" component={ForgotPage} />
         <Route path="reset_password" component={ResetPage} />
-        <Route path="bots">
-            <IndexRoute component={requireAuth(Bot)}/>
-            <Route path="add" component={requireAuth(BotAddPage)}/>
-            <Route path=":botname/learning">
-                <IndexRoute component={requireBotAuth(LearningPage)}/>
-            </Route>
-            <Route path=":botname/settings">
-                <IndexRoute component={requireBotAuth(SettingsPage)}/>
-            </Route>
-        </Route>
+        <Route path="bots" component={requireAuth(Bot)}/>
+        <Route path="bots/add" component={requireAuth(BotAddPage)}/>
+        <Route path="bots/:botname/learning" component={requireBotAuth(LearningPage)}/>
+        <Route path="bots/:botname/settings" component={requireBotAuth(SettingsPage)}/>
         <Route path="*" component={NotFound}/>
     </Route>
 )

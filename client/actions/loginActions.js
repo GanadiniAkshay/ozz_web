@@ -6,7 +6,6 @@ import { browserHistory } from 'react-router';
 import { SET_CURRENT_USER } from './types';
 
 export function setCurrentUser(user){
-    console.log('here');
     return {
         type: SET_CURRENT_USER,
         user

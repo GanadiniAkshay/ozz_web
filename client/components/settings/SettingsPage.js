@@ -21,13 +21,10 @@ class SettingsPage extends React.Component{
             nlp_app_secret:'',
             button:'save',
             disabled:true,
-            fallback:[],
-            fallback_txt:'',
             client_label:'Client Secret',
             errors:{}
         }
 
-         this.onTextChange = this.onTextChange.bind(this);
          this.onSelectChange = this.onSelectChange.bind(this);
          this.onChange = this.onChange.bind(this);
          this.onSubmit = this.onSubmit.bind(this);
@@ -59,17 +56,6 @@ class SettingsPage extends React.Component{
                             this.setState({'nlp_app_secret':'Support Coming Soon'});
                             Materialize.updateTextFields();
                         }
-
-                        this.setState({fallback:activeBot.fallback_text.fallbacks});
-
-                        var fallback_txt = '';
-                        for (var i=0;i<this.state.fallback.length;i++){
-                            fallback_txt += this.state.fallback[i] + ' --- ';
-                        }
-
-                        $('#bot_guid').readOnly = true;
-                        this.setState({fallback_txt:fallback_txt});
-                        Materialize.updateTextFields();
                     }
                 }
         );
@@ -94,11 +80,6 @@ class SettingsPage extends React.Component{
             this.setState({'nlp_app_secret':'Support Coming Soon',disabled:true});
             Materialize.updateTextFields();
         }
-    }
-
-    onTextChange(){
-        var textarea = $('#fallback').val();
-        this.setState({fallback_txt:textarea});
     }
 
     onChange(e){
@@ -148,18 +129,22 @@ class SettingsPage extends React.Component{
             bot_obj['platform'] = this.state.platform;
             bot_obj['nlp_platform'] = this.state.nlp_platform;
             bot_obj['nlp_app_secret'] = this.state.nlp_app_secret;
-            bot_obj['fallback_text'] = {'fallbacks':this.state.fallback_txt.split('---')};
             bot_obj['webhook'] = '';
 
             var url = 'https://api.ozz.ai/bots/' + this.state.id;
             axios.put(url,bot_obj).then(
-                (res) => {this.setState({button:'save'})},
+                (res) => {
+                    this.setState({button:'save'});
+
+                    Materialize.toast('Saved', 2000, 'rounded'); 
+                },
                 (error) => {console.log(error);this.setState({button:'save'})}
             )
         }
     }
 
     render(){
+
         const { errors } = this.state;
         
 
@@ -237,12 +222,6 @@ class SettingsPage extends React.Component{
                                 type="text"
                                 field="nlp_app_secret"
                             />
-
-                            <div className="input-field">
-                                <textarea id="fallback" className="materialize-textarea" value={this.state.fallback_txt} onChange={this.onTextChange}></textarea>
-                                <label>Fallback Messages ( seperate fallback messages with ' --- ')</label>
-                            </div>
-
 
                             <div className="form-group">
                                 <button className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>

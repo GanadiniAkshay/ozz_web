@@ -17,6 +17,7 @@ class LoginForm extends React.Component{
 
     
         this.onChange = this.onChange.bind(this);
+        this.getBots  = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -29,8 +30,21 @@ class LoginForm extends React.Component{
         e.preventDefault();
 
         this.props.userLoginRequest(this.state).then(
-                () => {
-                    browserHistory.push('/');
+                (res) => {
+                    this.props.getBots(this.state).then(
+                        (res) => {
+                            if (this.props.bots.bots.length == 0){
+                                browserHistory.push('/bots');
+                            }else{
+                                var current_bots = this.props.bots.bots;
+                                var max_time = Math.max.apply(Math, current_bots.map(function(o){return o.used}));
+                                var activeBot = current_bots.find(function(o){ return o.used == max_time});
+
+                                browserHistory.push('/bots/' + activeBot.name + '/learning');
+                            }
+                        },
+                        (error) => { console.log(error)}
+                    )
                 },
                 ( error ) => this.setState({ errors: error.response.data.errors || error.response.data, button:"login" })
             );
@@ -85,7 +99,11 @@ class LoginForm extends React.Component{
 }
 
 LoginForm.propTypes = {
-    userLoginRequest: React.PropTypes.func.isRequired
+    userLoginRequest: React.PropTypes.func.isRequired,
+    getBots: React.PropTypes.func.isRequired,
+    user: React.PropTypes.object.isRequired,
+    bots: React.PropTypes.object.isRequired,
+    activeBot: React.PropTypes.object.isRequired
 }
 
 export default LoginForm;
