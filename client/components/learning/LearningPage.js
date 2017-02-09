@@ -119,7 +119,7 @@ class LearningPage extends React.Component{
 
 
         const show_feed = (<div>
-                                {this.state.nlp_there? Feed: <p>Update</p>}
+                                {this.state.nlp_there? Feed: <p>Update Access Token in Settings Page</p>}
                             </div>)
 
         const bot_loaded = (<div>

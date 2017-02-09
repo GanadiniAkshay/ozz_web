@@ -49,7 +49,6 @@ class LearningDocsPage extends React.Component{
                         <hr/>
                         <h6>We natively support all the bot platforms and any kind of conversational interface. We are also programming language agnoistic. 
                             However if you are using node.js we recommend the use of our npm module <a href="https://www.npmjs.com/package/ozz" style={{"textDecoration":"underline"}}>ozz</a>. We have a REST API which can be used for other languages.</h6>
-                        <p><b>Tutorial:</b> You can read a full step by step tutorial here</p>
                         <br/><br/>
                         <hr/>
                         <div className="row">
