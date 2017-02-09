@@ -114,7 +114,7 @@ class Navbar extends React.Component{
                                 </ul>
                             </li><br/>
                             <li><div className="divider"></div></li>
-                            <li><a href="#!">Docs<i className="material-icons">content_paste</i></a></li>
+                            <li><Link to="/docs/learning">Docs<i className="material-icons">content_paste</i></Link></li>
                             <li><a href="#!" onClick={this.logout}>Logout<i className="material-icons">settings_power</i></a></li>
                         </ul>
                         <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only"><i className="material-icons">menu</i></a>
