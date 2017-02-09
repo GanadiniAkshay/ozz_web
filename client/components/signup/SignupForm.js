@@ -45,7 +45,7 @@ class SignupForm extends React.Component{
         if (this.isValid()){
             this.props.userSignupRequest(this.state).then(
                 () => {
-                    browserHistory.push('/');
+                    browserHistory.push('/login');
                 },
                 ( error ) => this.setState({ errors: error.response.data.errors || error.response.data, button:"sign up"  })
             );
