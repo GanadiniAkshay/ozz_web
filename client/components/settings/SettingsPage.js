@@ -36,7 +36,7 @@ class SettingsPage extends React.Component{
                     var current_bots = this.props.bots.bots;
 
                     var url_path = window.location.pathname.split('/');
-                    var bot_name = url_path[2];
+                    var bot_name = url_path[2].replace('%20',' ');
 
                     var activeBot = current_bots.find(function(o){ return o.name == bot_name});
 
