@@ -47,7 +47,7 @@ class Bot extends React.Component{
                     <div className="container full">
                         <br/><br/>
                         <div className="video-container">
-                            <iframe width="853" height="480" src="https://www.youtube.com/embed/RWrvGfweeTQ" frameBorder="0" allowFullScreen></iframe>
+                            <iframe width="853" height="480" src="https://www.youtube.com/embed/--2aYhjFwiI" frameBorder="0" allowFullScreen></iframe>
                         </div>
                         <br/>
                         <button onClick={this.onClick} className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>

@@ -81,9 +81,13 @@ class Message extends React.Component{
             if (flag){
                 axios.post(url,body).then(
                     () => {
-                        this.setState({hidden:"true"});
-                        this.props.addIntent(name);
-                        Materialize.toast('Retrained', 1000, 'rounded'); 
+                            axios.put('https://api.ozz.ai/conversations?bot_id='+this.props.id,{'message':this.props.message}).then(
+                                (res) => {console.log(res.data)},
+                                (error) => {console.log(error)}
+                            )
+                            this.setState({hidden:"true"});
+                            this.props.addIntent(name);
+                            Materialize.toast('Retrained', 1000, 'rounded'); 
                     },
                     (error) => {
                                 this.setState({hidden:"true"});
@@ -112,6 +116,10 @@ class Message extends React.Component{
             if (flag){
                 axios.post(url,body,headers).then(
                     (res) => {
+                        axios.put('https://api.ozz.ai/conversations?bot_id='+this.props.id,{'message':this.props.message}).then(
+                                (res) => {console.log(res.data)},
+                                (error) => {console.log(error)}
+                        )
                         this.setState({hidden:"true"});
                         this.props.addIntent(name);
                         Materialize.toast('Retrained', 1000, 'rounded'); 
@@ -137,8 +145,12 @@ class Message extends React.Component{
 
             axios.put(url,body,headers).then(
                 (res) => {
-                    this.setState({button:'Retrain',hidden:"true"});
-                    Materialize.toast('Retrained', 1000, 'rounded'); 
+                            axios.put('https://api.ozz.ai/conversations?bot_id='+this.props.id,{'message':this.props.message}).then(
+                                (res) => {console.log(res.data)},
+                                (error) => {console.log(error)}
+                            )
+                            this.setState({button:'Retrain',hidden:"true"});
+                            Materialize.toast('Retrained', 1000, 'rounded'); 
                 },
                 (error) => {this.setState({button:'Retrain',hidden:"true"});console.log(error)}
             )
@@ -157,6 +169,10 @@ class Message extends React.Component{
                     
                     axios.put('https://api.ozz.ai/api?intent_id=' + intent_id + '&dat=' + this.props.token,intent_body,headers).then(
                         (res) => {
+                            axios.put('https://api.ozz.ai/conversations?bot_id='+this.props.id,{'message':this.props.message}).then(
+                                (res) => {console.log(res.data)},
+                                (error) => {console.log(error)}
+                            )
                             this.setState({button:'Retrain',hidden:"true"});
                             Materialize.toast('Retrained', 1000, 'rounded'); 
                         },
@@ -257,7 +273,8 @@ Message.propTypes = {
     intents:React.PropTypes.array.isRequired,
     intent_ids:React.PropTypes.object.isRequired,
     intent:React.PropTypes.string.isRequired,
-    addIntent:React.PropTypes.func.isRequired
+    addIntent:React.PropTypes.func.isRequired,
+    id:React.PropTypes.number.isRequired
 }
 
 export default Message;

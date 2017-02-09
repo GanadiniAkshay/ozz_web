@@ -104,7 +104,7 @@ class LearningPage extends React.Component{
         for (var i=0;i<this.state.messages.length;i++){
             var current = this.state.messages[i];
             if (current){
-                messages.push(<Message key={i} identifier={"intent" + i} addIntent={this.addIntent} message={current['message']} intents={this.state.intents} intent_ids={this.state.intent_ids} nlp={this.state.nlp} token={this.state.nlp_app_secret} intent={current['intent']}/>);
+                messages.push(<Message id={this.state.id} key={i} identifier={"intent" + i} addIntent={this.addIntent} message={current['message']} intents={this.state.intents} intent_ids={this.state.intent_ids} nlp={this.state.nlp} token={this.state.nlp_app_secret} intent={current['intent']}/>);
             }
         }
 
