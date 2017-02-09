@@ -42,11 +42,7 @@ class SignupPage extends React.Component{
                             </div>
                             <div className="col s4 offset-s1" style={{"marginTop":"5%"}}>
                                 <h4 style={{'color':'#ABA0CB'}}>Continuous Learning</h4>
-                                <p>Make your bot continuously learn from incoming conversations automatically.</p>
-                                <h4 style={{'color':'#ABA0CB'}}>Automated Testing</h4>
-                                <p>Run tests with auto expanded test cases to make sure your bot is ready.</p>
-                                <h4 style={{'color':'#ABA0CB'}}>Smart Analytics</h4>
-                                <p>Get actionable insights and custom text analytics on your conversation data.</p>
+                                <p>Make your bot continuously learn from incoming conversations.</p>
                             </div>
                         </div>
                         <br/>

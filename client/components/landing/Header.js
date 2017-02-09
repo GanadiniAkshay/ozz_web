@@ -27,7 +27,7 @@ export default () => {
                         Make your Chatbots<div>Smarter</div>
                     </h1>
                     <h2 className="paragraph">
-                        Use Continuous Learning to constanly improve your NLP models
+                        Use Continuous Learning to constanly improve your bot's NLP models
                     </h2>
                     <div className="ctas">
                         <Link className="ctas-button" to="/signup">
