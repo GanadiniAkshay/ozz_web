@@ -55,7 +55,8 @@ class LearningPage extends React.Component{
                     var activeBot = current_bots.find(function(o){ return o.name == bot_name});
 
                     if (!activeBot){
-                        browserHistory.push('/bots');
+                        activeBot = current_bots[0];
+                        browserHistory.push('/bots/'+activeBot.name+'/learning');
                     }else{
                         this.setState({id:activeBot.id,name:activeBot.name,nlp:activeBot.nlp_platform,nlp_app_secret:activeBot.nlp_app_secret,loader:false})
                         if (this.state.nlp_app_secret == ''){

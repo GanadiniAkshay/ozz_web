@@ -41,7 +41,8 @@ class SettingsPage extends React.Component{
                     var activeBot = current_bots.find(function(o){ return o.name == bot_name});
 
                     if (!activeBot){
-                        browserHistory.push('/bots');
+                        activeBot = current_bots[0];
+                        browserHistory.push('/bots/'+activeBot.name+'/learning');
                     }else{
                         this.setState({name:activeBot.name,platform:activeBot.platform,nlp_platform:activeBot.nlp_platform,id:activeBot.id,bot_guid:activeBot.bot_guid});
                         Materialize.updateTextFields();

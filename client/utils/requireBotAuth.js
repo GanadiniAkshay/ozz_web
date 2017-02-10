@@ -30,7 +30,8 @@ export default function(ComposedComponent){
                         if(activeBot){
                             that.props.updateBot(activeBot);
                         }else{
-                            browserHistory.push('/bots');
+                            activeBot = current_bots[0];
+                            browserHistory.push('/bots/'+activeBot.name+'/learning');
                         }  
                     },100);
                 }
