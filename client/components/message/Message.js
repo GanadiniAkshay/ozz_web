@@ -63,6 +63,7 @@ class Message extends React.Component{
         var name = $(selector).val();
         var flag = true;
 
+
         for(var i=0;i<this.state.intents.length;i++){
                 if (name == this.state.intents[i]){
                     this.setState({error:'An intent already exists with that name',button:'Retrain'});
@@ -99,6 +100,11 @@ class Message extends React.Component{
             var url = 'https://api.ozz.ai/api?dat=' + this.props.token,intent_body,headers;
             var headers = {'headers':{'Authorization':'Bearer ' + this.props.token}};
 
+            var selector = "#response" + this.props.identifier;
+            var response = $(selector).val();
+
+            var responses = [{'resetContexts':false,"speech":response}];
+
             var userSays = [];
 
             for (var i=0;i<this.state.utterances.length;i++){
@@ -110,7 +116,8 @@ class Message extends React.Component{
                 "auto":true,
                 "contexts":[],
                 "templates":this.state.utterances,
-                "userSays":userSays
+                "userSays":userSays,
+                "responses":responses,
             }
 
             if (flag){
@@ -238,8 +245,15 @@ class Message extends React.Component{
                                         <label>Name</label>
                                     </div>
                                     <br/><br/><br/><br/>
-                                    <h5>Utterances</h5>
+                                    {this.props.nlp == 'api'? <div>
+                                                                    <div className="input-field col s6">
+                                                                        <input id={"response" + this.props.identifier} type="text"/>
+                                                                        <label>Response</label>
+                                                                    </div>
+                                                                </div>:<div></div>}
+                                    <br/><br/><br/><br/>
                                     <ul>
+                                        <p><b>Utterances</b></p>
                                         {user_says}
                                     </ul>
                                     <div className="input-field col s6">
