@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { browserHistory } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 
 import Navbar from '../navbar/Navbar';
 import Message from '../message/Message';
@@ -109,12 +109,22 @@ class LearningPage extends React.Component{
             }
         }
 
+        const helper = (
+            <div>
+                <p>Please add the tracking code to your bot. You can find detailed instruction on the <Link to="https://ozz.ai/docs/learning" style={{'textDecoration':'underline','color':'#ABA0CB'}}>documentation page</Link>.</p>
+                <p>Or watch the video below for a detailed demo.</p><br/>
+                <div className="video-container">
+                    <iframe width="853" height="480" src="https://www.youtube.com/embed/9XfrRJIzGs8" frameBorder="0" allowFullScreen></iframe>
+                </div>
+            </div>
+        )
+
         const Feed = (
             <div>
                 <button className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}} onClick={this.getMessages}>
                         Refresh <i className="material-icons right">cached</i>
                 </button><br/><br/>
-                {messages}
+                {messages.length == 0? helper:messages}
             </div>
         )
 

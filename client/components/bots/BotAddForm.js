@@ -126,7 +126,6 @@ class BotAddForm extends React.Component{
                         <option value="wit">Wit.ai</option>
                         <option value="api">Api.ai</option>
                         <option value="luis">LUIS</option>
-                        <option value="rasa">Rasa</option>
                         <option value="other">Other</option>
                         <option value="none">None</option>
                     </select>
