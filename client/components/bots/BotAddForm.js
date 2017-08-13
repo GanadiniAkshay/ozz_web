@@ -15,6 +15,8 @@ class BotAddForm extends React.Component{
             button:"Add",
             platform: '',
             nlp_platform:'',
+            app_secret:'',
+            webhook:'',
             errors: {}
         }
         
@@ -46,10 +48,20 @@ class BotAddForm extends React.Component{
             isValid = false;
         }
 
-        if (data.platform == ""){
-            errors.platform = 'Platform cannot be empty';
+        if (data.webhook == ""){
+            errors.webhook = 'Webhook cannot be empty';
             isValid = false;
         }
+
+        if (data.app_secret == ""){
+            errors.app_secret = 'Facebook App Secret cannot be empty';
+            isValid = false;
+        }
+
+        // if (data.platform == ""){
+        //     errors.platform = 'Platform cannot be empty';
+        //     isValid = false;
+        // }
 
         if(data.nlp_platform == ""){
             errors.nlp_platform = 'NLP Platform cannot be empty';
@@ -74,8 +86,8 @@ class BotAddForm extends React.Component{
             payload['user_id'] = this.props.user.id;
             payload['platform'] = this.state.platform;
             payload['nlp_platform'] = this.state.nlp_platform;
-            payload['app_secret'] = '';
-            payload['webhook'] = '';
+            payload['app_secret'] = this.state.app_secret;
+            payload['webhook'] = this.state.webhook;
 
             this.props.createBot(payload).then(
                 () => {browserHistory.push('/')}
@@ -132,6 +144,26 @@ class BotAddForm extends React.Component{
                     <label>NLP Platform</label>
                     <span style={{"color":"red"}}>{this.state.errors.nlp_platform}</span>
                 </div>
+
+                <br/>
+
+                <TextFieldGroup
+                    error={errors.webhook}
+                    label="Webhook"
+                    onChange={this.onChange}
+                    value={this.state.webhook}
+                    type="text"
+                    field="webhook"
+                />
+
+                <TextFieldGroup
+                    error={errors.app_secret}
+                    label="Facebook App Secret"
+                    onChange={this.onChange}
+                    value={this.state.app_secret}
+                    type="text"
+                    field="app_secret"
+                />
 
                 <br/><br/>
 

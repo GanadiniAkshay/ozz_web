@@ -22,6 +22,8 @@ class SettingsPage extends React.Component{
             button:'save',
             disabled:true,
             client_label:'Client Secret',
+            webhook:'',
+            app_secret:'',
             errors:{}
         }
 
@@ -44,7 +46,7 @@ class SettingsPage extends React.Component{
                         activeBot = current_bots[0];
                         browserHistory.push('/bots/'+activeBot.name+'/learning');
                     }else{
-                        this.setState({name:activeBot.name,platform:activeBot.platform,nlp_platform:activeBot.nlp_platform,id:activeBot.id,bot_guid:activeBot.bot_guid});
+                        this.setState({name:activeBot.name,platform:activeBot.platform,nlp_platform:activeBot.nlp_platform,id:activeBot.id,bot_guid:"http://localhost:5000/messenger/" + activeBot.bot_guid,webhook:activeBot.webhook,app_secret:activeBot.app_secret});
                         Materialize.updateTextFields();
                         $('select').material_select(this.onSelectChange.bind(this));
                         if (this.state.nlp_platform == 'wit'){
@@ -126,11 +128,11 @@ class SettingsPage extends React.Component{
 
             bot_obj['id'] = this.state.id;
             bot_obj['name'] = this.state.name;
-            bot_obj['app_secret'] = '';
+            bot_obj['app_secret'] = this.state.app_secret;
             bot_obj['platform'] = this.state.platform;
             bot_obj['nlp_platform'] = this.state.nlp_platform;
             bot_obj['nlp_app_secret'] = this.state.nlp_app_secret;
-            bot_obj['webhook'] = '';
+            bot_obj['webhook'] = this.state.webhook;
 
             var url = 'https://api.ozz.ai/bots/' + this.state.id;
             axios.put(url,bot_obj).then(
@@ -171,11 +173,21 @@ class SettingsPage extends React.Component{
                             <TextFieldGroup
                                 id = 'bot_guid'
                                 error= {errors.none}
-                                label="Bot Key"
-                                onChange={this.onChange}
+                                label="New Webhook"
                                 value={this.state.bot_guid}
                                 type="text"
                                 field="bot key"
+                            />
+
+                            <br/>
+
+                            <TextFieldGroup
+                                id = 'bot_verification_token'
+                                error= {errors.none}
+                                label="New Verification Token"
+                                value="demo_verification_token"
+                                type="text"
+                                field="bot verification token"
                             />
 
                             <br/>
@@ -214,7 +226,7 @@ class SettingsPage extends React.Component{
 
                             <br/>
 
-                            <TextFieldGroup
+                            {/*<TextFieldGroup
                                 error={errors.nlp_app_secret}
                                 disabled={this.state.disabled}
                                 label={this.state.client_label}
@@ -222,7 +234,7 @@ class SettingsPage extends React.Component{
                                 value={this.state.nlp_app_secret}
                                 type="text"
                                 field="nlp_app_secret"
-                            />
+                            />*/}
 
                             <div className="form-group">
                                 <button className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>

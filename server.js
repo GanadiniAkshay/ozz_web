@@ -18,7 +18,7 @@ app.get('/*',(req,res) => {
 
 
 //start the server
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 const env  = process.env.NODE_ENV || 'production';
 
-app.listen(port, () => console.log('Running on localhost:5000'));
+app.listen(port, () => console.log('Running on localhost:' + port));

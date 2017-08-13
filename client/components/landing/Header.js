@@ -8,7 +8,7 @@ export default () => {
                 <div className="col-12 spread">
                     <div>
                         <Link className="logo" to="/">
-                            <img src="/img/logo_white_full.png" alt="ozz_logo" height="80px"/> 
+                            <img src="https://d7rkpiptlikiz.cloudfront.net/img/logo_white_full.png" alt="ozz_logo" height="80px"/> 
                         </Link>
                     </div>
                     <div>
@@ -24,7 +24,7 @@ export default () => {
             <div className="container-lrg flex">
                 <div className="col-6 centervertical">
                     <h1 className="heading">
-                        Make your Chatbots<div>Smarter</div>
+                        Make your Chatbots<div>Farter</div>
                     </h1>
                     <h2 className="paragraph">
                         Use Continuous Learning to constantly improve your bot's NLP models
@@ -39,7 +39,7 @@ export default () => {
                     <div className="computerwrapper">
                         <div className="computer">
                             <div className="mask">
-                                <img className="mask-img" src="img/demo.gif"/>
+                                <img className="mask-img" src="https://d7rkpiptlikiz.cloudfront.net/img/demo.gif"/>
                             </div>
                         </div>
                     </div>

@@ -9,7 +9,7 @@ export default {
     ],
     output: {
         path: '/',
-        publicPah: '/'
+        publicPath: '/'
     },
     plugins : [
         new webpack.NoErrorsPlugin(),

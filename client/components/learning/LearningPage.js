@@ -111,7 +111,7 @@ class LearningPage extends React.Component{
 
         const helper = (
             <div>
-                <p>Please add the tracking code to your bot. You can find detailed instruction on the <Link to="https://ozz.ai/docs/learning" style={{'textDecoration':'underline','color':'#ABA0CB'}}>documentation page</Link>.</p>
+                <p>Please update your bots webhook using the new webhook from the settings page. You can find detailed instruction on the <Link to="https://ozz.ai/docs/learning" style={{'textDecoration':'underline','color':'#ABA0CB'}}>documentation page</Link>.</p>
                 <p>Or watch the video below for a detailed demo.</p><br/>
                 <div className="video-container">
                     <iframe width="853" height="480" src="https://www.youtube.com/embed/9XfrRJIzGs8" frameBorder="0" allowFullScreen></iframe>
@@ -130,7 +130,7 @@ class LearningPage extends React.Component{
 
 
         const show_feed = (<div>
-                                {this.state.nlp_there? Feed: <p>Update Access Token in Settings Page</p>}
+                                {this.state.nlp_there? Feed: Feed}
                             </div>)
 
         const bot_loaded = (<div>

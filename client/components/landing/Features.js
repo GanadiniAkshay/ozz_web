@@ -19,12 +19,12 @@ export default () => {
               <div className="browseriphone">
                 <div className="iphone">
                   <div className="mask">
-                    <img className="mask-img" src="img/phone.png"/>
+                    <img className="mask-img" src="https://d7rkpiptlikiz.cloudfront.net/img/phone.png"/>
                   </div>
                 </div>
                 <div className="browser">
                   <div className="mask">
-                    <img className="mask-img" src="img/web.png"/>
+                    <img className="mask-img" src="https://d7rkpiptlikiz.cloudfront.net/img/web.png"/>
                   </div>
                 </div>
               </div>
@@ -59,7 +59,7 @@ export default () => {
                   <div className="computerwrapper">
                     <div className="computer">
                       <div className="mask">
-                        <img className="mask-img" src="img/code.png"/>
+                        <img className="mask-img" src="https://d7rkpiptlikiz.cloudfront.net/img/code.png"/>
                       </div>
                     </div>
                   </div>
