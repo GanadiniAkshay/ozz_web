@@ -21,6 +21,8 @@ import LearningDocsPage from './components/docs/LearningDocsPage';
 
 import LearningPage from './components/learning/LearningPage';
 
+import IntentsPage from './components/intents/IntentsPage';
+
 import SettingsPage from './components/settings/SettingsPage';
 
 import NotFound from './components/common/NotFound'; 
@@ -43,6 +45,7 @@ export default (
         <Route path="bots/add" component={requireAuth(BotAddPage)}/>
         <Route path="bots/:botname/learning" component={requireBotAuth(LearningPage)}/>
         <Route path="bots/:botname/settings" component={requireBotAuth(SettingsPage)}/>
+        <Route path="bots/:botname/intents"  component={requireBotAuth(IntentsPage)}/>
         <Route path="*" component={NotFound}/>
     </Route>
 )

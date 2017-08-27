@@ -48,26 +48,6 @@ class BotAddForm extends React.Component{
             isValid = false;
         }
 
-        if (data.webhook == ""){
-            errors.webhook = 'Webhook cannot be empty';
-            isValid = false;
-        }
-
-        if (data.app_secret == ""){
-            errors.app_secret = 'Facebook App Secret cannot be empty';
-            isValid = false;
-        }
-
-        // if (data.platform == ""){
-        //     errors.platform = 'Platform cannot be empty';
-        //     isValid = false;
-        // }
-
-        if(data.nlp_platform == ""){
-            errors.nlp_platform = 'NLP Platform cannot be empty';
-            isValid = false;
-        }
-
         return { isValid, errors };
     }
 
@@ -84,10 +64,6 @@ class BotAddForm extends React.Component{
             var payload = {};
             payload['name'] = this.state.name;
             payload['user_id'] = this.props.user.id;
-            payload['platform'] = this.state.platform;
-            payload['nlp_platform'] = this.state.nlp_platform;
-            payload['app_secret'] = this.state.app_secret;
-            payload['webhook'] = this.state.webhook;
 
             this.props.createBot(payload).then(
                 () => {browserHistory.push('/')}
@@ -110,59 +86,6 @@ class BotAddForm extends React.Component{
                     value={this.state.name}
                     type="text"
                     field="name"
-                />
-
-                <br/>
-
-                <div className="input-field">
-                    <select value={this.state.platform} id="platform" className="validate[required] invalid">
-                        <option value="">Choose Platform</option>
-                        <option value="messenger">Messenger</option>
-                        <option value="slack">Slack</option>
-                        <option value="telegram">Telegram</option>
-                        <option value="skype">Skype</option>
-                        <option value="sms">SMS</option>
-                        <option value="web">Web</option>
-                        <option value="email" style={{"color":"#ABA0CB"}}>Email</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <label className="control-label">Platform</label>
-                    <span style={{"color":"red"}}>{this.state.errors.platform}</span>
-                </div>
-
-                <br/>
-
-                <div className="input-field">
-                    <select value={this.state.nlp_platform} id="nlp_platform">
-                        <option value="">Choose NLP Platform</option>
-                        <option value="wit">Wit.ai</option>
-                        <option value="api">Api.ai</option>
-                        <option value="luis">LUIS</option>
-                        <option value="other">Other</option>
-                        <option value="none">None</option>
-                    </select>
-                    <label>NLP Platform</label>
-                    <span style={{"color":"red"}}>{this.state.errors.nlp_platform}</span>
-                </div>
-
-                <br/>
-
-                <TextFieldGroup
-                    error={errors.webhook}
-                    label="Webhook"
-                    onChange={this.onChange}
-                    value={this.state.webhook}
-                    type="text"
-                    field="webhook"
-                />
-
-                <TextFieldGroup
-                    error={errors.app_secret}
-                    label="Facebook App Secret"
-                    onChange={this.onChange}
-                    value={this.state.app_secret}
-                    type="text"
-                    field="app_secret"
                 />
 
                 <br/><br/>

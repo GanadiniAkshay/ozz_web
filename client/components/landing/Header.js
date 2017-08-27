@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router'; 
 
+// The image files referred will link to v0.0.1 always as image is not something that is going to change
+
 export default () => {
     return (
         <header className="header">
@@ -8,7 +10,7 @@ export default () => {
                 <div className="col-12 spread">
                     <div>
                         <Link className="logo" to="/">
-                            <img src="https://d7rkpiptlikiz.cloudfront.net/img/logo_white_full.png" alt="ozz_logo" height="80px"/> 
+                            Ozz
                         </Link>
                     </div>
                     <div>
@@ -24,10 +26,10 @@ export default () => {
             <div className="container-lrg flex">
                 <div className="col-6 centervertical">
                     <h1 className="heading">
-                        Make your Chatbots<div>Farter</div>
+                        Make your Chatbots<div>Smarter</div>
                     </h1>
                     <h2 className="paragraph">
-                        Use Continuous Learning to constantly improve your bot's NLP models
+                        Add self learning cabability to your bot in under 5 minutes without writing a single line of code.
                     </h2>
                     <div className="ctas">
                         <Link className="ctas-button" to="/signup">
@@ -35,14 +37,10 @@ export default () => {
                         </Link>
                     </div>
                 </div>
+
+                
                 <div className="col-6 sidedevices">
-                    <div className="computerwrapper">
-                        <div className="computer">
-                            <div className="mask">
-                                <img className="mask-img" src="https://d7rkpiptlikiz.cloudfront.net/img/demo.gif"/>
-                            </div>
-                        </div>
-                    </div>
+                   <img width="100%" style={{"marginLeft":"25%"}} src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/robot.jpg"/>
                 </div>
             </div>
         </header>

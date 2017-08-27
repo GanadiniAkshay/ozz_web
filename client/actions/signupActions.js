@@ -7,7 +7,7 @@ import { setCurrentUser } from './loginActions';
 
 export function userSignupRequest(userData) {
    return dispatch => {
-       return axios.post('https://api.ozz.ai/users', userData).then( res => {
+       return axios.post('/users', userData).then( res => {
            const token = res.data.token;
            localStorage.setItem('jwtToken',token);
            setAuthorizationToken(token);

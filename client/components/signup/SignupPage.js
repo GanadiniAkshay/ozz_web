@@ -20,7 +20,7 @@ class SignupPage extends React.Component{
                 <div className="row">
                     <div className="headingLogo">
                         <Link to="/">
-                            <img src="/img/logo_white_full.png" alt="ozz_logo" height="100px" style={{"marginTop":"10px"}}/> 
+                            <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/logo_white_full.png" alt="ozz_logo" height="100px" style={{"marginTop":"10px"}}/> 
                         </Link>
                     </div>
                 </div>

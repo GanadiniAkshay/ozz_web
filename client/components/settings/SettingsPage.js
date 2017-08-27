@@ -46,7 +46,7 @@ class SettingsPage extends React.Component{
                         activeBot = current_bots[0];
                         browserHistory.push('/bots/'+activeBot.name+'/learning');
                     }else{
-                        this.setState({name:activeBot.name,platform:activeBot.platform,nlp_platform:activeBot.nlp_platform,id:activeBot.id,bot_guid:"http://localhost:5000/messenger/" + activeBot.bot_guid,webhook:activeBot.webhook,app_secret:activeBot.app_secret});
+                        this.setState({name:activeBot.name,platform:activeBot.platform,nlp_platform:activeBot.nlp_platform,id:activeBot.id,bot_guid:activeBot.bot_guid,webhook:activeBot.webhook,app_secret:activeBot.app_secret});
                         Materialize.updateTextFields();
                         $('select').material_select(this.onSelectChange.bind(this));
                         if (this.state.nlp_platform == 'wit'){
@@ -97,21 +97,6 @@ class SettingsPage extends React.Component{
             isValid = false;
         }
 
-        if (data.platform == ""){
-            errors.platform = 'Platform cannot be empty';
-            isValid = false;
-        }
-
-        if(data.nlp_platform == ""){
-            errors.nlp_platform = 'NLP Platform cannot be empty';
-            isValid = false;
-        }
-
-        if (data.nlp_app_secret == ''){
-            errors.nlp_app_secret = 'This field cannot be empty';
-            isValid = false;
-        }
-
         return { isValid, errors };
     }
 
@@ -128,13 +113,8 @@ class SettingsPage extends React.Component{
 
             bot_obj['id'] = this.state.id;
             bot_obj['name'] = this.state.name;
-            bot_obj['app_secret'] = this.state.app_secret;
-            bot_obj['platform'] = this.state.platform;
-            bot_obj['nlp_platform'] = this.state.nlp_platform;
-            bot_obj['nlp_app_secret'] = this.state.nlp_app_secret;
-            bot_obj['webhook'] = this.state.webhook;
 
-            var url = 'https://api.ozz.ai/bots/' + this.state.id;
+            var url = '/bots/' + this.state.id;
             axios.put(url,bot_obj).then(
                 (res) => {
                     this.setState({button:'save'});
@@ -173,58 +153,11 @@ class SettingsPage extends React.Component{
                             <TextFieldGroup
                                 id = 'bot_guid'
                                 error= {errors.none}
-                                label="New Webhook"
+                                label="Bot GUID"
                                 value={this.state.bot_guid}
                                 type="text"
                                 field="bot key"
                             />
-
-                            <br/>
-
-                            <TextFieldGroup
-                                id = 'bot_verification_token'
-                                error= {errors.none}
-                                label="New Verification Token"
-                                value="demo_verification_token"
-                                type="text"
-                                field="bot verification token"
-                            />
-
-                            <br/>
-
-                            <div className="input-field">
-                                <select value={this.state.platform} id="platform" className="validate[required] invalid">
-                                    <option value="">Choose Platform</option>
-                                    <option value="messenger">Messenger</option>
-                                    <option value="slack">Slack</option>
-                                    <option value="telegram">Telegram</option>
-                                    <option value="skype">Skype</option>
-                                    <option value="sms">SMS</option>
-                                    <option value="web">Web</option>
-                                    <option value="email" style={{"color":"#ABA0CB"}}>Email</option>
-                                    <option value="other">Other</option>
-                                </select>
-                                <label className="control-label">Platform</label>
-                                <span style={{"color":"red"}}>{this.state.errors.platform}</span>
-                            </div>
-
-                            <br/>
-
-                            <div className="input-field">
-                                <select value={this.state.nlp_platform} id="nlp_platform">
-                                    <option value="">Choose NLP Platform</option>
-                                    <option value="wit">Wit.ai</option>
-                                    <option value="api">Api.ai</option>
-                                    <option value="luis">LUIS</option>
-                                    <option value="rasa">Rasa</option>
-                                    <option value="other">Other</option>
-                                    <option value="none">None</option>
-                                </select>
-                                <label>NLP Platform</label>
-                                <span style={{"color":"red"}}>{this.state.errors.nlp_platform}</span>
-                            </div>
-
-                            <br/>
 
                             {/*<TextFieldGroup
                                 error={errors.nlp_app_secret}

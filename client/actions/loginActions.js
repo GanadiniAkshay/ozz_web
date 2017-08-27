@@ -15,7 +15,7 @@ export function setCurrentUser(user){
 
 export function userLoginRequest(userData) {
    return dispatch => {
-       return axios.post('https://api.ozz.ai/auth', userData).then( res => {
+       return axios.post('/auth', userData).then( res => {
            const token = res.data.token;
            localStorage.setItem('jwtToken',token);
            setAuthorizationToken(token);
