@@ -50,8 +50,8 @@ class Navbar extends React.Component{
         const intents_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="intents">Intents<i className="material-icons">speaker_notes</i></Link>);
         const intents_active = (<Link to={"/bots/" + this.props.activeBot.name + "/intents"} className="collapsible-header waves-affect" id="intents">Intents<i className="material-icons">speaker_notes</i></Link>);
 
-        const learning_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="learning">Continuous Learning<i className="material-icons">speaker_notes</i></Link>);
-        const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learning"} className="collapsible-header waves-affect" id="learning">Continuous Learning<i className="material-icons">speaker_notes</i></Link>);
+        const learning_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="learning">Continuous Learning<i className="material-icons">lightbulb_outline</i></Link>);
+        const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learning"} className="collapsible-header waves-affect" id="learning">Continuous Learning<i className="material-icons">lightbulb_outline</i></Link>);
 
         const settings_inactive = (<Link to="/bots" className="collapsible-header waves-affect" id="settings" onClick={e => {e.preventDefault()}}>Settings<i className="material-icons">settings</i></Link>);
         const settings_active = (<Link to={"/bots/" + this.props.activeBot.name + "/settings"} className="collapsible-header waves-affect" id="settings">Settings<i className="material-icons">settings</i></Link>);

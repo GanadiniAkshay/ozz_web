@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router'; 
 
 import { getBots } from '../../actions/botActions';
+import { getIntents } from '../../actions/intentActions';
 
 import Navbar from '../navbar/Navbar';
 import TextFieldGroup from '../common/TextFieldGroup';
+
+import IntentCard from './IntentCard';
 
 class IntentsPage extends React.Component{
     constructor(props){
@@ -19,6 +22,7 @@ class IntentsPage extends React.Component{
             json_button: 'Import JSON',
             button:'save',
             disabled:true,
+            loader:true,
             errors:{}
         }
 
@@ -27,6 +31,7 @@ class IntentsPage extends React.Component{
     }
 
     componentWillMount(){
+        console.log(this.props);
         this.props.getBots(this.state).then(
                 () => {
                     var current_bots = this.props.bots.bots;
@@ -38,14 +43,25 @@ class IntentsPage extends React.Component{
 
                     if (!activeBot){
                         activeBot = current_bots[0];
-                        browserHistory.push('/bots/'+activeBot.name+'/learning');
+                        browserHistory.push('/bots/'+activeBot.name+'/intents');
                     }else{
                         console.log(activeBot);
                         this.setState({name:activeBot.name,id:activeBot.id,bot_guid:activeBot.bot_guid});
+
+                        this.props.getIntents(this.state).then(
+                            () => {
+                                console.log(this.props.activeIntents.activeIntents);
+                                this.setState({loader:false})
+                            }
+                        )
                     }
                 }
         );
-    } 
+    }
+    
+    componentDidMount(){
+        console.log(this.props);
+    }
 
 
     onChange(e){
@@ -103,32 +119,53 @@ class IntentsPage extends React.Component{
     }
 
     render(){
-
+        console.log(this.props);
         const { errors } = this.state;
-        
+        const current_intents = this.props.activeIntents.activeIntents;
+
+        const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
+
+        const intents = current_intents.map((current_intent) => {
+            return (
+                <div key={current_intent.name}>
+                    <IntentCard  intent={current_intent.name} utterances={current_intent.utterances} responses={current_intent.responses} 
+                        calls={current_intent.calls}/>
+                </div>
+            )
+        })
 
         return (
             <div className="full">
                 <Navbar active="settings_none"/>
                 <main>
-                    <div className="container full">
+                    <div className="container">
                         <h4>Intents</h4>
 
-                        <form className="col s8 offset-s2" id="json" encType="multipart/form-data">
-                            <div className="file-field input-field" >
-                                <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white'}}>
-                                    <span>{this.state.json_button}</span>
-                                    <input 
-                                        type="file" 
-                                        id="jsfile"
-                                        onChange={this.onChange} 
-                                        name="file"
-                                    />
+                        <div>
+                            <form className="col s8 offset-s2" id="json" encType="multipart/form-data">
+                                <div className="file-field input-field" >
+                                    <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white'}}>
+                                        <span>Add Intent</span>
+                                    </div>
+                                    <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right'}}>
+                                        <span>{this.state.json_button}</span>
+                                        <input 
+                                            type="file" 
+                                            id="jsfile"
+                                            onChange={this.onChange} 
+                                            name="file"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+                    </div>
+                    <br/><br/><br/>
+                    <div className="container full">
+                        {this.state.loader? loader: intents}
                     </div>
                 </main>
+                
             </div>
         )
     }
@@ -142,9 +179,11 @@ IntentsPage.propTypes = {
 
 function mapStateToProps(state){
     return {
-        activeBot: state.activeBot
+        bots:state.bots,
+        activeBot: state.activeBot,
+        activeIntents: state.activeIntents
     }
 }
 
 
-export default connect(mapStateToProps, { getBots })(IntentsPage);
+export default connect(mapStateToProps, { getBots, getIntents })(IntentsPage);

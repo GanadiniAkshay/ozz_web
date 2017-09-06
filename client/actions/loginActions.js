@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import { browserHistory } from 'react-router'; 
 import { SET_CURRENT_USER } from './types';
+import { config } from '../config';
 
 export function setCurrentUser(user){
     return {
@@ -15,7 +16,7 @@ export function setCurrentUser(user){
 
 export function userLoginRequest(userData) {
    return dispatch => {
-       return axios.post('/auth', userData).then( res => {
+       return axios.post(config.url + '/auth', userData).then( res => {
            const token = res.data.token;
            localStorage.setItem('jwtToken',token);
            setAuthorizationToken(token);
