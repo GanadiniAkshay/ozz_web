@@ -7,12 +7,21 @@ import { getBots } from '../../actions/botActions';
 
 import Navbar from '../navbar/Navbar';
 import TextFieldGroup from '../common/TextFieldGroup';
+import PropTypes from 'prop-types';
 
 class IntentCard extends React.Component{
     constructor(props){
         super(props);
 
         this.state = {};
+        this.openIntent = this.openIntent.bind(this);
+    }
+
+    openIntent(e){
+        var button = e.currentTarget;
+        var name = button.attributes.name.value
+        var url_path = window.location.pathname+"/"+name;
+        browserHistory.push(url_path);
     }
 
     render(){
@@ -38,7 +47,7 @@ class IntentCard extends React.Component{
                                     <i className="material-icons">trending_up</i>
                                     <p>{this.props.calls} API Calls</p>
                                 </div>
-                                <div className="col s4 m2 btn waves-effect waves-light" style={{'background':'#58488a','color':'white'}}>
+                                <div className="col s4 m2 btn waves-effect waves-light" name={this.props.intent} style={{'background':'#58488a','color':'white'}} onClick={this.openIntent}>
                                     <i className="material-icons">launch</i>
                                 </div>
                             </div>
@@ -51,10 +60,10 @@ class IntentCard extends React.Component{
 }
 
 IntentCard.propTypes = {
-    intent: React.PropTypes.string.isRequired,
-    utterances: React.PropTypes.number.isRequired,
-    responses: React.PropTypes.number.isRequired,
-    calls: React.PropTypes.number.isRequired
+    intent: PropTypes.string.isRequired,
+    utterances: PropTypes.number.isRequired,
+    responses: PropTypes.number.isRequired,
+    calls: PropTypes.number.isRequired
 }
 
 export default IntentCard;

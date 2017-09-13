@@ -5,6 +5,8 @@ import { browserHistory, Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/loginActions';
 
+import PropTypes from 'prop-types';
+
 
 class Navbar extends React.Component{
     constructor(props){
@@ -50,9 +52,6 @@ class Navbar extends React.Component{
         const intents_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="intents">Intents<i className="material-icons">speaker_notes</i></Link>);
         const intents_active = (<Link to={"/bots/" + this.props.activeBot.name + "/intents"} className="collapsible-header waves-affect" id="intents">Intents<i className="material-icons">speaker_notes</i></Link>);
 
-        const learning_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="learning">Continuous Learning<i className="material-icons">lightbulb_outline</i></Link>);
-        const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learning"} className="collapsible-header waves-affect" id="learning">Continuous Learning<i className="material-icons">lightbulb_outline</i></Link>);
-
         const settings_inactive = (<Link to="/bots" className="collapsible-header waves-affect" id="settings" onClick={e => {e.preventDefault()}}>Settings<i className="material-icons">settings</i></Link>);
         const settings_active = (<Link to={"/bots/" + this.props.activeBot.name + "/settings"} className="collapsible-header waves-affect" id="settings">Settings<i className="material-icons">settings</i></Link>);
         
@@ -67,7 +66,7 @@ class Navbar extends React.Component{
 
         const elements = current_bots.map((current_bot) => {
             return (<li key={current_bot.id}>
-                        <a href={"/bots/" + current_bot.name + "/learning"} onClick={this.update} >{current_bot.name}</a>
+                        <a href={"/bots/" + current_bot.name + "/intents"} onClick={this.update} >{current_bot.name}</a>
                     </li>)
         });
 
@@ -110,11 +109,6 @@ class Navbar extends React.Component{
                                         </div>
                                     </li>
                                     <li className="bold">
-                                        {learning_active}
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                    <li className="bold">
                                         {settings_active}
                                         <div className="collapsible-body">
                                         </div>
@@ -122,7 +116,6 @@ class Navbar extends React.Component{
                                 </ul>
                             </li><br/>
                             <li><div className="divider"></div></li>
-                            <li><Link to="/docs/learning">Docs<i className="material-icons">content_paste</i></Link></li>
                             <li><a href="#!" onClick={this.logout}>Logout<i className="material-icons">settings_power</i></a></li>
                         </ul>
                         <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only"><i className="material-icons">menu</i></a>
@@ -133,10 +126,10 @@ class Navbar extends React.Component{
 }
 
 Navbar.propTypes = {
-    active:React.PropTypes.string.isRequired,
-    logout: React.PropTypes.func.isRequired,
-    activeBot: React.PropTypes.object.isRequired,
-    bots: React.PropTypes.object.isRequired
+    active:PropTypes.string.isRequired,
+    logout: PropTypes.func.isRequired,
+    activeBot: PropTypes.object.isRequired,
+    bots: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state){

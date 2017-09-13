@@ -10,6 +10,7 @@ import Navbar from '../navbar/Navbar';
 import TextFieldGroup from '../common/TextFieldGroup';
 
 import IntentCard from './IntentCard';
+import PropTypes from 'prop-types';
 
 class IntentsPage extends React.Component{
     constructor(props){
@@ -31,7 +32,6 @@ class IntentsPage extends React.Component{
     }
 
     componentWillMount(){
-        console.log(this.props);
         this.props.getBots(this.state).then(
                 () => {
                     var current_bots = this.props.bots.bots;
@@ -45,12 +45,10 @@ class IntentsPage extends React.Component{
                         activeBot = current_bots[0];
                         browserHistory.push('/bots/'+activeBot.name+'/intents');
                     }else{
-                        console.log(activeBot);
                         this.setState({name:activeBot.name,id:activeBot.id,bot_guid:activeBot.bot_guid});
 
                         this.props.getIntents(this.state).then(
                             () => {
-                                console.log(this.props.activeIntents.activeIntents);
                                 this.setState({loader:false})
                             }
                         )
@@ -59,16 +57,13 @@ class IntentsPage extends React.Component{
         );
     }
     
-    componentDidMount(){
-        console.log(this.props);
-    }
+    
 
 
     onChange(e){
         if ( e.target.name != 'file'){
             this.setState({ [e.target.name]: e.target.value });
         }else{
-            console.log(this.state.bot_guid);
             this.setState({ errors: {}, json_button:"Imported" });
 
             //create new formdata object
@@ -119,7 +114,6 @@ class IntentsPage extends React.Component{
     }
 
     render(){
-        console.log(this.props);
         const { errors } = this.state;
         const current_intents = this.props.activeIntents.activeIntents;
 
@@ -172,8 +166,8 @@ class IntentsPage extends React.Component{
 }
 
 IntentsPage.propTypes = {
-    activeBot:React.PropTypes.object.isRequired,
-    getBots:React.PropTypes.func.isRequired
+    activeBot:PropTypes.object.isRequired,
+    getBots:PropTypes.func.isRequired
 }
 
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import PropTypes from 'prop-types';
 
 import { getBots, setActiveBot, updateBot } from '../actions/botActions';
 
@@ -31,7 +32,7 @@ export default function(ComposedComponent){
                             that.props.updateBot(activeBot);
                         }else{
                             activeBot = current_bots[0];
-                            browserHistory.push('/bots/'+activeBot.name+'/learning');
+                            browserHistory.push('/bots/'+activeBot.name+'/intents');
                         }  
                     },100);
                 }
@@ -46,11 +47,11 @@ export default function(ComposedComponent){
     }
 
     BotAuthenticate.propTypes = {
-        isAuthenticated: React.PropTypes.bool.isRequired,
-        bots: React.PropTypes.object.isRequired,
-        getBots: React.PropTypes.func.isRequired,
-        setActiveBot: React.PropTypes.func.isRequired,
-        updateBot: React.PropTypes.func.isRequired
+        isAuthenticated: PropTypes.bool.isRequired,
+        bots: PropTypes.object.isRequired,
+        getBots: PropTypes.func.isRequired,
+        setActiveBot: PropTypes.func.isRequired,
+        updateBot: PropTypes.func.isRequired
     }
 
     function mapStateToProps(state){

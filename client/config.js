@@ -1,5 +1,5 @@
 // Development Config
-export const config = {"url":"http://localhost:5000"};
+//export const config = {"url":"http://localhost:5000/api"};
 
 // Production Config
-//export const config = {"url":""};
+export const config = {"url":"/api"};

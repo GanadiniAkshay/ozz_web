@@ -5,6 +5,8 @@ import validateInput from '../../shared/validations/signup'
 import TextFieldGroup from '../common/TextFieldGroup';
 import { browserHistory, Link } from 'react-router';
 
+import PropTypes from 'prop-types';
+
 import timezones from '../../data/timezones';
 
 class SignupForm extends React.Component{
@@ -115,7 +117,7 @@ class SignupForm extends React.Component{
 }
 
 SignupForm.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired
+    userSignupRequest: PropTypes.func.isRequired
 }
 
 export default SignupForm;

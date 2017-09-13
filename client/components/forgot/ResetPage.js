@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router'; 
 
 import ResetForm from './ResetForm';
+import PropTypes from 'prop-types';
 
 class ResetPage extends React.Component{
     constructor(props){
@@ -58,7 +59,7 @@ class ResetPage extends React.Component{
 }
 
 ResetPage.propTypes = {
-    isAuthenticated: React.PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired
 }
 
 

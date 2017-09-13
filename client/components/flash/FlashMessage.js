@@ -1,6 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
+import PropTypes from 'prop-types';
+
 class FlashMessage extends React.Component {
     constructor(props){
         super(props);
@@ -27,8 +29,8 @@ class FlashMessage extends React.Component {
 }
 
 FlashMessage.propTypes = {
-    message: React.PropTypes.object.isRequired,
-    deleteFlashMessage: React.PropTypes.func.isRequired
+    message: PropTypes.object.isRequired,
+    deleteFlashMessage: PropTypes.func.isRequired
 }
 
 export default FlashMessage;

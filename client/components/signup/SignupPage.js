@@ -4,6 +4,7 @@ import { Link, browserHistory } from 'react-router';
 import { userSignupRequest } from '../../actions/signupActions';
 
 import SignupForm from './SignupForm';
+import PropTypes from 'prop-types';
 
 class SignupPage extends React.Component{
     componentWillMount(){
@@ -54,8 +55,8 @@ class SignupPage extends React.Component{
 }
 
 SignupPage.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired,
-    isAuthenticated: React.PropTypes.bool.isRequired
+    userSignupRequest: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired
 }
 
 function mapStateToProps(state){

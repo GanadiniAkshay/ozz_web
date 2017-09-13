@@ -6,6 +6,7 @@ import { browserHistory, Link} from 'react-router';
 import { getBots, setActiveBot, updateBot } from '../../actions/botActions';
 
 import Navbar from '../navbar/Navbar';
+import PropTypes from 'prop-types';
 
 class Bot extends React.Component{
     constructor(props){
@@ -28,7 +29,7 @@ class Bot extends React.Component{
                     var activeBot = current_bots.find(function(o){ return o.used == max_time});
 
                     this.props.updateBot(activeBot);
-                    browserHistory.push("/bots/" + activeBot.name + "/learning");
+                    //browserHistory.push("/bots/" + activeBot.name + "/intents");
                 } else{
                     this.setState({hidden:''})
                 }
@@ -63,11 +64,11 @@ class Bot extends React.Component{
 
 
 Bot.propTypes = {
-    getBots: React.PropTypes.func.isRequired,
-    setActiveBot: React.PropTypes.func.isRequired,
-    updateBot: React.PropTypes.func.isRequired,
-    activeBot: React.PropTypes.object.isRequired,
-    bots: React.PropTypes.object.isRequired
+    getBots: PropTypes.func.isRequired,
+    setActiveBot: PropTypes.func.isRequired,
+    updateBot: PropTypes.func.isRequired,
+    activeBot: PropTypes.object.isRequired,
+    bots: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state){

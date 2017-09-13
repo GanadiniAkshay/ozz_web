@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import TextFieldGroup from '../common/TextFieldGroup';
 import { browserHistory, Link } from 'react-router';
 
+import PropTypes from 'prop-types';
 
 class LoginForm extends React.Component{
     constructor(props){
@@ -40,7 +41,7 @@ class LoginForm extends React.Component{
                                 var max_time = Math.max.apply(Math, current_bots.map(function(o){return o.used}));
                                 var activeBot = current_bots.find(function(o){ return o.used == max_time});
 
-                                browserHistory.push('/bots/' + activeBot.name + '/learning');
+                                browserHistory.push('/bots/' + activeBot.name + '/intents');
                             }
                         },
                         (error) => { console.log(error)}
@@ -99,11 +100,11 @@ class LoginForm extends React.Component{
 }
 
 LoginForm.propTypes = {
-    userLoginRequest: React.PropTypes.func.isRequired,
-    getBots: React.PropTypes.func.isRequired,
-    user: React.PropTypes.object.isRequired,
-    bots: React.PropTypes.object.isRequired,
-    activeBot: React.PropTypes.object.isRequired
+    userLoginRequest: PropTypes.func.isRequired,
+    getBots: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    bots: PropTypes.object.isRequired,
+    activeBot: PropTypes.object.isRequired
 }
 
 export default LoginForm;

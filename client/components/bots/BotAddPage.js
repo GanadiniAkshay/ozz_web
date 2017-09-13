@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import BotAddForm from './BotAddForm';
 
 import { createBot } from '../../actions/botActions';
+import PropTypes from 'prop-types';
 
 class BotAddPage extends React.Component{
     render(){
@@ -40,8 +41,8 @@ function mapStateToProps(state){
 }
 
 BotAddPage.propTypes = {
-    user: React.PropTypes.object.isRequired,
-    createBot: React.PropTypes.func.isRequired
+    user: PropTypes.object.isRequired,
+    createBot: PropTypes.func.isRequired
 }
 
 

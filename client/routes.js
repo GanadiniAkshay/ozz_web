@@ -22,6 +22,7 @@ import LearningDocsPage from './components/docs/LearningDocsPage';
 import LearningPage from './components/learning/LearningPage';
 
 import IntentsPage from './components/intents/IntentsPage';
+import IntentEditPage from './components/intents/IntentEditPage';
 
 import SettingsPage from './components/settings/SettingsPage';
 
@@ -40,12 +41,11 @@ export default (
         <Route path="privacy" component={PrivacyPage} />
         <Route path="forgot_password" component={ForgotPage} />
         <Route path="reset_password" component={ResetPage} />
-        <Route path="docs/learning" component={LearningDocsPage} />
         <Route path="bots" component={requireAuth(Bot)}/>
         <Route path="bots/add" component={requireAuth(BotAddPage)}/>
-        <Route path="bots/:botname/learning" component={requireBotAuth(LearningPage)}/>
         <Route path="bots/:botname/settings" component={requireBotAuth(SettingsPage)}/>
         <Route path="bots/:botname/intents"  component={requireBotAuth(IntentsPage)}/>
+        <Route path="bots/:botname/intents/:intentname" component={requireBotAuth(IntentEditPage)}/>
         <Route path="*" component={NotFound}/>
     </Route>
 )

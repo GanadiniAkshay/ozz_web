@@ -5,6 +5,8 @@ import { browserHistory } from 'react-router';
 
 import { getBots } from '../../actions/botActions';
 
+import PropTypes from 'prop-types';
+
 import Navbar from '../navbar/Navbar';
 import TextFieldGroup from '../common/TextFieldGroup';
 
@@ -44,7 +46,7 @@ class SettingsPage extends React.Component{
 
                     if (!activeBot){
                         activeBot = current_bots[0];
-                        browserHistory.push('/bots/'+activeBot.name+'/learning');
+                        browserHistory.push('/bots/'+activeBot.name+'/intents');
                     }else{
                         this.setState({name:activeBot.name,platform:activeBot.platform,nlp_platform:activeBot.nlp_platform,id:activeBot.id,bot_guid:activeBot.bot_guid,webhook:activeBot.webhook,app_secret:activeBot.app_secret});
                         Materialize.updateTextFields();
@@ -184,8 +186,8 @@ class SettingsPage extends React.Component{
 }
 
 SettingsPage.propTypes = {
-    activeBot:React.PropTypes.object.isRequired,
-    getBots:React.PropTypes.func.isRequired
+    activeBot:PropTypes.object.isRequired,
+    getBots:PropTypes.func.isRequired
 }
 
 

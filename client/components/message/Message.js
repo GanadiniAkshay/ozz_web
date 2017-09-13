@@ -3,6 +3,7 @@ import axios from 'axios';
 import classnames from 'classnames';
 
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Message extends React.Component{
     constructor(props){
@@ -281,14 +282,14 @@ class Message extends React.Component{
 }
 
 Message.propTypes = {
-    message: React.PropTypes.string.isRequired,
-    nlp: React.PropTypes.string.isRequired,
-    token:React.PropTypes.string.isRequired,
-    intents:React.PropTypes.array.isRequired,
-    intent_ids:React.PropTypes.object.isRequired,
-    intent:React.PropTypes.string.isRequired,
-    addIntent:React.PropTypes.func.isRequired,
-    id:React.PropTypes.number.isRequired
+    message: PropTypes.string.isRequired,
+    nlp: PropTypes.string.isRequired,
+    token:PropTypes.string.isRequired,
+    intents:PropTypes.array.isRequired,
+    intent_ids:PropTypes.object.isRequired,
+    intent:PropTypes.string.isRequired,
+    addIntent:PropTypes.func.isRequired,
+    id:PropTypes.number.isRequired
 }
 
 export default Message;

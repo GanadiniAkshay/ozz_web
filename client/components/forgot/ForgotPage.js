@@ -4,6 +4,8 @@ import { Link, browserHistory } from 'react-router';
 
 import ForgotForm from './ForgotForm';
 
+import PropTypes from 'prop-types';
+
 class ForgotPage extends React.Component{
     componentWillMount(){
             if (this.props.isAuthenticated){
@@ -35,7 +37,7 @@ class ForgotPage extends React.Component{
 }
 
 ForgotPage.propTypes = {
-    isAuthenticated: React.PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired
 }
 
 

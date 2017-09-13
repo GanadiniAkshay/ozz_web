@@ -5,6 +5,8 @@ import { browserHistory, Link } from 'react-router';
 import Navbar from '../navbar/Navbar';
 import Message from '../message/Message';
 
+import PropTypes from 'prop-types';
+
 
 class LearningPage extends React.Component{
     constructor(props){
@@ -56,7 +58,7 @@ class LearningPage extends React.Component{
 
                     if (!activeBot){
                         activeBot = current_bots[0];
-                        browserHistory.push('/bots/'+activeBot.name+'/learning');
+                        browserHistory.push('/bots/'+activeBot.name+'/intents');
                     }else{
                         this.setState({id:activeBot.id,name:activeBot.name,nlp:activeBot.nlp_platform,nlp_app_secret:activeBot.nlp_app_secret,loader:false})
                         if (this.state.nlp_app_secret == ''){
@@ -111,7 +113,7 @@ class LearningPage extends React.Component{
 
         const helper = (
             <div>
-                <p>Please update your bots webhook using the new webhook from the settings page. You can find detailed instruction on the <Link to="https://ozz.ai/docs/learning" style={{'textDecoration':'underline','color':'#ABA0CB'}}>documentation page</Link>.</p>
+                <p>Please update your bots webhook using the new webhook from the settings page. </p>
                 <p>Or watch the video below for a detailed demo.</p><br/>
                 <div className="video-container">
                     <iframe width="853" height="480" src="https://www.youtube.com/embed/9XfrRJIzGs8" frameBorder="0" allowFullScreen></iframe>

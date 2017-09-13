@@ -82,6 +82,19 @@
      box-shadow: 0 1px 0 0 #ABA0CB;
    }
 
+   .input-field-none input[type=text] {
+     border-bottom: none!important;
+     box-shadow: none!important;
+     margin-top: -10px;
+     margin-bottom: -10px;
+     padding: 0px;
+   }
+
+   .input-field-none input[type=text]:focus {
+     border-bottom: none!important;
+     box-shadow: none!important;
+   }
+
    .input-field input[type=email]:focus {
      border-bottom: 1px solid #ABA0CB;
      box-shadow: 0 1px 0 0 #ABA0CB;
@@ -129,6 +142,14 @@
 
     .ozz_color{
       background: #ABA0CB;
+    }
+
+    .hoverize i{
+      visibility:hidden;
+    }
+
+    .hoverize:hover i{
+      visibility:visible;
     }
   </style>
 </head>

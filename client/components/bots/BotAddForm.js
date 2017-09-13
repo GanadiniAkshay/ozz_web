@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import TextFieldGroup from '../common/TextFieldGroup';
 import { browserHistory, Link } from 'react-router';
 
-
+import PropTypes from 'prop-types';
 
 
 class BotAddForm extends React.Component{
@@ -101,8 +101,8 @@ class BotAddForm extends React.Component{
 }
 
 BotAddForm.propTypes = {
-    user: React.PropTypes.object.isRequired,
-    createBot: React.PropTypes.func.isRequired
+    user: PropTypes.object.isRequired,
+    createBot: PropTypes.func.isRequired
 }
 
 

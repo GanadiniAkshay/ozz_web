@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { createEvent } from '../../actions/eventActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 
+import PropTypes from 'prop-types';
+
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +50,7 @@ class EventForm extends React.Component {
 }
 
 EventForm.propTypes = {
-  createEvent: React.PropTypes.func.isRequired
+  createEvent: PropTypes.func.isRequired
 }
 
 export default connect(null, { createEvent })(EventForm);

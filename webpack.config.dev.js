@@ -11,6 +11,7 @@ export default {
         path: '/',
         publicPath: '/'
     },
+    devtool: '#eval-source-map',
     plugins : [
         new webpack.NoErrorsPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),

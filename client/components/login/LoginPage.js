@@ -5,6 +5,7 @@ import { userLoginRequest } from '../../actions/loginActions';
 import { getBots } from '../../actions/botActions';
 
 import LoginForm from './LoginForm';
+import PropTypes from 'prop-types';
 
 class LoginPage extends React.Component{
     componentWillMount(){
@@ -40,12 +41,12 @@ class LoginPage extends React.Component{
 }
 
 LoginPage.propTypes = {
-    userLoginRequest: React.PropTypes.func.isRequired,
-    getBots: React.PropTypes.func.isRequired,
-    isAuthenticated: React.PropTypes.bool.isRequired,
-    user:React.PropTypes.object.isRequired,
-    bots:React.PropTypes.object.isRequired,
-    activeBot:React.PropTypes.object.isRequired
+    userLoginRequest: PropTypes.func.isRequired,
+    getBots: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    user:PropTypes.object.isRequired,
+    bots:PropTypes.object.isRequired,
+    activeBot:PropTypes.object.isRequired
 }
 
 

@@ -5,6 +5,8 @@ import classnames from 'classnames';
 import TextFieldGroup from '../common/TextFieldGroup';
 import { browserHistory, Link } from 'react-router';
 
+import PropTypes from 'prop-types';
+
 
 class ContactForm extends React.Component{
     constructor(props){
