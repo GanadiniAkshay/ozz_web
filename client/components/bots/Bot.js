@@ -29,7 +29,7 @@ class Bot extends React.Component{
                     var activeBot = current_bots.find(function(o){ return o.used == max_time});
 
                     this.props.updateBot(activeBot);
-                    //browserHistory.push("/bots/" + activeBot.name + "/intents");
+                    browserHistory.push("/bots/" + activeBot.name + "/intents");
                 } else{
                     this.setState({hidden:''})
                 }
