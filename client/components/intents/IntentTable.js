@@ -10,6 +10,7 @@ import Navbar from '../navbar/Navbar';
 import PropTypes from 'prop-types';
 
 import Utterance from './utterance';
+import { config } from '../../config';
 
 class IntentTable extends React.Component{
     constructor(props){
@@ -19,12 +20,15 @@ class IntentTable extends React.Component{
             "bot_guid":"",
             "intent_name":"",
             "utterances":[],
-            "intent_name":""
+            "intent_name":"",
+            "old_intent_name":""
         };
 
         this.onChange = this.onChange.bind(this);
         this.onIntentAdd = this.onIntentAdd.bind(this);
         this.onDelete_ = this.onDelete_.bind(this);
+        this.onNameChange = this.onNameChange.bind(this);
+        this.onNameChangeConfirm = this.onNameChangeConfirm.bind(this);
     }
 
     componentWillMount(){
@@ -38,8 +42,8 @@ class IntentTable extends React.Component{
                 var current_bots = this.props.bots.bots;
                 
                 var url_path = window.location.pathname.split('/');
-                var bot_name = url_path[2].replace('%20',' ');
-                var intent_name = url_path[4].replace('%20',' ');
+                var bot_name = decodeURI(url_path[2]);
+                var intent_name = decodeURI(url_path[4]);
 
                 var activeBot = current_bots.find(function(o){ return o.name == bot_name});
                 
@@ -47,7 +51,7 @@ class IntentTable extends React.Component{
                     activeBot = current_bots[0];
                     browserHistory.push('/bots/'+activeBot.name+'/intents');
                 }else{
-                    this.setState({bot_guid:activeBot.bot_guid, intent_name:intent_name});
+                    this.setState({bot_guid:activeBot.bot_guid, intent_name:intent_name, old_intent_name:intent_name});
 
                     this.props.getUtterances(this.state).then(
                         () => {
@@ -118,6 +122,28 @@ class IntentTable extends React.Component{
         );
     }
 
+    onNameChange(e){
+        this.setState({intent_name:e.target.value});
+    }
+
+    onNameChangeConfirm(e){
+        var key = e.which || e.keyCode;
+        if (key === 13){
+            var url = config.url + '/intents/' +this.state.bot_guid;
+            
+            var payload = {}
+            payload["old_name"] = this.state.old_intent_name;
+            payload["new_name"] = this.state.intent_name;
+    
+            axios.put(url,payload).then(
+                (res) => {
+                    this.setState({old_intent_name:this.state.intent_name});
+                },
+                (error) => {console.log(error);this.setState({button:'save'})}
+            )
+        }
+    }
+
     render(){
         var utterances = this.state.utterances;
 
@@ -167,7 +193,11 @@ class IntentTable extends React.Component{
         return (
             <div>
                 <div className="container">
-                    <h3>{this.state.intent_name}</h3>
+                    <h3>
+                        <div className="input-field-none">
+                            <input type="text" value={this.state.intent_name} style={{"fontSize":"1em"}} onChange={this.onNameChange} onKeyPress={this.onNameChangeConfirm}/>
+                        </div>
+                    </h3>
 
                     <div>
                         <form className="col s8 offset-s2" id="json" encType="multipart/form-data" onSubmit={this.onIntentAdd}>

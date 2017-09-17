@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {SET_CURRENT_INTENTS, SET_CURRENT_UTTERANCES, RESET_UTTERANCES, APPEND_UTTERANCES, REMOVE_UTTERANCES, SET_CURRENT_RESPONSES, RESET_RESPONSES, APPEND_RESPONSES, REMOVE_RESPONSES} from './types';
+import {SET_CURRENT_INTENTS, ADD_NEW_INTENT, REMOVE_INTENT, SET_CURRENT_UTTERANCES, RESET_UTTERANCES, APPEND_UTTERANCES, REMOVE_UTTERANCES, SET_CURRENT_RESPONSES, RESET_RESPONSES, APPEND_RESPONSES, REMOVE_RESPONSES} from './types';
 
 import { config } from '../config';
 
@@ -15,11 +15,43 @@ export function setActiveIntents(activeIntents){
     }
 }
 
+export function addNewIntent(name){
+    return {
+        type: ADD_NEW_INTENT,
+        name
+    }
+}
+
+export function deleteIntent(index){
+    return {
+        type: REMOVE_INTENT,
+        index
+    }
+}
+
 export function getIntents(payload){
     return dispatch => {
         return axios.get(config.url + '/intents/'+ payload.bot_guid).then(res => {
             const intents = res.data.intents;
             dispatch(setActiveIntents(intents));
+        })
+    }
+}
+
+export function addIntent(payload){
+    return dispatch => {
+        return axios.post(config.url + '/intents/' + payload.bot_guid, payload).then(res => {
+            const success = res.data;
+            dispatch(addNewIntent(payload.name));
+        })
+    }
+}
+
+export function removeIntent(payload){
+    return dispatch => {
+        return axios.delete(config.url + '/intents/' + payload.bot_guid, {"params":payload}).then(res => {
+            const success = res.data;
+            dispatch(deleteIntent(payload.index));
         })
     }
 }

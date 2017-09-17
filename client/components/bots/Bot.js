@@ -23,7 +23,6 @@ class Bot extends React.Component{
             () => {
                 var current_bots =  this.props.bots.bots;
                 
-                console.log(current_bots);
                 if (current_bots.length > 0){
                     var max_time = Math.max.apply(Math, current_bots.map(function(o){return o.used}));
                     var activeBot = current_bots.find(function(o){ return o.used == max_time});

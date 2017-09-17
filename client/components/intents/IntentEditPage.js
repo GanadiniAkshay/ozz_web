@@ -22,7 +22,6 @@ class IntentEditPage extends React.Component{
             id:'',
             bot_guid:'',
             name:'',
-            json_button: 'Import JSON',
             button:'save',
             disabled:true,
             loader:true,
@@ -32,14 +31,14 @@ class IntentEditPage extends React.Component{
         this.onChange = this.onChange.bind(this);
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.props.getBots(this.state).then(
                 () => {
                     var current_bots = this.props.bots.bots;
 
                     var url_path = window.location.pathname.split('/');
-                    var bot_name = url_path[2].replace('%20',' ');
-                    var intent_name = url_path[4].replace('%20',' ');
+                    var bot_name = decodeURI(url_path[2]);
+                    var intent_name = decodeURI(url_path[4]);
 
                     var activeBot = current_bots.find(function(o){ return o.name == bot_name});
 
@@ -48,12 +47,6 @@ class IntentEditPage extends React.Component{
                         browserHistory.push('/bots/'+activeBot.name+'/intents');
                     }else{
                         this.setState({name:intent_name,id:activeBot.id,bot_guid:activeBot.bot_guid});
-
-                        this.props.getIntents(this.state).then(
-                            () => {
-                                this.setState({loader:false})
-                            }
-                        )
                     }
                 }
         );
@@ -69,10 +62,7 @@ class IntentEditPage extends React.Component{
 
     render(){
         const { errors } = this.state;
-        const current_intents = this.props.activeIntents.activeIntents;
-
-        const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
-
+        
         return (
             <div className="full">
                 <Navbar active="settings_none"/>
@@ -96,7 +86,6 @@ function mapStateToProps(state){
     return {
         bots:state.bots,
         activeBot: state.activeBot,
-        activeIntents: state.activeIntents,
         utterances:state.utterances
     }
 }

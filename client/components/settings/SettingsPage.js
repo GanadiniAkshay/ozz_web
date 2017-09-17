@@ -24,6 +24,7 @@ class SettingsPage extends React.Component{
             button:'save',
             disabled:true,
             client_label:'Client Secret',
+            json_button: 'Import JSON',
             webhook:'',
             app_secret:'',
             errors:{}
@@ -31,6 +32,7 @@ class SettingsPage extends React.Component{
 
          this.onSelectChange = this.onSelectChange.bind(this);
          this.onChange = this.onChange.bind(this);
+         this.onJsonChange = this.onJsonChange.bind(this);
          this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -40,7 +42,7 @@ class SettingsPage extends React.Component{
                     var current_bots = this.props.bots.bots;
 
                     var url_path = window.location.pathname.split('/');
-                    var bot_name = url_path[2].replace('%20',' ');
+                    var bot_name = decodeURI(url_path[2]);
 
                     var activeBot = current_bots.find(function(o){ return o.name == bot_name});
 
@@ -87,6 +89,32 @@ class SettingsPage extends React.Component{
         }
     }
 
+    onJsonChange(e){
+        if ( e.target.name != 'file'){
+            this.setState({ [e.target.name]: e.target.value });
+        }else{
+            this.setState({ errors: {}, json_button:"Imported" });
+
+            //create new formdata object
+            var token = localStorage.getItem('jwtToken');
+            var form_data = new FormData($('#json')[0]);
+            var bot_guid  = this.state.bot_guid;
+            $.ajax({
+                type: 'POST',
+                url: '/upload/' + bot_guid,
+                headers:{'Authorization':'Bearer ' + token},
+                data: form_data,
+                contentType: false,
+                processData: false,
+                dataType: 'json'
+            }).done(function(data, textStatus, jqXHR){
+                console.log(data);
+            }).fail(function(data){
+                alert('error!');
+            });
+        }
+    }
+
     onChange(e){
         this.setState({ [e.target.name]: e.target.value });
     }
@@ -116,7 +144,7 @@ class SettingsPage extends React.Component{
             bot_obj['id'] = this.state.id;
             bot_obj['name'] = this.state.name;
 
-            var url = '/bots/' + this.state.id;
+            var url = '/api/bots/' + this.state.id;
             axios.put(url,bot_obj).then(
                 (res) => {
                     this.setState({button:'save'});
@@ -139,6 +167,22 @@ class SettingsPage extends React.Component{
                 <main>
                     <div className="container full">
                         <h4>Settings</h4>
+
+                        <form className="col s8 offset-s2" id="json" encType="multipart/form-data">
+                        <div className="file-field input-field" >
+                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right'}}>
+                                <span>{this.state.json_button}</span>
+                                <input 
+                                    type="file" 
+                                    id="jsfile"
+                                    onChange={this.onJsonChange} 
+                                    name="file"
+                                />
+                            </div>
+                        </div>
+                    </form>
+
+                    <br/><br/><br/>
 
                         <form className="col s8 offset-s2" onSubmit={this.onSubmit}>
                             <TextFieldGroup

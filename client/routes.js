@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute, NotFoundRoute, browserHistory } from 'react-router';
 
-
-
 import App from './components/App';
 import SignupPage from './components/signup/SignupPage';
 import LoginPage from './components/login/LoginPage';
@@ -23,6 +21,9 @@ import LearningPage from './components/learning/LearningPage';
 
 import IntentsPage from './components/intents/IntentsPage';
 import IntentEditPage from './components/intents/IntentEditPage';
+
+import EntitiesPage from './components/entities/EntitiesPage';
+import EntityEditPage from './components/entities/EntityEditPage';
 
 import SettingsPage from './components/settings/SettingsPage';
 
@@ -46,6 +47,8 @@ export default (
         <Route path="bots/:botname/settings" component={requireBotAuth(SettingsPage)}/>
         <Route path="bots/:botname/intents"  component={requireBotAuth(IntentsPage)}/>
         <Route path="bots/:botname/intents/:intentname" component={requireBotAuth(IntentEditPage)}/>
+        <Route path="bots/:botname/entities"  component={requireBotAuth(EntitiesPage)}/>
+        <Route path="bots/:botname/entities/:entityname" component={requireBotAuth(EntityEditPage)} />
         <Route path="*" component={NotFound}/>
     </Route>
 )
