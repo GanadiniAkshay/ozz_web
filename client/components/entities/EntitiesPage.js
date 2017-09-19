@@ -89,6 +89,7 @@ class EntitiesPage extends React.Component{
         
         if (key && key == 13){
             var entity_name = document.getElementById('entity').value;
+            entity_name = entity_name.toLowerCase();
             this.setState({int_button:"Adding..."});
     
             var payload = {};

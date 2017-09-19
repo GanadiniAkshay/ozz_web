@@ -99,6 +99,7 @@ class IntentsPage extends React.Component{
         
         if (key && key == 13){
             var intent_name = document.getElementById('intent').value;
+            intent_name = intent_name.toLowerCase()
             this.setState({int_button:"Adding..."});
     
             var payload = {};

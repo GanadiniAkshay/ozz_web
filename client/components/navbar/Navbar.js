@@ -47,7 +47,8 @@ class Navbar extends React.Component{
     }
 
     startTrain(e){
-        console.log("Starting training");
+        var $toastContent = $('<span>Training   <i class="fa fa-gear fa-spin" style="font-size:24px;margin-top:4%"></i></span>');
+        Materialize.toast($toastContent, 30000);
         this.setState({trainButton:"Training..."});
 
         var payload = {}
@@ -56,6 +57,7 @@ class Navbar extends React.Component{
         this.props.beginTraining(payload).then(
             () => {
                 this.setState({trainButton:"Train"});
+                $('.toast').remove()
             }
         )
     }

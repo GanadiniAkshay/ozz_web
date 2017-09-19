@@ -194,15 +194,15 @@ class IntentTable extends React.Component{
             <div>
                 <div className="container">
                     <h3>
-                        <div className="input-field-none">
-                            <input type="text" value={this.state.intent_name} style={{"fontSize":"1em"}} onChange={this.onNameChange} onKeyPress={this.onNameChangeConfirm}/>
+                        <div className="input-field-none" style={{"height":"100%"}}>
+                            <input autoComplete="off" type="text" value={this.state.intent_name} style={{"fontSize":"1em","height":"100%"}} onChange={this.onNameChange} onKeyPress={this.onNameChangeConfirm}/>
                         </div>
                     </h3>
 
                     <div>
                         <form className="col s8 offset-s2" id="json" encType="multipart/form-data" onSubmit={this.onIntentAdd}>
                             <div className="input-field">
-                                <input id="intent" type="text" placeholder="Add utterance" />
+                                <input autoComplete="off" id="intent" type="text" placeholder="Add utterance" />
                             </div>
                             <div className="file-field input-field" >
                                 <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right','marginTop':'-2%'}} onClick={this.onIntentAdd}>
