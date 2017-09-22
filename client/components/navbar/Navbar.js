@@ -73,16 +73,14 @@ class Navbar extends React.Component{
         document.body.style.backgroundColor = '#fff';
         var  current_bots = this.props.bots.bots.slice();
 
-        const intents_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="intents">Intents<i className="material-icons">speaker_notes</i></Link>);
+        const dashboard_active = (<Link to={"/bots/" + this.props.activeBot.name + "/"} className="collapsible-header waves-affect" id="intents">Dashboard<i className="material-icons">dashboard</i></Link>);
         const intents_active = (<Link to={"/bots/" + this.props.activeBot.name + "/intents"} className="collapsible-header waves-affect" id="intents">Intents<i className="material-icons">speaker_notes</i></Link>);
-
-        const entities_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="entities">Entities<i className="material-icons">aspect_ratio</i></Link>);
         const entities_active = (<Link to={"/bots/" + this.props.activeBot.name + "/entities"} className="collapsible-header waves-affect" id="entities">Entities<i className="material-icons">aspect_ratio</i></Link>);
-
-        const persona_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Persona<i className="material-icons">tag_faces</i></Link>);
         const persona_active = (<Link to={"/bots/" + this.props.activeBot.name + "/persona"} className="collapsible-header waves-affect" id="persona">Persona<i className="material-icons">tag_faces</i></Link>);
-
-        const settings_inactive = (<Link to="/bots" className="collapsible-header waves-affect" id="settings" onClick={e => {e.preventDefault()}}>Settings<i className="material-icons">settings</i></Link>);
+        const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learn"} className="collapsible-header waves-affect" id="persona">Learning<i className="material-icons">lightbulb_outline</i></Link>);
+        const context_active = (<Link to={"/bots/" + this.props.activeBot.name + "/context"} className="collapsible-header waves-affect" id="persona">Context Management<i className="material-icons">blur_on</i></Link>);
+        const sforms_active = (<Link to={"/bots/" + this.props.activeBot.name + "/smart_forms"} className="collapsible-header waves-affect" id="persona">Smart Forms<i className="material-icons">assistant</i></Link>);
+        const analytics_active = (<Link to={"/bots/" + this.props.activeBot.name + "/analytics"} className="collapsible-header waves-affect" id="persona">Analytics<i className="material-icons">trending_up</i></Link>);
         const settings_active = (<Link to={"/bots/" + this.props.activeBot.name + "/settings"} className="collapsible-header waves-affect" id="settings">Settings<i className="material-icons">settings</i></Link>);
         
 
@@ -134,6 +132,11 @@ class Navbar extends React.Component{
                             <li className="no-padding">
                                 <ul>
                                     <li className="bold">
+                                        {dashboard_active}
+                                        <div className="collapsible-body">
+                                        </div>
+                                    </li>
+                                    <li className="bold">
                                         {intents_active}
                                         <div className="collapsible-body">
                                         </div>
@@ -145,6 +148,26 @@ class Navbar extends React.Component{
                                     </li>
                                     <li className="bold">
                                         {persona_active}
+                                        <div className="collapsible-body">
+                                        </div>
+                                    </li>
+                                    <li className="bold">
+                                        {learning_active}
+                                        <div className="collapsible-body">
+                                        </div>
+                                    </li>
+                                    <li className="bold">
+                                        {context_active}
+                                        <div className="collapsible-body">
+                                        </div>
+                                    </li>
+                                    <li className="bold">
+                                        {sforms_active}
+                                        <div className="collapsible-body">
+                                        </div>
+                                    </li>
+                                    <li className="bold">
+                                        {analytics_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
