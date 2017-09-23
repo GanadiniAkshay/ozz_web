@@ -1,0 +1,261 @@
+.sidedevices .computerwrapper .mask {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	border-radius: 8px;
+	box-shadow: -1px 1px 4px rgba(107,124,147,.45);
+	background: white;
+}
+.sidedevices .computerwrapper .mask-img {
+	width: 100%;
+	height:100%;
+	display: block;
+}
+.sidedevices .computerwrapper .computer {
+	width: 800px;
+	height: 520px;
+	background: linear-gradient(to bottom, rgba(247,251,254,1) 0%,rgba(221,226,232,1) 100%);
+	border-radius: 18px;
+	position: relative;
+	box-shadow: inset 0 2px 7px 1px rgba(255,255,255,.5),inset 0 -5px 20px rgba(187,200,225,.35),0 2px 6px rgba(40,39,66,.14),0 10px 20px rgba(40,39,66,.06), 76px 75px 169px -35px rgba(0,0,0,0.4);
+	padding: 28px;
+}
+.sidedevices .computerwrapper .computer:after,
+.sidedevices .computerwrapper .computer:before {
+	content: "";
+	position: absolute;
+	border-radius: 3px 3px 0 0;
+	width: calc(100% + 200px);
+	height: 10px;
+	background: linear-gradient(to right, rgba(246,250,253,1) 0%,rgba(221,226,233,1) 6%,rgba(246,250,253,1) 15%,rgba(246,250,253,1) 42%,rgba(230, 230, 230, 1) 42%,rgba(246,250,253,1) 45%,rgba(246,250,253,1) 53%,rgba(230, 230, 230, 1) 56%,rgba(246,250,253,1) 56%, rgba(246,250,253,1) 85%,rgba(221,226,233,1) 94%,rgba(246,250,253,1) 100%);
+	left: -100px;
+	bottom: -5px;
+}
+.sidedevices .computerwrapper .computer:before {
+	height: 6px;
+	bottom: -11px;
+	border-radius: 0 0 40px 40px;
+	background: #dde2e9;
+	box-shadow: inset 0px -25px 10px -20px rgba(0,0,0,.5);
+}
+@media screen and (max-width: 900px) {
+.sidedevices .computerwrapper .sidedevices .computerwrapper .computer{
+		margin: auto;
+		width: 100%;
+		padding: 20px;
+		height: calc((100vw - 80px) * .75);
+	}
+}.sidedevices .browserwrapper .mask {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background: white;
+}
+.sidedevices .browserwrapper .mask-img {
+	width: 100%;
+	display: block;
+}
+.sidedevices .browserwrapper .browser {
+	border-radius: 6px;
+	background: linear-gradient(to bottom, rgba(233,232,233,1) 0%,rgba(212,212,213,1) 100%);
+	background-size: 60px;
+	box-shadow: 0 10px 20px rgba(40,39,66,.06);
+	overflow: hidden;
+	width: 900px;
+	height: 560px;
+	z-index: 2;
+	padding: 30px 0 0 0;
+	top: 0;
+	left: 0;
+}
+.sidedevices .browserwrapper .browser:before {
+	content: "\25CF \25CF \25CF";
+	letter-spacing: -1px;
+	border-radius: 10px;
+	color: rgba(0,0,0,.05);
+	background: -webkit-linear-gradient(left, rgba(255,99,91,1) 0%,rgba(255,99,91,1) 35%,rgba(255,99,91,1) 35%,rgba(255,195,48,1) 35%,rgba(255,195,48,1) 66%,rgba(41,207,66,1) 66%,rgba(41,207,66,1) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+	font-size: 26px;
+	line-height: 30px;
+	height: 30px;
+	padding-left: 8px;
+	position: absolute;
+	top: 0;
+}
+
+@media screen and (max-width: 900px) {
+	.sidedevices .browserwrapper .header-images {
+		position: relative;
+		white-space: nowrap;
+		vertical-align: top;
+		overflow: scroll;
+		width: calc(100% + 40px);
+		margin: 0 0 0 -20px;
+		padding-bottom: 60px;
+		-webkit-overflow-scrolling: touch;
+	}	
+	.sidedevices .browserwrapper .browser {
+		width: 100%;
+		height: calc(100vw * .65);
+	}
+}.centerdevices .browserwrapper .mask {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background: white;
+}
+.centerdevices .browserwrapper .mask-img {
+	width: 100%;
+	display: block;
+}
+.centerdevices .browserwrapper .browser {
+	border-radius: 6px;
+	background: linear-gradient(to bottom, rgba(233,232,233,1) 0%,rgba(212,212,213,1) 100%);
+	background-size: 60px;
+	box-shadow: 0 10px 20px rgba(40,39,66,.06);
+	overflow: hidden;
+	width: 1020px;
+	height: 610px;
+	z-index: 2;
+	padding: 30px 0 0 0;
+	margin: auto;
+}
+.centerdevices .browserwrapper .browser:before {
+	content: "\25CF \25CF \25CF";
+	letter-spacing: -1px;
+	border-radius: 10px;
+	color: rgba(0,0,0,.05);
+	background: -webkit-linear-gradient(left, rgba(255,99,91,1) 0%,rgba(255,99,91,1) 35%,rgba(255,99,91,1) 35%,rgba(255,195,48,1) 35%,rgba(255,195,48,1) 66%,rgba(41,207,66,1) 66%,rgba(41,207,66,1) 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 26px;
+	line-height: 30px;
+	height: 30px;
+	padding-left: 8px;
+	position: absolute;
+	top: 0;
+}
+
+@media screen and (max-width: 1120px) {
+	.centerdevices .browserwrapper .header-images {
+		position: relative;
+		white-space: nowrap;
+		vertical-align: top;
+		overflow: scroll;
+		width: calc(100% + 40px);
+		margin: 0 0 0 -20px;
+		padding-bottom: 60px;
+		-webkit-overflow-scrolling: touch;
+	}	
+	.centerdevices .browserwrapper .browser {
+		width: 100%;
+		height: calc(100vw * .65);
+	}
+}.sidedevices .browseriphone .mask {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background: white;
+}
+.sidedevices .browseriphone .mask-img {
+	width: 100%;
+	display: block;
+}
+.sidedevices .browseriphone .browser {
+	border-radius: 6px;
+	background: linear-gradient(to bottom, rgba(233,232,233,1) 0%,rgba(212,212,213,1) 100%);
+	background-size: 60px;
+	box-shadow: 0 10px 20px rgba(40,39,66,.06);
+	overflow: hidden;
+	width: 900px;
+	height: 560px;
+	z-index: 2;
+	padding: 30px 0 0 0;
+	position: relative;
+	top: 0;
+	left: 90px;
+}
+.sidedevices .browseriphone .browser:before {
+	content: "\25CF \25CF \25CF";
+	letter-spacing: -1px;
+	border-radius: 10px;
+	color: rgba(0,0,0,.05);
+	background: -webkit-linear-gradient(left, rgba(255,99,91,1) 0%,rgba(255,99,91,1) 35%,rgba(255,99,91,1) 35%,rgba(255,195,48,1) 35%,rgba(255,195,48,1) 66%,rgba(41,207,66,1) 66%,rgba(41,207,66,1) 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 26px;
+	line-height: 30px;
+	height: 30px;
+	padding-left: 8px;
+	position: absolute;
+	top: 0;
+}
+.sidedevices .browseriphone .iphone {
+	background: linear-gradient(to bottom, rgba(247,251,254,1) 0%,rgba(221,226,232,1) 100%);
+	box-shadow: inset 0 4px 7px 1px #fff,inset 0 -5px 20px rgba(187,200,225,.35),0 2px 6px rgba(40,39,66,.14),0 10px 20px rgba(40,39,66,.06), 0px 36px 79px -1px rgba(0,0,0,0.15);
+	overflow: hidden;
+	border-radius: 30px;
+	width: 220px;
+	height: 440px;
+	padding: 50px 8px 60px;
+	z-index: 3;
+	position: absolute;
+	top: 0;
+	transform: translate3d(0,130px,0);
+}
+.sidedevices .browseriphone .iphone .mask {
+	border-radius: 4px;
+}
+.sidedevices .browseriphone .iphone:after {
+	content: "";
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: rgba(0,0,0,.05);
+	position: absolute;
+	top: calc(50% - 22px);
+	right: 23px;
+}
+.sidedevices .browseriphone .iphone:after {
+	top: initial;
+	width: 38px;
+	height: 38px;
+	left: calc(50% - 19px);
+	bottom: 12px;
+}
+.sidedevices .browseriphone .iphone:before {
+	content: "";
+	width: 50px;
+	height: 7px;
+	border-radius: 10px;
+	background: rgba(0,0,0,.08);
+	position: absolute;
+	top: 24px;
+	left: calc(50% - 25px);
+}
+@media (max-width: 660px) {
+	.sidedevices .browseriphone {
+		white-space: nowrap;
+		overflow: scroll;
+		margin-left: -20px;
+		width: calc(100% + 40px;);
+		-webkit-overflow-scrolling: touch;
+		vertical-align: top;
+	}
+	.sidedevices .browseriphone .iphone {
+		display: inline-block;
+		vertical-align: top;
+		position: relative;
+		transform: none;
+		margin: 0 20px;
+	}
+	.sidedevices .browseriphone .browser {
+		height: 440px;
+		width: 708px;
+		display: inline-block;
+		vertical-align: top;
+		left: inherit;
+		margin: 0 20px 0 0;
+	}
+}

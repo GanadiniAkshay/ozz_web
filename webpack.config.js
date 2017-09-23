@@ -1,5 +1,6 @@
 // webpack.config.js
 const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
     path: path.join(__dirname, 'server', 'dist', 'js'),
     filename: 'bundle.js'
   },
-  devtool: '#eval-source-map',
+  devtool: 'nosources-source-map',
   module: {
     loaders: [{
       test: /\.js$/,
@@ -16,22 +17,16 @@ module.exports = {
                         path.join(__dirname, 'client'),
                         path.join(__dirname,'server/shared')
                ],
-      loaders: [ 'react-hot', 'babel' ]
+      loaders: [ 'babel' ]
     }]
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
     }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      mangle: true,
-      sourcemap: false,
-      beautify: false,
-      dead_code: true
-    })
+    new UglifyJSPlugin()
   ],
   node: {
         net : 'empty',

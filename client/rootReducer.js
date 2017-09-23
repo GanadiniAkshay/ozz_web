@@ -8,6 +8,7 @@ import activeEntities from './reducers/activeEntities';
 import utterances from './reducers/utterances';
 import responses from './reducers/responses';
 import examples from './reducers/examples';
+import test from './reducers/test';
 
 export default combineReducers({
     auth,
@@ -17,5 +18,6 @@ export default combineReducers({
     activeEntities,
     utterances,
     responses,
-    examples
+    examples,
+    test
 })
