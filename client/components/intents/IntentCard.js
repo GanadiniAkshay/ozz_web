@@ -30,7 +30,7 @@ class IntentCard extends React.Component{
         return (
             <div className="row">
                 <div className="col s12 m8" style={{'width':'75%'}}>
-                    <div className="card purple lighten-5">
+                    <div className="card white lighten-5">
                         <div className="card-content">
                             <span className="card-title">{this.props.intent}</span>
                             

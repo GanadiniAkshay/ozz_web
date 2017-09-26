@@ -92,7 +92,7 @@ class Navbar extends React.Component{
     }
 
     render(){
-        document.body.style.backgroundColor = '#fff';
+        document.body.style.backgroundColor = '#F8F8F8';
         var  current_bots = this.props.bots.bots.slice();
 
         const intents_active = (<Link to={"/bots/" + this.props.activeBot.name + "/intents"} className="collapsible-header waves-affect" id="intents">Intents<i className="material-icons">speaker_notes</i></Link>);
@@ -152,11 +152,6 @@ class Navbar extends React.Component{
                             <li className="no-padding">
                                 <ul>
                                     <li className="bold">
-                                        {learning_active}
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                    <li className="bold">
                                         {intents_active}
                                         <div className="collapsible-body">
                                         </div>
@@ -168,6 +163,11 @@ class Navbar extends React.Component{
                                     </li>
                                     <li className="bold">
                                         {context_active}
+                                        <div className="collapsible-body">
+                                        </div>
+                                    </li>
+                                    <li className="bold">
+                                        {learning_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>

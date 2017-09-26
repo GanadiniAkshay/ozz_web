@@ -113,6 +113,7 @@ class IntentsPage extends React.Component{
             this.props.addIntent(payload).then(
                 () => {
                     this.setState({int_button:"Add", activeIntents:this.props.activeIntents.activeIntents});
+                    $('#intent_form').modal('close');
                     browserHistory.push('/bots/'+ this.state.name +'/intents/'+ intent_name);
                 }
             )
