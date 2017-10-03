@@ -101,7 +101,7 @@ class SettingsPage extends React.Component{
             var bot_guid  = this.state.bot_guid;
             $.ajax({
                 type: 'POST',
-                url: '/upload/' + bot_guid,
+                url: '/api/upload/' + bot_guid,
                 headers:{'Authorization':'Bearer ' + token},
                 data: form_data,
                 contentType: false,
