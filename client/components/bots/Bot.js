@@ -46,14 +46,15 @@ class Bot extends React.Component{
                 <Navbar active="app_new"/>
                 <main className={this.state.hidden}>
                     <div className="container full">
+                        <br/><br/><br/>
+                        <button onClick={this.onClick} className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>
+                          Add Bot<i className="material-icons right">add</i>
+                        </button>
                         <br/><br/>
                         <div className="video-container">
                             <iframe width="853" height="480" src="https://www.youtube.com/embed/--2aYhjFwiI" frameBorder="0" allowFullScreen></iframe>
                         </div>
                         <br/>
-                        <button onClick={this.onClick} className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>
-                          Add Bot<i className="material-icons right">add</i>
-                        </button>
                     </div>
                 </main>
             </div>

@@ -76,7 +76,7 @@ class BotAddForm extends React.Component{
         const { errors } = this.state;
 
         return (
-            <form className="col s8 offset-s2" onSubmit={this.onSubmit}>
+            <form className="col s8 offset-s2" onSubmit={this.onSubmit} autoComplete="off">
 
 
                 <TextFieldGroup

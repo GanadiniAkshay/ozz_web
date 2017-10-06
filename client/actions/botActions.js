@@ -18,6 +18,7 @@ export function setActiveBot(activeBot){
     }
 }
 
+
 export function getBots(event){
     return dispatch => {
         return axios.get(config.url + '/bots').then(res => {
@@ -39,6 +40,15 @@ export function updateBot(paylod){
     return dispatch => {
         return axios.put(config.url + '/bots/' + paylod.bot_guid, paylod).then(res => {
             dispatch(setActiveBot(paylod));
+        })
+    }
+}
+
+export function deleteBot(payload){
+    return dispatch => {
+        return axios.delete(config.url + '/bots/' + payload.bot_guid).then(res => {
+            const bots = res.data.bots;
+            dispatch(setBots(bots))
         })
     }
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router'; 
 
-import { getBots } from '../../actions/botActions';
+import { getBots, updateBot, deleteBot } from '../../actions/botActions';
 
 import PropTypes from 'prop-types';
 
@@ -32,6 +32,7 @@ class SettingsPage extends React.Component{
 
          this.onSelectChange = this.onSelectChange.bind(this);
          this.onChange = this.onChange.bind(this);
+         this.onDelete = this.onDelete.bind(this);
          this.onJsonChange = this.onJsonChange.bind(this);
          this.onSubmit = this.onSubmit.bind(this);
     }
@@ -70,6 +71,7 @@ class SettingsPage extends React.Component{
 
     componentDidMount(){
         $('select').material_select(this.onSelectChange.bind(this));
+        $('.modal').modal();
     }
 
 
@@ -117,6 +119,14 @@ class SettingsPage extends React.Component{
 
     onChange(e){
         this.setState({ [e.target.name]: e.target.value });
+
+        if (e.target.id == 'delete'){
+            if(e.target.value == this.state.name){
+                this.setState({"disabled":false});
+            }else{
+                this.setState({"disabled":true});
+            }
+        }
     }
 
     validate(data){
@@ -131,29 +141,25 @@ class SettingsPage extends React.Component{
     }
 
     onSubmit(e){
-        this.setState({ errors: {}, button:"saving..." });
         e.preventDefault();
 
         const {isValid, errors } = this.validate(this.state);
 
         if (!isValid){
-            this.setState({errors:errors, button:'Add'});
+            this.setState({errors:errors});
         } else{
-            var bot_obj = {}
-
-            bot_obj['id'] = this.state.id;
-            bot_obj['name'] = this.state.name;
-
-            var url = '/api/bots/' + this.state.id;
-            axios.put(url,bot_obj).then(
-                (res) => {
-                    this.setState({button:'save'});
-
-                    Materialize.toast('Saved', 2000, 'rounded'); 
-                },
-                (error) => {console.log(error);this.setState({button:'save'})}
-            )
+            this.props.updateBot(this.state);
         }
+    }
+
+    onDelete(e){
+        e.preventDefault();
+        this.props.deleteBot(this.state).then(
+            () => {
+                $('#deleteModal').modal('close');
+                browserHistory.push('/bots');
+            }
+        )
     }
 
     render(){
@@ -168,7 +174,7 @@ class SettingsPage extends React.Component{
                     <div className="container full">
                         <h4>Settings</h4>
 
-                        <form className="col s8 offset-s2" id="json" encType="multipart/form-data">
+                        <form className="col s8 offset-s2" id="json" encType="multipart/form-data" autoComplete="off">
                         <div className="file-field input-field" >
                             <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right'}}>
                                 <span>{this.state.json_button}</span>
@@ -184,7 +190,7 @@ class SettingsPage extends React.Component{
 
                     <br/><br/><br/>
 
-                        <form className="col s8 offset-s2" onSubmit={this.onSubmit}>
+                        <form className="col s8 offset-s2" onSubmit={this.onSubmit} autoComplete="off">
                             <TextFieldGroup
                                 error={errors.name}
                                 label="Name"
@@ -205,21 +211,35 @@ class SettingsPage extends React.Component{
                                 field="bot key"
                             />
 
-                            {/*<TextFieldGroup
-                                error={errors.nlp_app_secret}
-                                disabled={this.state.disabled}
-                                label={this.state.client_label}
-                                onChange={this.onChange}
-                                value={this.state.nlp_app_secret}
-                                type="text"
-                                field="nlp_app_secret"
-                            />*/}
-
                             <div className="form-group">
                                 <button className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>
                                     {this.state.button} <i className="material-icons right">send</i>
                                 </button>
                                 <br/><br/>
+                                <button className="btn waves-effect waves-light modal-trigger" id="button" style={{'background':'#ef5350','color':'white'}} data-target="deleteModal">
+                                    Delete <i className="material-icons right">delete_forever</i>
+                                </button>
+                                <br/><br/>
+                            </div>
+                            <div id="deleteModal" className="modal">
+                                <div className="modal-content">
+                                    <h4>Delete {this.state.name}</h4>
+                                    <p><b>Deleting a bot is permanent and all data will be lost!</b></p>
+
+                                    <div className="row">
+                                        <div className="col s12">
+                                            Enter bot name to confirm:
+                                            <div className="input-field inline">
+                                                <input id="delete" type="text" onChange={this.onChange}/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button disabled={this.state.disabled} onClick={this.onDelete} className="btn waves-effect waves-light" id="button" style={{'background':'#ef5350','color':'white'}}>
+                                        <i className="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -231,7 +251,8 @@ class SettingsPage extends React.Component{
 
 SettingsPage.propTypes = {
     activeBot:PropTypes.object.isRequired,
-    getBots:PropTypes.func.isRequired
+    getBots:PropTypes.func.isRequired,
+    updateBot:PropTypes.func.isRequired
 }
 
 
@@ -242,4 +263,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, { getBots })(SettingsPage);
+export default connect(mapStateToProps, { getBots, updateBot, deleteBot })(SettingsPage);

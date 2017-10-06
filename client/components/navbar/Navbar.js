@@ -95,12 +95,25 @@ class Navbar extends React.Component{
         document.body.style.backgroundColor = '#F8F8F8';
         var  current_bots = this.props.bots.bots.slice();
 
+        const intents_inactive = (<Link to="/bots" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="learning">Intents<i className="material-icons">speaker_notes</i></Link>);
         const intents_active = (<Link to={"/bots/" + this.props.activeBot.name + "/intents"} className="collapsible-header waves-affect" id="intents">Intents<i className="material-icons">speaker_notes</i></Link>);
+        
+        const entities_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="entities">Entities<i className="material-icons">aspect_ratio</i></Link>);
         const entities_active = (<Link to={"/bots/" + this.props.activeBot.name + "/entities"} className="collapsible-header waves-affect" id="entities">Entities<i className="material-icons">aspect_ratio</i></Link>);
+        
+        const persona_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Persona<i className="material-icons">tag_faces</i></Link>);
         const persona_active = (<Link to={"/bots/" + this.props.activeBot.name + "/persona"} className="collapsible-header waves-affect" id="persona">Persona<i className="material-icons">tag_faces</i></Link>);
+        
+        const learning_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Learning<i className="material-icons">lightbulb_outline</i></Link>);
         const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learn"} className="collapsible-header waves-affect" id="persona">Learning<i className="material-icons">lightbulb_outline</i></Link>);
+        
+        const context_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Context<i className="material-icons">blur_on</i></Link>);
         const context_active = (<Link to={"/bots/" + this.props.activeBot.name + "/context"} className="collapsible-header waves-affect" id="persona">Context<i className="material-icons">blur_on</i></Link>);
+        
+        const knowledge_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Knowledge<i className="material-icons">library_books</i></Link>);
         const knowledge_active = (<Link to={"/bots/" + this.props.activeBot.name + "/knowledge"} className="collapsible-header waves-affect" id="persona">Knowledge<i className="material-icons">library_books</i></Link>);
+        
+        const analytics_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Analytics<i className="material-icons">trending_up</i></Link>);
         const analytics_active = (<Link to={"/bots/" + this.props.activeBot.name + "/analytics"} className="collapsible-header waves-affect" id="persona">Analytics<i className="material-icons">trending_up</i></Link>);
         
 
@@ -152,37 +165,37 @@ class Navbar extends React.Component{
                             <li className="no-padding">
                                 <ul>
                                     <li className="bold">
-                                        {intents_active}
+                                        {(this.props.bots.bots.length == 0)? intents_inactive : intents_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
                                     <li className="bold">
-                                        {entities_active}
+                                        {(this.props.bots.bots.length == 0)? entities_inactive : entities_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
                                     <li className="bold">
-                                        {context_active}
+                                        {(this.props.bots.bots.length == 0)? context_inactive : context_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
                                     <li className="bold">
-                                        {learning_active}
+                                        {(this.props.bots.bots.length == 0)? learning_inactive : learning_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
                                     <li className="bold">
-                                        {persona_active}
+                                        {(this.props.bots.bots.length == 0)? persona_inactive : persona_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
                                     <li className="bold">
-                                        {knowledge_active}
+                                        {(this.props.bots.bots.length == 0)? knowledge_inactive : knowledge_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
                                     <li className="bold">
-                                        {analytics_active}
+                                        {(this.props.bots.bots.length == 0)? analytics_inactive : analytics_active}
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
@@ -192,11 +205,11 @@ class Navbar extends React.Component{
                             <li className="no-padding">
                                 <ul>
                                     <li className="bold">
-                                        <a className="collapsible-header waves-effect waves-light modal-trigger" href="#modal1">Test<i className="material-icons">check_circle</i></a>
+                                        <a className="collapsible-header waves-effect waves-light modal-trigger" href={(this.props.bots.bots.length == 0)? "#" : "#modal1"}>Test<i className="material-icons">check_circle</i></a>
                                         <div className="collapsible-body">
                                         </div>
                                     </li>
-                                    <li className="bold" onClick={this.startTrain}>
+                                    <li className="bold" onClick={(this.props.bots.bots.length == 0)? "" : this.startTrain} >
                                         <Link className="collapsible-header waves-affect" id="train">{this.state.trainButton}<i className="material-icons">build</i></Link>
                                         <div className="collapsible-body">
                                         </div>
