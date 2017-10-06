@@ -37,7 +37,7 @@ export function createBot(payload){
 
 export function updateBot(paylod){
     return dispatch => {
-        return axios.put(config.url + '/bots/' + paylod.id, paylod).then(res => {
+        return axios.put(config.url + '/bots/' + paylod.bot_guid, paylod).then(res => {
             dispatch(setActiveBot(paylod));
         })
     }
