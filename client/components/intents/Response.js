@@ -28,7 +28,7 @@ class Response extends React.Component{
         return(
             <div className="collapsible-body" style={{"backgroundColor":"#ede7f6"}}>
                 <div className="input-field">
-                    <input id={this.props.index} type="text" defaultValue={this.props.response} onKeyPress={this.props.onChange}/>
+                    <input id={this.props.index} type="text" defaultValue={this.props.response} onKeyPress={this.props.onChange} autoComplete="off"/>
                 </div>
                 <div style={{"marginLeft":"95%"}}>
                     <a className="btn-floating waves-effect waves-light red"  onClick={this.props.onIntentDelete}><i className="material-icons" id={"button " + this.props.index}>delete</i></a>
