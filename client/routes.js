@@ -2,8 +2,10 @@ import React from 'react';
 import { Route, IndexRoute, NotFoundRoute, browserHistory } from 'react-router';
 
 import App from './components/App';
-import SignupPage from './components/signup/SignupPage';
-import LoginPage from './components/login/LoginPage';
+// import SignupPage from './components/signup/SignupPage';
+import SignupPage from './components/signup/SignupPageNew';
+// import LoginPage from './components/login/LoginPage';
+import LoginPage from './components/login/LoginPageNew';
 import ContactPage from './components/contact/ContactPage';
 import ForgotPage from './components/forgot/ForgotPage';
 import ResetPage from './components/forgot/ResetPage';

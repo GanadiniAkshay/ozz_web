@@ -3,6 +3,8 @@ import ReactJson from 'react-json-view';
 
 import PropTypes from 'prop-types';
 
+import ChatBox from './chatBox';
+
 
 class TestBox extends React.Component{
     constructor(props){
@@ -21,12 +23,14 @@ class TestBox extends React.Component{
 
     render(){
         return (
-            <div id="modal1" className="modal modal-fixed-footer">
-                <div className="modal-content container" style={{"backgroundColor":"white"}}>
+            <div id="modal1" className="modal modal-fixed-footer" style={{"width":"80%","height":"60%"}}>
+                <div className="modal-content container" style={{"backgroundColor":"white","height":"100%"}}>
                     <h5 style={{"textAlign":"center"}}>{this.props.activeBot.name} - Test</h5>
-                    <br/><br/><br/>
                     <div className="row">
-                        <div className="col s5 offset-s4">
+                        <div className="col s7">
+                            <ChatBox/>
+                        </div>
+                        <div className="col s4 offset-s1">
                             <ReactJson src={this.props.json} displayDataTypes={false}/>
                         </div>
                     </div>

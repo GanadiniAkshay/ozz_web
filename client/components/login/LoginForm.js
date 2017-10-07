@@ -11,7 +11,7 @@ class LoginForm extends React.Component{
         super(props);
         this.state = {
             email: '',
-            button:"login",
+            button:"Sign In",
             password: '',
             errors: {}
         }
@@ -55,7 +55,7 @@ class LoginForm extends React.Component{
         const { errors } = this.state;
 
         return (
-            <form className="col s8 offset-s2" onSubmit={this.onSubmit}>
+            <form className="col s8" onSubmit={this.onSubmit}>
 
 
                 <TextFieldGroup
@@ -65,8 +65,9 @@ class LoginForm extends React.Component{
                     value={this.state.email}
                     type="email"
                     field="email"
+                    autoFocus={true}
                 />
-
+                <br/>
                 <TextFieldGroup
                     error={errors.password}
                     label="Password"
@@ -76,11 +77,11 @@ class LoginForm extends React.Component{
                     field="password"
                 />
 
-
+                <br/>
 
                 <div className="form-group">
                     <button className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>
-                        {this.state.button} <i className="material-icons right">send</i>
+                        {this.state.button}
                     </button>
                     <br/><br/>
                     <Link to="/forgot_password" style={{'textDecoration':'underline','color':'#58488a'}}>
@@ -90,7 +91,7 @@ class LoginForm extends React.Component{
                     <p>
                         Don't have an account? &emsp;
                         <Link to="/signup" style={{'textDecoration':'underline','color':'#58488a'}}>
-                         Signup
+                         Sign Up
                         </Link>
                     </p>
                 </div>

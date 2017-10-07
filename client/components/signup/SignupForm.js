@@ -15,7 +15,7 @@ class SignupForm extends React.Component{
         this.state = {
             name: '',
             email: '',
-            button:"sign up",
+            button:"Sign Up",
             password: '',
             passwordConfirmation: '',
             errors: {}
@@ -62,7 +62,7 @@ class SignupForm extends React.Component{
         );
 
         return (
-            <form onSubmit={this.onSubmit}>
+            <form className="col s8" onSubmit={this.onSubmit}>
 
                 <TextFieldGroup
                     error={errors.name}
@@ -70,6 +70,7 @@ class SignupForm extends React.Component{
                     onChange={this.onChange}
                     value={this.state.name}
                     field="name"
+                    autoFocus={true}
                 />
 
                 <TextFieldGroup
@@ -102,12 +103,12 @@ class SignupForm extends React.Component{
                 <br/><br/>
                 <div className="input-field">
                     <button className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white'}}>
-                        {this.state.button} <i className="material-icons right">send</i>
+                        {this.state.button} 
                     </button><br/><br/>
                     <p>
                         Already have an account? &emsp;
                         <Link to="/login" style={{'textDecoration':'underline','color':'#58488a'}}>
-                         Login
+                         Sign In
                         </Link>
                     </p>
                 </div>

@@ -17,7 +17,7 @@ class BotAddPage extends React.Component{
                 <div className="row">
                     <div className="headingLogo">
                         <Link to="/">
-                            <h1 style={{'fontSize':'1.2em'}}><b>OZZ.ai</b></h1>
+                            <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.5.0/img/logo_white_full.png" alt="ozz_logo" height="80px" />
                         </Link>
                     </div>
                 </div>
