@@ -20,6 +20,7 @@ import PrivacyPage from './components/terms/PrivacyPage';
 import LearningDocsPage from './components/docs/LearningDocsPage';
 
 import LearningPage from './components/learning/LearningPage';
+import LearningDemoPage from './components/learning/LearningDemo';
 
 import IntentsPage from './components/intents/IntentsPage';
 import IntentEditPage from './components/intents/IntentEditPage';
@@ -66,6 +67,7 @@ export default (
         <Route path="bots/:botname/entities/:entityname" component={requireBotAuth(EntityEditPage)} />
         <Route path="bots/:botname/analytics" component={requireBotAuth(AnalyticsPage)} />
         <Route path="bots/:botname/knowledge" component={requireBotAuth(KnowledgePage)} />
+        <Route path="bots/:botname/learn" component={requireBotAuth(LearningDemoPage)} />
         <Route path="*" component={NotFound}/>
     </Route>
 )
