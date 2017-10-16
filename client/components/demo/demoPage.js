@@ -55,21 +55,6 @@ class DemoPage extends React.Component{
                                     <img className="activator" src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/logo_color_full.png"/>
                                 </div>
                                 <div className="card-content">
-                                    <span className="card-title activator grey-text text-darken-4">Context API<i className="material-icons right">more_vert</i></span>
-                                    <button className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white'}} onClick={this.openContext}>
-                                        Open
-                                    </button>
-                                </div>
-                                <div className="card-reveal">
-                                <span className="card-title grey-text text-darken-4">Context Management<i className="material-icons right">close</i></span>
-                                    <p>Context Management let's the chatbot automatically maintain context and substitute it into messages as and when required. <br/><br/>For eg it can remember the city a user talked about and change what is the weather there? to what is the weather in China?</p>
-                                </div>
-                            </div>
-                            <div className="card col s3 offset-s1">
-                                <div className="card-image waves-effect waves-block waves-light">
-                                    <img className="activator" src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/logo_color_full.png"/>
-                                </div>
-                                <div className="card-content">
                                     <span className="card-title activator grey-text text-darken-4">Active Learning<i className="material-icons right">more_vert</i></span>
                                     <button className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white'}} onClick={this.openActive}>
                                         Open
