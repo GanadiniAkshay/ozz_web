@@ -29,6 +29,15 @@ import EntityEditPage from './components/entities/EntityEditPage';
 
 import SettingsPage from './components/settings/SettingsPage';
 
+import AnalyticsPage from './components/analytics/analyticsPage';
+
+import KnowledgePage from './components/knowledge/knowledge';
+
+import DemoPage from './components/demo/demoPage';
+import ContextDemoPage from './components/demo/contextDemo';
+import ActiveDemoPage from './components/demo/active';
+import KnowledgeDemoPage from './components/demo/knowledge';
+
 import NotFound from './components/common/NotFound'; 
 
 import requireAuth from './utils/requireAuth';
@@ -37,6 +46,10 @@ import requireBotAuth from './utils/requireBotAuth';
 export default (
     <Route path="/" history={browserHistory}>
         <IndexRoute component={App} />
+        <Route path="demos" component={DemoPage} />
+        <Route path="demos/context" component={ContextDemoPage}/>
+        <Route path="demos/active"  component={ActiveDemoPage}/>
+        <Route path="demos/knowledge" component={KnowledgeDemoPage}/>
         <Route path="signup" component={SignupPage} />
         <Route path="login"  component={LoginPage} />
         <Route path="contact" component={ContactPage} />
@@ -51,6 +64,8 @@ export default (
         <Route path="bots/:botname/intents/:intentname" component={requireBotAuth(IntentEditPage)}/>
         <Route path="bots/:botname/entities"  component={requireBotAuth(EntitiesPage)}/>
         <Route path="bots/:botname/entities/:entityname" component={requireBotAuth(EntityEditPage)} />
+        <Route path="bots/:botname/analytics" component={requireBotAuth(AnalyticsPage)} />
+        <Route path="bots/:botname/knowledge" component={requireBotAuth(KnowledgePage)} />
         <Route path="*" component={NotFound}/>
     </Route>
 )

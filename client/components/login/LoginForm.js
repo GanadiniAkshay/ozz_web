@@ -27,7 +27,7 @@ class LoginForm extends React.Component{
     }
 
     onSubmit(e){
-        this.setState({ errors: {}, button:"logging in..." });
+        this.setState({ errors: {}, button:"Signing In..." });
         e.preventDefault();
 
         this.props.userLoginRequest(this.state).then(

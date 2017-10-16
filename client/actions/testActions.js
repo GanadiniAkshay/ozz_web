@@ -3,10 +3,11 @@ import { browserHistory } from 'react-router';
 import { SET_CURRENT_REPLY } from './types';
 import { config } from '../config';
 
-export function setCurrentReply(json){
+export function setCurrentReply(json,message){
     return {
         type: SET_CURRENT_REPLY,
-        json
+        json,
+        message
     }
 }
 
@@ -15,7 +16,8 @@ export function sendMessage(payload) {
    return dispatch => {
        return axios.post(config.url + '/parse/' + payload.bot_guid, payload).then( res => {
            const json = res.data;
-           dispatch(setCurrentReply(json));
+           const message = payload.q;
+           dispatch(setCurrentReply(json, message));
        })
    } 
 }

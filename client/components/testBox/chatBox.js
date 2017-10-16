@@ -11,6 +11,8 @@ export default class ChatBox extends React.Component {
             {message: 'Fifth message', sentByUser: true}
         ];
         this.state = {messages}
+
+        console.log(this.props);
     }
     get styles() {
         return {
@@ -31,20 +33,12 @@ export default class ChatBox extends React.Component {
 
     renderMessages() {
         return this.state.messages.map(message => (
-            <div className="card" style={message.sentByUser? this.styles.fromMessage: this.styles.toMessage}>
+            <div className="card" style={message.sentByUser? this.styles.fromMessage: this.styles.toMessage} key={message.message}>
                 <div className="card-content" style={{padding: 10}}>
                     <p>{message.message}</p>
                 </div>
             </div>
         ));
-    }
-
-    handleMessageBox(event) {
-        if (event.keyCode == 13 || event.which == 13) {
-            console.log(this.refs);
-            this.setState({messages: [...this.state.messages, {message: this.refs.message.value, sentByUser: true}]});
-            this.refs.message.value = '';
-        }
     }
 
     render() {

@@ -9,6 +9,7 @@ import utterances from './reducers/utterances';
 import responses from './reducers/responses';
 import examples from './reducers/examples';
 import test from './reducers/test';
+import analytics from './reducers/analytics';
 
 export default combineReducers({
     auth,
@@ -19,5 +20,6 @@ export default combineReducers({
     utterances,
     responses,
     examples,
-    test
+    test,
+    analytics
 })

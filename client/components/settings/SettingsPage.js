@@ -186,6 +186,17 @@ class SettingsPage extends React.Component{
                                 />
                             </div>
                         </div>
+                        <div className="file-field input-field" >
+                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'left'}}>
+                                <span>Import CSV</span>
+                                <input 
+                                    type="file" 
+                                    id="jsfile"
+                                    onChange={this.onJsonChange} 
+                                    name="file"
+                                />
+                            </div>
+                        </div>
                     </form>
 
                     <br/><br/><br/>

@@ -38,3 +38,5 @@ export const ADD_SYNONYM = 'ADD_SYNONYM';
 export const REMOVE_SYNONYM = 'REMOVE_SYNONYM';
 
 export const SET_CURRENT_REPLY = 'SET_CURRENT_REPLY';
+
+export const SET_CURRENT_LOGS  = 'SET_CURRENT_LOGS';

@@ -20,6 +20,33 @@ class TestBox extends React.Component{
         return true;
     }
 
+    get styles() {
+        return {
+            fromMessage: {
+                maxWidth: '70%',
+                backgroundColor: '#6e5baa',
+                color: '#FFF',
+                marginLeft: 'auto',
+                marginRight: 0
+            },
+            toMessage: {
+                maxWidth: '70%',
+                backgroundColor: '#EEE'
+            }
+        }
+    }
+    set styles(val) {}
+
+    renderMessages() {
+        return this.props.messages.map( (message,index) => (
+            <div className="card" style={message.sentByUser? this.styles.fromMessage: this.styles.toMessage} key={index}>
+                <div className="card-content" style={{padding: 10}}>
+                    <p>{message.message}</p>
+                </div>
+            </div>
+        ));
+    }
+
 
     render(){
         return (
@@ -28,7 +55,12 @@ class TestBox extends React.Component{
                     <h5 style={{"textAlign":"center"}}>{this.props.activeBot.name} - Test</h5>
                     <div className="row">
                         <div className="col s7">
-                            <ChatBox/>
+                            <div className="card" style={{height: '100%'}}>
+                                <hr style={{marginBottom: 15}}/>
+                                <div className="card-content" style={{backgroundColor: '#', padding: 15, height: '100%'}}>
+                                    {this.renderMessages()}
+                                </div>
+                            </div>
                         </div>
                         <div className="col s4 offset-s1">
                             <ReactJson src={this.props.json} displayDataTypes={false}/>

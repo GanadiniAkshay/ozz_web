@@ -11,14 +11,21 @@ module.exports = {
   },
   devtool: 'nosources-source-map',
   module: {
-    loaders: [{
-      test: /\.js$/,
-      include: [
-                        path.join(__dirname, 'client'),
-                        path.join(__dirname,'server/shared')
-               ],
-      loaders: [ 'babel' ]
-    }]
+    loaders: [
+          {
+            test: /\.js$/,
+            include: [
+                              path.join(__dirname, 'client'),
+                              path.join(__dirname,'server/shared')
+                    ],
+            loaders: [ 'babel' ]
+          },
+          {
+              test: /\.css$/,  
+              include: /node_modules/,  
+              loaders: ['style-loader', 'css-loader'],
+         }
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({

@@ -7,7 +7,7 @@ import { logout } from '../../actions/loginActions';
 import { beginTraining } from '../../actions/trainActions';
 import { sendMessage } from '../../actions/testActions';
 
-import TestBox from '../testBox/testbox';
+import Ozz from '../widget/Ozz';
 import { config } from '../../config';
 
 import PropTypes from 'prop-types';
@@ -20,7 +20,8 @@ class Navbar extends React.Component{
         this.state = {
             'isBase':true,
             'trainButton':"Train",
-            'json':{}
+            'json':{},
+            'messages':[]
         }
 
         this.openSettings = this.openSettings.bind(this);
@@ -40,7 +41,7 @@ class Navbar extends React.Component{
         var current_bots =  this.props.bots.bots;
 
         if (current_bots.length > 0){
-            that.setState({'isBase':false});
+            that.setState({'isBase':false,'json':this.props.json,'messages':this.props.messages});
         }
     }
 
@@ -49,18 +50,15 @@ class Navbar extends React.Component{
     }
 
     sendMessage(e){
-        var key = e.which || e.keyCode;
-        if (key === 13){
-            var message = e.target.value;
-            var bot_guid = e.target.name;
-            e.target.value = "";
-            
-            var payload = {"q":message,"bot_guid":bot_guid}
-            this.props.sendMessage(payload).then(
-                () => {
-                    this.setState({"json":this.props.json});
-            })
-        }
+        var message = $('#message-bar').val();
+        var bot_guid = this.props.activeBot.bot_guid;
+        $('#message-bar').val("");
+
+        var payload = {"q":message,"bot_guid":bot_guid}
+        this.props.sendMessage(payload).then(
+            () => {
+                this.setState({"json":this.props.json,"messages":this.props.messages});
+        })
     }
 
     startTrain(e){
@@ -70,7 +68,7 @@ class Navbar extends React.Component{
 
         var payload = {}
         payload['bot_guid'] = this.props.activeBot.bot_guid;
-        
+
         this.props.beginTraining(payload).then(
             () => {
                 this.setState({trainButton:"Train"});
@@ -116,7 +114,17 @@ class Navbar extends React.Component{
         const analytics_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Analytics<i className="material-icons">trending_up</i></Link>);
         const analytics_active = (<Link to={"/bots/" + this.props.activeBot.name + "/analytics"} className="collapsible-header waves-affect" id="persona">Analytics<i className="material-icons">trending_up</i></Link>);
         
+        if (this.props.activeBot.name){
+            var config_name = this.props.activeBot.name;
+        }else{
+            var config_name = "Ozz"
+        }
 
+        const config = {
+            name: config_name,
+            'color':'#58488a',
+            'token':'YKUKHHEn4vY.cwA.c8g.NKBFH6f8Y7u6ztJRHLrokp1ZgiRWdVcie_zyfZb0bGk'
+        }
     
         for (var i=0;i<current_bots.length;i++){
             if (current_bots[i].name == this.props.activeBot.name){
@@ -204,11 +212,6 @@ class Navbar extends React.Component{
                             <li><div className="divider"></div></li>
                             <li className="no-padding">
                                 <ul>
-                                    <li className="bold">
-                                        <a className="collapsible-header waves-effect waves-light modal-trigger" href={(this.props.bots.bots.length == 0)? "#" : "#modal1"}>Test<i className="material-icons">check_circle</i></a>
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
                                     <li className="bold" onClick={(this.props.bots.bots.length == 0)? "" : this.startTrain} >
                                         <Link className="collapsible-header waves-affect" id="train">{this.state.trainButton}<i className="material-icons">build</i></Link>
                                         <div className="collapsible-body">
@@ -230,7 +233,7 @@ class Navbar extends React.Component{
                         </ul>
                         <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only"><i className="material-icons">menu</i></a>
                     </nav>
-                    <TestBox activeBot={this.props.activeBot} sendMessage={this.sendMessage} json={this.state.json}/>
+                    <Ozz config={config} messages={this.state.messages} sendMessage={this.sendMessage} json={this.state.json}></Ozz>
             </header>
         );
     }
@@ -247,7 +250,8 @@ function mapStateToProps(state){
     return {
         bots: state.bots,
         activeBot: state.activeBot.activeBot,
-        json:state.test.json
+        json:state.test.json,
+        messages: state.test.messages
     }
 }
 
