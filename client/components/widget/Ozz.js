@@ -19,7 +19,18 @@ class Ozz extends React.Component{
         this._handleClick = this._handleClick.bind(this);
     }
 
-    componentDidMount() {}
+    componentDidMount() {
+        $(document).mouseup($.proxy(function (e) {
+           var container = $("#ozz");
+
+           // if the target of the click isn't the container nor a descendant of the container
+           if (!container.is(e.target) && container.has(e.target).length === 0){
+                if (this.state){
+                    this.setState({active:false});
+                }
+           } 
+        },this));
+    }
 
     _handleClick() {
         this.setState({
@@ -31,7 +42,7 @@ class Ozz extends React.Component{
         const {active, config} = this.state;
 
         return(
-            <div className="ozz">
+            <div className="ozz" id="ozz">
                 {active ? <OzzBase active={active} config={config} messages={this.props.messages} sendMessage={this.props.sendMessage} json={this.props.json} isDemo={false}/> : false}
 
                 <Button 

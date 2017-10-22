@@ -132,6 +132,7 @@ class IntentsPage extends React.Component{
         payload['bot_guid'] = this.state.bot_guid;
         payload['index'] = index;
 
+        $("#deleteModal"+name).modal('close');
         this.props.removeIntent(payload).then(
             () => {
                 this.setState({activeIntents:this.props.activeIntents.activeIntents});

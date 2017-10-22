@@ -122,6 +122,7 @@ class EntitiesPage extends React.Component{
         payload['bot_guid'] = this.state.bot_guid;
         payload['index'] = index;
 
+        $("#deleteModal"+name).modal('close');
         this.props.removeEntity(payload).then(
             () => {
                 this.setState({activeEntities:this.props.activeEntities.activeEntities});

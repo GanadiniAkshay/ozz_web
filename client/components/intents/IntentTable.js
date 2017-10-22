@@ -63,7 +63,7 @@ class IntentTable extends React.Component{
         );
 
         $('.tooltipped').tooltip({delay: 50});
-    
+        $('#intent_form').modal('close');
 
         $(document).ready(function(){
             $('.collapsible').collapsible();

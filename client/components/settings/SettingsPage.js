@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router'; 
+import fileDownload from 'js-file-download';
 
 import { getBots, updateBot, deleteBot } from '../../actions/botActions';
 
@@ -9,6 +10,8 @@ import PropTypes from 'prop-types';
 
 import Navbar from '../navbar/Navbar';
 import TextFieldGroup from '../common/TextFieldGroup';
+
+import {config} from '../../config';
 
 class SettingsPage extends React.Component{
     constructor(props){
@@ -35,6 +38,7 @@ class SettingsPage extends React.Component{
          this.onDelete = this.onDelete.bind(this);
          this.onJsonChange = this.onJsonChange.bind(this);
          this.onSubmit = this.onSubmit.bind(this);
+         this.onExport = this.onExport.bind(this);
     }
 
     componentWillMount(){
@@ -152,6 +156,26 @@ class SettingsPage extends React.Component{
         }
     }
 
+    onExport(e){
+        e.preventDefault();
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": config.url + '/download/' + this.state.bot_guid,
+            "method": "GET",
+            "headers": {
+                "cache-control": "no-cache",
+                "Authorization": "Bearer " + localStorage.jwtToken
+            }
+        }
+            
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            fileDownload(JSON.stringify(response,null,2),'data.json');
+        });
+    }
+
     onDelete(e){
         e.preventDefault();
         this.props.deleteBot(this.state).then(
@@ -187,14 +211,8 @@ class SettingsPage extends React.Component{
                             </div>
                         </div>
                         <div className="file-field input-field" >
-                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'left'}}>
-                                <span>Import CSV</span>
-                                <input 
-                                    type="file" 
-                                    id="jsfile"
-                                    onChange={this.onJsonChange} 
-                                    name="file"
-                                />
+                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'left'}} onClick={this.onExport}>
+                                Export JSON
                             </div>
                         </div>
                     </form>

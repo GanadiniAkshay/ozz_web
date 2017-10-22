@@ -100,13 +100,13 @@ class Navbar extends React.Component{
         const entities_active = (<Link to={"/bots/" + this.props.activeBot.name + "/entities"} className="collapsible-header waves-affect" id="entities">Entities<i className="material-icons">aspect_ratio</i></Link>);
         
         const persona_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Persona<i className="material-icons">tag_faces</i></Link>);
-        const persona_active = (<Link to={"/bots/" + this.props.activeBot.name + "/persona"} className="collapsible-header waves-affect" id="persona">Persona<i className="material-icons">tag_faces</i></Link>);
+        const persona_active = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Persona<i className="material-icons">tag_faces</i></Link>);
         
         const learning_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Learning<i className="material-icons">lightbulb_outline</i></Link>);
         const learning_active = (<Link to={"/bots/" + this.props.activeBot.name + "/learn"} className="collapsible-header waves-affect" id="persona">Learning<i className="material-icons">lightbulb_outline</i></Link>);
         
         const context_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Context<i className="material-icons">blur_on</i></Link>);
-        const context_active = (<Link to={"/bots/" + this.props.activeBot.name + "/context"} className="collapsible-header waves-affect" id="persona">Context<i className="material-icons">blur_on</i></Link>);
+        const context_active = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Context<i className="material-icons">blur_on</i></Link>);
         
         const knowledge_inactive = (<Link to="/bots/" onClick={e => {e.preventDefault()}} className="collapsible-header waves-affect" id="persona">Knowledge<i className="material-icons">library_books</i></Link>);
         const knowledge_active = (<Link to={"/bots/" + this.props.activeBot.name + "/knowledge"} className="collapsible-header waves-affect" id="persona">Knowledge<i className="material-icons">library_books</i></Link>);
