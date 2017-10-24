@@ -163,7 +163,7 @@ class Navbar extends React.Component{
                     <nav style={{"background":"#ABA0CB"}}>
                         <ul id="slide-out" className="side-nav fixed">
                             <li>
-                                <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/logo_color_full.png" alt="ozz logo" height="80px" style={{"marginLeft":"20%","marginTop":"5%","padding":"0"}}/>
+                                <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/logo_color_full.png" alt="ozz logo" height="80px" style={{"marginLeft":"20%","marginTop":"5%","padding":"0"}}/>
                             </li>
                             <li><div className="divider"></div></li>
                             <li className="no-padding">

@@ -46,12 +46,12 @@ export default () => {
                   <div className="iphones">
                     <div className="iphone">
                       <div className="mask">
-                        <img className="mask-img" src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/learn2.png"/>
+                        <img className="mask-img" src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/learn2.png"/>
                       </div>
                     </div>
                     <div className="iphone iphone__2">
                       <div className="mask">
-                        <img className="mask-img" src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/learn1.png"/>
+                        <img className="mask-img" src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/learn1.png"/>
                       </div>
                     </div>
                   </div>
@@ -76,12 +76,12 @@ export default () => {
                   <div className="iphones">
                     <div className="iphone">
                       <div className="mask">
-                        <img className="mask-img" src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/pre2.png"/>
+                        <img className="mask-img" src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/pre2.png"/>
                       </div>
                     </div>
                     <div className="iphone iphone__2">
                       <div className="mask">
-                        <img className="mask-img" src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/pre1.png"/>
+                        <img className="mask-img" src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/pre1.png"/>
                       </div>
                     </div>
                   </div>

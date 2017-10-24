@@ -1,0 +1,231 @@
+.ozz-badge {
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    background: #FE556D;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    color: #FFF;
+    line-height: 24px;
+    -webkit-transform: translate(-100%, 100%);
+            transform: translate(-100%, 100%);
+  }
+  
+  .ozz-button {
+    outline: 0;
+    position: fixed;
+    right: 60px;
+    bottom: 60px;
+    display: block;
+    width: 100px;
+    height: 40px;
+    border: 0;
+    border-radius: 10%;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16);
+    -webkit-transition: box-shadow 200ms ease;
+    transition: box-shadow 200ms ease;
+    cursor: pointer;
+  }
+  .ozz-button:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09), 0 4px 40px rgba(0, 0, 0, 0.24);
+  }
+  
+  p.ozz-icon.ozz-icon--launcher {
+    position: absolute;
+    top: 60%;
+  }
+  
+  .ozz-button .ozz-icon {
+    color:white;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    z-index: 100;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+  }
+  .ozz-button .ozz-icon--close {
+    color:white;
+    top:50%;
+    width: 25px;
+    height: 25px;
+  }
+  .ozz-button .ozz-icon--launcher {
+    width: 32px;
+    height: 36px;
+  }
+  
+  .ozz-date__divider:before {
+    content: '/';
+  }
+  
+  .ozz-base {
+    position: fixed;
+    right: 20px;
+    bottom: 120px;
+    background: #FFF;
+    width: 750px;
+    height: 100%;
+    max-height: 670px;
+    border-radius: 8px;
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
+    display: flex;
+    z-index: 100;
+    flex-direction: column;
+  }
+
+  .ozz-base-demo {
+    position: fixed;
+    left: 70px;
+    bottom: 20px;
+    background: #FFF;
+    width: 700px;
+    height: 70%;
+    max-height: 670px;
+    border-radius: 8px;
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
+    display: flex;
+    z-index: 1;
+    flex-direction: column;
+  }
+  
+  .ozz-header {
+    display: block;
+    height: 250px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    padding-left: 0;
+  }
+
+  .ozz-list{
+    height:80%;
+    width: 100%;
+    position: relative;
+    background:white;
+    overflow: auto;
+    overflow-x: auto;
+    flex-grow:1 
+  }
+  
+  .quick_reply{
+    position: absolute;
+    display: block;
+    width:100%;
+    bottom: 0;
+    text-align: center
+  }
+  
+  .quick_reply_button{
+    margin: 5px;
+    border-radius:10px;
+    background: transparent;
+    outline: none; 
+    box-shadow: 0 0px 0px #fff;
+  }
+  
+  .quick_reply_button:focus{
+    background-color:transparent;
+    outline: none;
+  }
+  
+  .ozz_card{
+    display: inline-block;
+    margin-right:10px; 
+  }
+  
+  .ozz-footer {
+    clear: top;
+    display: block;
+    bottom: 0;
+    position: absolute;
+    height: auto;
+    min-height: 8%;
+    overflow: hidden;
+    z-index: 1;
+    width: 50%;
+    padding-right: 2%;
+    padding-left:0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background: rgb(232, 232, 232);
+}
+  
+  .ozz-list__item_bot {
+    max-width:60%;
+    float: left;
+    clear: both;
+    padding-top:10px;
+    padding-left:10px;
+    padding-bottom:5px;
+  }
+  
+  .ozz-list__item_gridlist{
+    width:100%;
+    float: left;
+    float: bottom;
+    clear: both;
+    padding-top:10px;
+    padding-left:10px;
+    padding-bottom:5px;
+  }
+  
+  .ozz-list__item_user {
+    max-width:60%;
+    float: right;
+    clear:both;
+    padding-top:10px;
+    padding-right:10px;
+    padding-bottom: 5px;
+  }
+  
+  .ozz-message--trim .ozz__content {
+    width: 255px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  
+  .ozz-user--avatar {
+    width: 40px;
+    max-width: 40px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin-right: 15px;
+    overflow: hidden;
+  }
+  .ozz-user--avatar img {
+    display: block;
+    width: 100%;
+  }
+  
+  .message-bar{
+    float: left;
+    margin-left:5%; 
+  }
+  
+  .send{
+    float: right;
+    margin-top: 3%;
+    margin-right: 3%;
+  }
+  
+  button:focus{
+    outline: none;
+  }
+  
+  pre {
+      margin-top:-10px;
+      margin-bottom: -10px; 
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      white-space: pre-wrap;       /* Since CSS 2.1 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  }
+  

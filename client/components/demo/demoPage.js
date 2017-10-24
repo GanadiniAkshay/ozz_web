@@ -37,7 +37,7 @@ class DemoPage extends React.Component{
                         <div className="row">
                             <div className="col s3 card">
                                 <div className="card-image waves-effect waves-block waves-light">
-                                    <img className="activator" src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/logo_color_full.png"/>
+                                    <img className="activator" src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/logo_color_full.png"/>
                                 </div>
                                 <div className="card-content">
                                     <span className="card-title activator grey-text text-darken-4">Knowledge API<i className="material-icons right">more_vert</i></span>
@@ -52,7 +52,7 @@ class DemoPage extends React.Component{
                             </div>
                             <div className="card col s3 offset-s1">
                                 <div className="card-image waves-effect waves-block waves-light">
-                                    <img className="activator" src="https://d1wi3kcd7kachl.cloudfront.net/v0.0.2/img/logo_color_full.png"/>
+                                    <img className="activator" src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/logo_color_full.png"/>
                                 </div>
                                 <div className="card-content">
                                     <span className="card-title activator grey-text text-darken-4">Active Learning<i className="material-icons right">more_vert</i></span>
