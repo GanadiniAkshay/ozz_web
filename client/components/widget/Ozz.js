@@ -20,16 +20,21 @@ class Ozz extends React.Component{
     }
 
     componentDidMount() {
+        this.mounted = true;
         $(document).mouseup($.proxy(function (e) {
            var container = $("#ozz");
 
            // if the target of the click isn't the container nor a descendant of the container
            if (!container.is(e.target) && container.has(e.target).length === 0){
-                if (this.state){
+                if (this.mounted){
                     this.setState({active:false});
                 }
            } 
         },this));
+    }
+
+    componentWillUnmount(){
+        this.mounted = false;
     }
 
     _handleClick() {

@@ -34,6 +34,8 @@ import AnalyticsPage from './components/analytics/analyticsPage';
 
 import KnowledgePage from './components/knowledge/knowledge';
 
+import PersonaPage from './components/persona/personaPage';
+
 import DemoPage from './components/demo/demoPage';
 import ContextDemoPage from './components/demo/contextDemo';
 import ActiveDemoPage from './components/demo/active';
@@ -68,6 +70,7 @@ export default (
         <Route path="bots/:botname/analytics" component={requireBotAuth(AnalyticsPage)} />
         <Route path="bots/:botname/knowledge" component={requireBotAuth(KnowledgePage)} />
         <Route path="bots/:botname/learn" component={requireBotAuth(LearningDemoPage)} />
+        <Route path="bots/:botname/persona" component={requireBotAuth(PersonaPage)} />
         <Route path="*" component={NotFound}/>
     </Route>
 )
