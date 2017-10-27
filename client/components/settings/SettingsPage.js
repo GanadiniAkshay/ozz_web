@@ -27,7 +27,10 @@ class SettingsPage extends React.Component{
             button:'save',
             disabled:true,
             client_label:'Client Secret',
-            json_button: 'Import JSON',
+            json_button: 'Import Ozz',
+            json_button_api: 'Import Dialogflow',
+            json_button_wit: 'Import Wit.ai',
+            tsv_button:'Import TSV',
             webhook:'',
             app_secret:'',
             errors:{}
@@ -37,6 +40,7 @@ class SettingsPage extends React.Component{
          this.onChange = this.onChange.bind(this);
          this.onDelete = this.onDelete.bind(this);
          this.onJsonChange = this.onJsonChange.bind(this);
+         this.onTSVChange = this.onTSVChange.bind(this);
          this.onSubmit = this.onSubmit.bind(this);
          this.onExport = this.onExport.bind(this);
     }
@@ -76,6 +80,7 @@ class SettingsPage extends React.Component{
     componentDidMount(){
         $('select').material_select(this.onSelectChange.bind(this));
         $('.modal').modal();
+        $('ul.tabs').tabs();
     }
 
 
@@ -109,6 +114,33 @@ class SettingsPage extends React.Component{
                 type: 'POST',
                 url: '/api/upload/' + bot_guid,
                 headers:{'Authorization':'Bearer ' + token},
+                data: form_data,
+                contentType: false,
+                processData: false,
+                dataType: 'json'
+            }).done(function(data, textStatus, jqXHR){
+                console.log(data);
+            }).fail(function(data){
+                alert('error!');
+            });
+        }
+    }
+
+    onTSVChange(e){
+        if ( e.target.name != 'file'){
+            this.setState({ [e.target.name]: e.target.value });
+        }else{
+            this.setState({ errors: {}, tsv_button:"Imported" });
+
+            //create new formdata object
+            var token = localStorage.getItem('jwtToken');
+            // var tsv = document.getElementById('tsvfile').files[0];
+            var form_data = new FormData($('#tsv')[0]);
+            var bot_guid  = this.state.bot_guid;
+            $.ajax({
+                type: 'POST',
+                url: config.url + '/upload_csv/' + bot_guid,
+                headers:{'Authorization':'Bearer ' + localStorage.jwtToken},
                 data: form_data,
                 contentType: false,
                 processData: false,
@@ -198,79 +230,138 @@ class SettingsPage extends React.Component{
                     <div className="container full">
                         <h4>Settings</h4>
 
-                        <form className="col s8 offset-s2" id="json" encType="multipart/form-data" autoComplete="off">
-                        <div className="file-field input-field" >
-                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right'}}>
-                                <span>{this.state.json_button}</span>
-                                <input 
-                                    type="file" 
-                                    id="jsfile"
-                                    onChange={this.onJsonChange} 
-                                    name="file"
-                                />
+                        <div className="row">
+                            <div className="col s12">
+                            <ul className="tabs">
+                                <li className="tab col s3"><a href="#test1">General</a></li>
+                                <li className="tab col s3"><a href="#test2">Import/Export</a></li>
+                            </ul>
                             </div>
-                        </div>
-                        <div className="file-field input-field" >
-                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'left'}} onClick={this.onExport}>
-                                Export JSON
-                            </div>
-                        </div>
-                    </form>
-
-                    <br/><br/><br/>
-
-                        <form className="col s8 offset-s2" onSubmit={this.onSubmit} autoComplete="off">
-                            <TextFieldGroup
-                                error={errors.name}
-                                label="Name"
-                                onChange={this.onChange}
-                                value={this.state.name}
-                                type="text"
-                                field="name"
-                            />
-
-                            <br/>
-
-                            <TextFieldGroup
-                                id = 'bot_guid'
-                                error= {errors.none}
-                                label="Bot GUID"
-                                value={this.state.bot_guid}
-                                type="text"
-                                field="bot key"
-                            />
-
-                            <div className="form-group">
-                                <button className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>
-                                    {this.state.button} <i className="material-icons right">send</i>
-                                </button>
+                            <div id="test1" className="col s12">
                                 <br/><br/>
-                                <button className="btn waves-effect waves-light modal-trigger" id="button" style={{'background':'#ef5350','color':'white'}} data-target="deleteModal">
-                                    Delete <i className="material-icons right">delete_forever</i>
-                                </button>
-                                <br/><br/>
-                            </div>
-                            <div id="deleteModal" className="modal">
-                                <div className="modal-content">
-                                    <h4>Delete {this.state.name}</h4>
-                                    <p><b>Deleting a bot is permanent and all data will be lost!</b></p>
+                                <form className="col s8 offset-s2" onSubmit={this.onSubmit} autoComplete="off">
+                                    <TextFieldGroup
+                                        error={errors.name}
+                                        label="Name"
+                                        onChange={this.onChange}
+                                        value={this.state.name}
+                                        type="text"
+                                        field="name"
+                                    />
 
+                                    <br/>
+
+                                    <TextFieldGroup
+                                        id = 'bot_guid'
+                                        error= {errors.none}
+                                        label="Bot GUID"
+                                        value={this.state.bot_guid}
+                                        type="text"
+                                        field="bot key"
+                                    />
+
+                                    <div className="form-group">
+                                        <button className="btn waves-effect waves-light" id="button" style={{'background':'#58488a','color':'white'}}>
+                                            {this.state.button} <i className="material-icons right">send</i>
+                                        </button>
+                                        <br/><br/>
+                                        <button className="btn waves-effect waves-light modal-trigger" id="button" style={{'background':'#ef5350','color':'white'}} data-target="deleteModal">
+                                            Delete <i className="material-icons right">delete_forever</i>
+                                        </button>
+                                        <br/><br/>
+                                    </div>
+                                    <div id="deleteModal" className="modal">
+                                        <div className="modal-content">
+                                            <h4>Delete {this.state.name}</h4>
+                                            <p><b>Deleting a bot is permanent and all data will be lost!</b></p>
+
+                                            <div className="row">
+                                                <div className="col s12">
+                                                    Enter bot name to confirm:
+                                                    <div className="input-field inline">
+                                                        <input id="delete" type="text" onChange={this.onChange}/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button disabled={this.state.disabled} onClick={this.onDelete} className="btn waves-effect waves-light" id="button" style={{'background':'#ef5350','color':'white'}}>
+                                                <i className="material-icons">delete_forever</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="test2" className="col s12">
+                                <br/><br/>
                                     <div className="row">
-                                        <div className="col s12">
-                                            Enter bot name to confirm:
-                                            <div className="input-field inline">
-                                                <input id="delete" type="text" onChange={this.onChange}/>
+                                        <h5>Import</h5>
+                                        <hr/>
+                                        <form className="col s4" id="json" encType="multipart/form-data" autoComplete="off">
+                                            <div className="file-field input-field">
+                                                <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white'}}>
+                                                    <span>{this.state.json_button}</span>
+                                                    <input 
+                                                        type="file" 
+                                                        id="jsfile"
+                                                        onChange={this.onJsonChange} 
+                                                        name="file"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <form className="col s4" id="json_wit" encType="multipart/form-data" autoComplete="off">
+                                        <div className="file-field input-field">
+                                            <div className="btn waves-effect waves-light" disabled style={{'background':'#58488a','color':'white'}}>
+                                                <span>{this.state.json_button_wit}</span>
+                                                <input 
+                                                    type="file" 
+                                                    id="js_witfile"
+                                                    onChange={this.onJsonChange} 
+                                                    name="file"
+                                                />
+                                            </div>
+                                        </div>
+                                        </form>
+                                        <form className="col s4" id="json_api" encType="multipart/form-data" autoComplete="off">
+                                        <div className="file-field input-field">
+                                            <div className="btn waves-effect waves-light" disabled style={{'background':'#58488a','color':'white'}}>
+                                                <span>{this.state.json_button_api}</span>
+                                                <input 
+                                                    type="file" 
+                                                    id="js_apifile"
+                                                    onChange={this.onJsonChange} 
+                                                    name="file"
+                                                />
+                                            </div>
+                                        </div>
+                                        </form>
+                                        <form className="col s4" id="tsv" encType="multipart/form-data" autoComplete="off">
+                                        <div className="file-field input-field">
+                                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white'}}>
+                                                <span>{this.state.tsv_button}</span>
+                                                <input 
+                                                    type="file" 
+                                                    id="tsvfile"
+                                                    onChange={this.onTSVChange} 
+                                                    name="file"
+                                                />
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    <br/><br/>
+                                    <div className="row">
+                                        <h5>Export</h5>
+                                        <hr/>
+                                        <div className="file-field input-field col s4" >
+                                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white'}} onClick={this.onExport}>
+                                                Export Ozz
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="modal-footer">
-                                    <button disabled={this.state.disabled} onClick={this.onDelete} className="btn waves-effect waves-light" id="button" style={{'background':'#ef5350','color':'white'}}>
-                                        <i className="material-icons">delete_forever</i>
-                                    </button>
-                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </main>
             </div>
