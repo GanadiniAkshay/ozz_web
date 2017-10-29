@@ -48,15 +48,19 @@ class IntentCard extends React.Component{
                         </div>
                         <div className="card-action">
                             <div className="row">
-                                <div className="col s4">
+                                <div className="col s3">
                                     <i className="material-icons">list</i>
                                     <p>{this.props.utterances} Utterances</p>
                                 </div>
-                                <div className="col s4">
+                                <div className="col s3">
+                                    <i className="material-icons">settings_ethernet</i>
+                                    <p>{this.props.patterns} Patterns</p>
+                                </div>
+                                <div className="col s3">
                                     <i className="material-icons">reply</i>
                                     <p>{this.props.responses} Responses</p>
                                 </div>
-                                <div className="col s4">
+                                <div className="col s3">
                                     <i className="material-icons">trending_up</i>
                                     <p>{this.props.calls} API Calls</p>
                                 </div>

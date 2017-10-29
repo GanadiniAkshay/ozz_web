@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {SET_CURRENT_INTENTS, ADD_NEW_INTENT, REMOVE_INTENT, SET_CURRENT_UTTERANCES, RESET_UTTERANCES, APPEND_UTTERANCES, REMOVE_UTTERANCES, SET_CURRENT_RESPONSES, RESET_RESPONSES, APPEND_RESPONSES, REMOVE_RESPONSES} from './types';
+import {SET_CURRENT_INTENTS, ADD_NEW_INTENT, REMOVE_INTENT, SET_CURRENT_UTTERANCES, RESET_UTTERANCES, APPEND_UTTERANCES, REMOVE_UTTERANCES, SET_CURRENT_RESPONSES, RESET_RESPONSES, APPEND_RESPONSES, REMOVE_RESPONSES, SET_CURRENT_PATTERNS, APPEND_PATTERNS, REMOVE_PATTERNS} from './types';
 
 import { config } from '../config';
 
@@ -125,6 +125,57 @@ export function dropUtterances(payload){
         return axios.delete(config.url + '/intents/' + payload.bot_guid + '/' + payload.intent_name + '/utterances',{"params":payload}).then(res => {
             const data = res.data;
             dispatch(removeUtterances(payload.index));
+        })
+    }
+}
+
+
+/*======================================================================*/
+//                     Handle Patterns                                  //
+/*======================================================================*/
+export function setCurrentPatterns(patterns){
+    return {
+        type:SET_CURRENT_PATTERNS,
+        patterns
+    }
+}
+
+export function appendPatterns(pattern){
+    return {
+        type: APPEND_PATTERNS,
+        pattern
+    }
+}
+
+export function removePattern(index){
+    return {
+        type: REMOVE_PATTERNS,
+        index
+    }
+}
+
+export function getPatterns(payload){
+    return dispatch => {
+        return axios.get(config.url + '/intents/' + payload.bot_guid + '/' + payload.intent_name + '/patterns').then(res => {
+            const patterns = res.data.patterns;
+            dispatch(setCurrentPatterns(patterns));
+        })
+    }
+}
+
+export function addPattern(payload){
+    return dispatch => {
+        return axios.post(config.url + '/intents/' + payload.bot_guid + '/' + payload.intent_name + '/patterns',payload).then(res => {
+            const data = res.data.pattern;
+            dispatch(appendPatterns(data));
+        })
+    }
+}
+
+export function dropPattern(payload){
+    return dispatch => {
+        return axios.delete(config.url + '/intents/' + payload.bot_guid + '/' + payload.intent_name + '/patterns',{"params":payload}).then(res => {
+            dispatch(removePattern(payload.index));
         })
     }
 }

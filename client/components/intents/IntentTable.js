@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { browserHistory, Link } from 'react-router'; 
 
 import { getBots } from '../../actions/botActions';
-import { getUtterances, changeUtterances, addUtterance, dropUtterances } from '../../actions/intentActions';
+import { getUtterances, changeUtterances, addUtterance, dropUtterances, getPatterns, addPattern, dropPattern } from '../../actions/intentActions';
 
 import Navbar from '../navbar/Navbar';
 import PropTypes from 'prop-types';
 
 import Utterance from './utterance';
+import Pattern from './pattern';
 import { config } from '../../config';
 
 class IntentTable extends React.Component{
@@ -20,13 +21,16 @@ class IntentTable extends React.Component{
             "bot_guid":"",
             "intent_name":"",
             "utterances":[],
+            "patterns":[],
             "intent_name":"",
             "old_intent_name":""
         };
 
         this.onChange = this.onChange.bind(this);
         this.onIntentAdd = this.onIntentAdd.bind(this);
+        this.onPatternAdd = this.onPatternAdd.bind(this);
         this.onDelete_ = this.onDelete_.bind(this);
+        this.onPatternDelete_ = this.onPatternDelete_.bind(this);
         this.onNameChange = this.onNameChange.bind(this);
         this.onNameChangeConfirm = this.onNameChangeConfirm.bind(this);
     }
@@ -36,7 +40,7 @@ class IntentTable extends React.Component{
     }
 
     componentDidMount(){
-
+        $('ul.tabs').tabs();
         this.props.getBots(this.state).then(
             () => {
                 var current_bots = this.props.bots.bots;
@@ -56,6 +60,12 @@ class IntentTable extends React.Component{
                     this.props.getUtterances(this.state).then(
                         () => {
                             this.setState({utterances:this.props.utterances.utterances});
+                        }
+                    )
+
+                    this.props.getPatterns(this.state).then(
+                        () => {
+                            this.setState({patterns:this.props.patterns.patterns});
                         }
                     )
                 }
@@ -105,6 +115,40 @@ class IntentTable extends React.Component{
         }
     }
 
+    onPatternAdd(e){
+        e.preventDefault();
+        var pattern = document.getElementById('pattern_input').value;
+        document.getElementById('pattern_input').value = '';
+        var payload = {};
+
+        payload['value'] = pattern;
+        payload['bot_guid'] = this.state.bot_guid;
+        payload['intent_name'] = this.state.intent_name;
+
+        this.props.addPattern(payload).then(
+            () => {
+                this.setState({"patterns":this.props.patterns.patterns});
+            }
+        )
+    }
+
+    onPatternDelete_(e){
+        e.preventDefault();
+        var index = e.target.id.split(" ")[1];
+        var payload = {};
+        
+        payload['index'] = index;
+        payload['pattern'] = this.state.patterns[index].string;
+        payload['bot_guid'] = this.state.bot_guid;
+        payload['intent_name'] = this.state.intent_name;
+
+        this.props.dropPattern(payload).then(
+            () => {
+                this.setState({"patterns":this.props.patterns.patterns})
+            }
+        )
+    }
+
     onIntentAdd(e){
         e.preventDefault();
         var intent = document.getElementById('intent').value;
@@ -146,6 +190,26 @@ class IntentTable extends React.Component{
 
     render(){
         var utterances = this.state.utterances;
+        var patterns   = this.state.patterns;
+        
+        const patterns_list = patterns.map((pattern, index)=>{
+            var start_str = pattern.string;
+            var ent_str = "";
+            var end_str = "";
+            var entity_list = ""; 
+            var entities = [];
+
+            return (
+                <li className="collection-item" key={index}>
+                    <div className="collapsible-header"><i className="material-icons">format_quote</i>
+                        {start_str}
+                        {ent_str}
+                        {end_str}
+                    </div>
+                    <Pattern pattern={start_str} index={index} onDelete={this.onPatternDelete_}/>
+                </li>
+            )
+        })
 
         const utterance_list = utterances.map((utterance, index)=>{
             var utterance_str = utterances[index].utterance;
@@ -194,30 +258,67 @@ class IntentTable extends React.Component{
             <div>
                 <div className="container">
                     <h3>
-                        <div className="input-field-none" style={{"height":"100%"}}>
-                            <input autoComplete="off" type="text" value={this.state.intent_name} style={{"fontSize":"1em","height":"100%"}} onChange={this.onNameChange} onKeyPress={this.onNameChangeConfirm}/>
-                        </div>
-                    </h3>
-
-                    <div>
-                        <form className="col s8 offset-s2" id="json" encType="multipart/form-data" onSubmit={this.onIntentAdd}>
-                            <div className="input-field">
-                                <input autoComplete="off" id="intent" type="text" placeholder="Add utterance" />
+                            <div className="input-field-none" style={{"height":"100%"}}>
+                                <input autoComplete="off" type="text" value={this.state.intent_name} style={{"fontSize":"1em","height":"100%"}} onChange={this.onNameChange} onKeyPress={this.onNameChangeConfirm}/>
                             </div>
-                            <div className="file-field input-field" >
-                                <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right','marginTop':'-2%'}} onClick={this.onIntentAdd}>
-                                    <span>Add Utterance</span>
+                    </h3>
+                    <div className="row">
+                        <div className="col s12">
+                            <ul className="tabs">
+                                <li className="tab col s3"><a href="#test1">ML Utterances</a></li>
+                                <li className="tab col s3"><a href="#test2">Simple Patterns</a></li>
+                            </ul>
+                        </div>
+                        <div id="test1" className="col s12">
+                            <div>
+                                <div>
+                                    <form className="col s12" id="json" encType="multipart/form-data" onSubmit={this.onIntentAdd}>
+                                        <div className="input-field">
+                                            <input autoComplete="off" id="intent" type="text" placeholder="Add utterance" />
+                                        </div>
+                                        <div className="file-field input-field" >
+                                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right','marginTop':'-2%'}} onClick={this.onIntentAdd}>
+                                                <span>Add Utterance</span>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-                <br/><br/><br/>
-                <div className="container">
-                    <div className="row">
-                        <ul className="collapsible popout" data-collapsible="accordion">
-                            {utterance_list}
-                        </ul>
+                            <br/><br/><br/>
+                            <br/><br/><br/>
+                            <div className="container">
+                                <div className="row">
+                                    <ul className="collapsible popout" data-collapsible="accordion">
+                                        {utterance_list}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="test2" className="col s12">
+                            <div>
+                                <div>
+                                    <form className="col s12" id="json" encType="multipart/form-data" onSubmit={this.onPatternAdd}>
+                                        <div className="input-field">
+                                            <input autoComplete="off" id="pattern_input" type="text" placeholder="Add pattern" />
+                                        </div>
+                                        <div className="file-field input-field" >
+                                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right','marginTop':'-2%'}} onClick={this.onPatternAdd}>
+                                                <span>Add Pattern</span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <br/><br/><br/>
+                            <br/><br/><br/>
+                            <div className="container">
+                                <div className="row">
+                                    <ul className="collapsible popout" data-collapsible="accordion" style={{"width":"100%"}}>
+                                        {patterns_list}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -234,8 +335,9 @@ function mapStateToProps(state){
     return {
         bots:state.bots,
         activeBot: state.activeBot,
-        utterances:state.utterances
+        utterances:state.utterances,
+        patterns: state.patterns
     }
 }
 
-export default connect(mapStateToProps, { getBots, getUtterances, changeUtterances, addUtterance, dropUtterances})(IntentTable);
+export default connect(mapStateToProps, { getBots, getUtterances, changeUtterances, addUtterance, dropUtterances, getPatterns, addPattern, dropPattern})(IntentTable);

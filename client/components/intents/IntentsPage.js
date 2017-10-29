@@ -155,7 +155,7 @@ class IntentsPage extends React.Component{
         const intents = current_intents.map((current_intent,index) => {
             return (
                 <div key={index}>
-                    <IntentCard  index={index} intent={current_intent.name} utterances={current_intent.utterances} responses={current_intent.responses} 
+                    <IntentCard  index={index} intent={current_intent.name} utterances={current_intent.utterances} patterns={current_intent.patterns} responses={current_intent.responses} 
                         calls={current_intent.calls} onRemove={this.deleteIntent}/>
                 </div>
             )

@@ -6,6 +6,7 @@ import activeBot from './reducers/activeBot';
 import activeIntents from './reducers/activeIntents';
 import activeEntities from './reducers/activeEntities';
 import utterances from './reducers/utterances';
+import patterns from './reducers/patterns';
 import responses from './reducers/responses';
 import examples from './reducers/examples';
 import test from './reducers/test';
@@ -18,6 +19,7 @@ export default combineReducers({
     activeIntents,
     activeEntities,
     utterances,
+    patterns,
     responses,
     examples,
     test,
