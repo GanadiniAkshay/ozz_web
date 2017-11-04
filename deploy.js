@@ -20,7 +20,7 @@ cmd.get(
                     function(err, data, stderr){
                         console.log("Pushing deployment folder to CDN");
                         cmd.get(
-                            'directory-to-s3 -d releases/' +' ozz-cdn',
+                            'directory-to-s3 -d releases/v'+config.version +' ozz-cdn/v'+config.version,
                             function(err, data, stderr){
                                 console.log("Deployed v" + config.version);
                             }
