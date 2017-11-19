@@ -1,4 +1,4 @@
-import { SET_CURRENT_REPLY } from '../actions/types';
+import { SET_CURRENT_REPLY, CLEAR_WINDOW } from '../actions/types';
 import isEmpty from 'lodash/isEmpty';
 
 const initialState = {
@@ -20,6 +20,11 @@ export default (state = initialState, action = {}) => {
         json: action.json,
         messages:state.messages.concat(new_messages)
       };
+    case CLEAR_WINDOW:
+	return {
+		json:{},
+		messages:[]
+	}
     default: return state;
   }
 }

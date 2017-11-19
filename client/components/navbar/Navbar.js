@@ -5,7 +5,7 @@ import { browserHistory, Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/loginActions';
 import { beginTraining } from '../../actions/trainActions';
-import { sendMessage } from '../../actions/testActions';
+import { sendMessage, clearBox } from '../../actions/testActions';
 
 import Ozz from '../widget/Ozz';
 import { config } from '../../config';
@@ -28,6 +28,7 @@ class Navbar extends React.Component{
         this.sendMessage = this.sendMessage.bind(this);
         this.logout = this.logout.bind(this);
         this.startTrain = this.startTrain.bind(this);
+        this.clearBox = this.clearBox.bind(this);
     }
 
 
@@ -61,6 +62,11 @@ class Navbar extends React.Component{
         })
     }
 
+    clearBox(){
+        this.props.clearBox();
+        this.setState({"json":{},"messages":[]})
+    }
+    
     startTrain(e){
         var $toastContent = $('<span>Training   <i class="fa fa-gear fa-spin" style="font-size:24px;margin-top:4%"></i></span>');
         Materialize.toast($toastContent, 30000);
@@ -233,7 +239,7 @@ class Navbar extends React.Component{
                         </ul>
                         <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only"><i className="material-icons">menu</i></a>
                     </nav>
-                    <Ozz config={config} messages={this.state.messages} sendMessage={this.sendMessage} json={this.state.json}></Ozz>
+                    <Ozz config={config} messages={this.state.messages} clearBox={this.clearBox} sendMessage={this.sendMessage} json={this.state.json}></Ozz>
             </header>
         );
     }
@@ -255,4 +261,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, { logout, beginTraining, sendMessage })(Navbar);
+export default connect(mapStateToProps, { logout, beginTraining, sendMessage, clearBox })(Navbar);

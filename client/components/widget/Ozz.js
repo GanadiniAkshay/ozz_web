@@ -48,7 +48,7 @@ class Ozz extends React.Component{
 
         return(
             <div className="ozz" id="ozz">
-                {active ? <OzzBase active={active} config={config} messages={this.props.messages} sendMessage={this.props.sendMessage} json={this.props.json} isDemo={false}/> : false}
+                {active ? <OzzBase active={active} config={config} messages={this.props.messages} clearBox={this.props.clearBox} sendMessage={this.props.sendMessage} json={this.props.json} isDemo={false}/> : false}
 
                 <Button 
                     active={active}

@@ -72,7 +72,7 @@ class OzzBase extends React.Component{
                 transform: `translateY(${interpolatingStyles.y}px)`
                 }}
             >
-                <OzzHeader active={active} rest={stable} config={config}/>
+                <OzzHeader active={active} rest={stable} config={config} clearBox={this.props.clearBox}/>
                 <div style={{"height":"100%","width":"100%"}} className="row">
                     <div className="col s6" style={{"height":"100%","padding":"0"}}>
                         <ChatList color={config.color} messages={this.props.messages}/>

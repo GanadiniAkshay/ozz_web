@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router'; 
-import { SET_CURRENT_REPLY } from './types';
+import { SET_CURRENT_REPLY, CLEAR_WINDOW } from './types';
 import { config } from '../config';
 
 export function setCurrentReply(json,message){
@@ -11,6 +11,11 @@ export function setCurrentReply(json,message){
     }
 }
 
+export function clearChatWindow(){
+	return{
+		type: CLEAR_WINDOW
+	}
+}
 
 export function sendMessage(payload) {
    return dispatch => {
@@ -20,4 +25,10 @@ export function sendMessage(payload) {
            dispatch(setCurrentReply(json, message));
        })
    } 
+}
+
+export function clearBox(){
+    return dispatch => {
+		dispatch(clearChatWindow());
+	}
 }
