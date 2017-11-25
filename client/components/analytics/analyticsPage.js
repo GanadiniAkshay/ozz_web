@@ -1,5 +1,6 @@
 import React from 'react';
 import Chart from 'chart.js';
+import moment from 'moment';
 import { connect } from 'react-redux';
 
 import { getLogs } from '../../actions/analyticsActions';
@@ -47,29 +48,49 @@ class AnalyticsPage extends React.Component{
                 intent_count.push(count[key]);
             }
 
-            console.log(intent_labels);
             that.setState({api_calls:logs.calls,time:logs.avg_resp_time,intent_count:intent_count,intent_labels:intent_labels,success:logs.success_percentage, times: logs.times});
 
 
+            var timestamp_labels = [];
             var timestamp_data = [];
+            var timestamps = [];
             var times = that.state.times;
 
+            times.sort(function(a,b){ return (new Date(a)-new Date(b))});
+            
+            var timestamp_info = {};
+
             for (var i=0; i<times.length; i++){
-                var time_obj = {}
-                time_obj['x'] = new Date(times[i]);
-                time_obj['y'] = 1
-                timestamp_data.push(time_obj);
+                var date_obj = new Date(times[i]);
+                var date = date_obj.getDate();
+                var month = date_obj.getMonth();
+                var year = date_obj.getFullYear();
+                var new_date_obj = new Date(year,month-1,date);
+                var key = new_date_obj.toDateString();
+                if (timestamp_info[key] != undefined){
+                    timestamp_info[key] += 1;
+                }else{
+                    timestamp_info[key] = 1;
+                }
+            }
+
+            for (var key in timestamp_info){
+                timestamp_data.push(timestamp_info[key]);
+                timestamp_labels.push(new Date(key));
+            }
+
+            function newDate(days) {
+                return moment().add(days, 'd');
             }
 
             var data = {
+                labels: timestamp_labels,
                 datasets: [{
                     label: 'No of API Requests',
                     data: timestamp_data,
                     borderColor: '#00008B',
                     backgroundColor: 'transparent'
-                  },
-      
-                ]
+                  }]
             };
 
             var ctx = document.getElementById("timeChart");
@@ -79,24 +100,39 @@ class AnalyticsPage extends React.Component{
                 options: {
                   fill: 'origin',
                   responsive: true,
-      
+                  elements: {
+                    line: {
+                        tension: 0
+                    }
+                  },
                   scales: {
                     xAxes: [{
                       type: 'time',
+                      time: {
+                        displayFormats: {
+                            'millisecond': 'MMM DD',
+                          'second': 'MMM DD',
+                          'minute': 'MMM DD',
+                          'hour': 'MMM DD',
+                          'day': 'MMM DD',
+                          'week': 'MMM DD',
+                          'month': 'MMM DD',
+                          'quarter': 'MMM DD',
+                          'year': 'MMM DD',
+                        }
+                      },
                       display: true,
                       scaleLabel: {
                         display: true,
                         labelString: "Date",
                       }
                     }],
-      
                     yAxes: [{
-                      display: true,
-                      scaleLabel: {
-                        display: true,
-                        labelString: "Calls",
-                      }
-                    }]
+                        scaleIntegersOnly: true,
+                        ticks: {
+                          beginAtZero: true
+                        }
+                      }]
                   }
                 },
               });

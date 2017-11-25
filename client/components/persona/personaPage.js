@@ -123,7 +123,7 @@ class PersonaPage extends React.Component{
                                     <div className="switch">
                                         <label>
                                         No
-                                        <input disabled type="checkbox" checked={this.state.average} onChange={this.changeAverage}/>
+                                        <input type="checkbox" checked={this.state.average} onChange={this.changeAverage}/>
                                         <span className="lever"></span>
                                         Yes
                                         </label>
@@ -140,7 +140,7 @@ class PersonaPage extends React.Component{
                                     <div className="switch">
                                         <label>
                                         No
-                                        <input disabled type="checkbox" checked={this.state.professional} onChange={this.changeProfessional}/>
+                                        <input type="checkbox" checked={this.state.professional} onChange={this.changeProfessional}/>
                                         <span className="lever"></span>
                                         Yes
                                         </label>
