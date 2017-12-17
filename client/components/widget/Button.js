@@ -60,19 +60,20 @@ class Button extends React.Component{
                 onRest={this._handleRest}
             >
             {interpolatingStyles =>
-            <button 
+            <a
                 className={classes}
                 onClick={onClick || noop}
                 style={{
                 opacity: interpolatingStyles.opacity,
                 transform: `scale(${interpolatingStyles.scale})`,
-                background:color
+                background:color,
+                zIndex:100
                 }}
             >
                 
                 <LaunchIcon active={active} />
                 <CloseIcon active={active} />
-            </button>
+            </a>
             }
             </Motion>
         )

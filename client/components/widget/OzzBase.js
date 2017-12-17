@@ -67,7 +67,7 @@ class OzzBase extends React.Component{
             <div 
                 className={this.props.isDemo? "ozz-base-demo":"ozz-base"}
                 style={{
-                height: this.state.height,
+                height: window.innerHeight,
                 opacity: interpolatingStyles.opacity,
                 transform: `translateY(${interpolatingStyles.y}px)`
                 }}

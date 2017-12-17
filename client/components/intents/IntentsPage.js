@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router'; 
+import { browserHistory, Link } from 'react-router';
 
 import { getBots } from '../../actions/botActions';
 import { getIntents, addIntent, removeIntent } from '../../actions/intentActions';
@@ -33,6 +33,7 @@ class IntentsPage extends React.Component{
          this.onSubmit = this.onSubmit.bind(this);
          this.addIntent = this.addIntent.bind(this);
          this.addKeyIntent = this.addKeyIntent.bind(this);
+         this.openIntent = this.openIntent.bind(this);
          this.deleteIntent = this.deleteIntent.bind(this);
     }
 
@@ -140,6 +141,13 @@ class IntentsPage extends React.Component{
         )
     }
 
+    openIntent(e){
+        var button = e.currentTarget;
+        var name = button.attributes.name.value
+        var url_path = window.location.pathname+"/"+name;
+        browserHistory.push(url_path);
+    }
+
 
     onSubmit(e){
         this.setState({ errors: {}, button:"saving..." });
@@ -154,10 +162,14 @@ class IntentsPage extends React.Component{
 
         const intents = current_intents.map((current_intent,index) => {
             return (
-                <div key={index}>
-                    <IntentCard  index={index} intent={current_intent.name} utterances={current_intent.utterances} patterns={current_intent.patterns} responses={current_intent.responses} 
-                        calls={current_intent.calls} onRemove={this.deleteIntent}/>
-                </div>
+                <tr style={{"cursor":"pointer"}} key={index} name={current_intent.name} onClick={this.openIntent}>
+                    <td width="50%" style={{"paddingLeft":"25px","textAlign":"left"}}><i className="material-icons">assignment</i><span>{current_intent.name}</span></td>
+                    <td>-</td>
+                    <td>{current_intent.utterances}</td>
+                    <td>{current_intent.responses} </td>
+                    <td>{current_intent.calls}</td>
+                    <td>-</td>
+                </tr>
             )
         })
 
@@ -165,15 +177,18 @@ class IntentsPage extends React.Component{
             <div className="full">
                 <Navbar active="settings_none"/>
                 <main>
-                    <div className="container">
-                        <h4>Intents</h4>
-
-                        <div>
-                            <form className="col s8 offset-s2" id="json" encType="multipart/form-data">
-                                <div className="file-field input-field" >
-                                    <a className="waves-effect waves-light btn modal-trigger" href="#intent_form" style={{'background':'#58488a','color':'white'}}>Add Intent</a>
-                                </div>
-                            </form>
+                    <div className="fluid-container" style={{"backgroundColor":"rgb(88, 72, 138)","top":0,"position":"sticky","zIndex":2}}>
+                        <div className="row" style={{"color":"white"}}>
+                            <div className="col s9 m9">
+                                <h4 style={{"marginLeft":"25px"}}>Intents</h4>
+                            </div>
+                            <div className="col s2 m2">
+                                <form className="col s12" id="json" encType="multipart/form-data">
+                                    <div className="file-field input-field" >
+                                        <a className="waves-effect waves-light btn modal-trigger" href="#intent_form" style={{'background':'white','color':'#58488a'}}>Add Intent</a>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div id="intent_form" className="modal">
@@ -188,9 +203,35 @@ class IntentsPage extends React.Component{
                             <a className="waves-effect waves-green btn-flat" onClick={this.addIntent}>{this.state.int_button}</a>
                         </div>
                     </div>
-                    <br/><br/><br/>
-                    <div className="container full">
-                        {this.state.loader? loader: intents}
+                    <div className="fluid-container full">
+                        <div className="row">
+                            <div className="col s12 m12">
+                            <div className="card" style={{"zIndex":0}}>
+                                <div className="card-content" style={{"margin":0,"padding":0,"border":0}}>
+                                    <br/>
+                                    <span className="card-title">
+                                        <h5 style={{"paddingLeft":"25px"}}>Intents</h5>
+                                    </span>
+                                    <table className="bordered highlight centered">
+                                        <thead>
+                                        <tr>
+                                            <th style={{"paddingLeft":"25px","textAlign":"left"}}>Name</th>
+                                            <th>Intents</th>
+                                            <th>Utterances</th>
+                                            <th>Responses</th>
+                                            <th>API Calls</th>
+                                            <th>Last Modified</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {this.state.loader? loader: intents}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                 </main>
                 

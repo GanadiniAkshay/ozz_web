@@ -165,11 +165,10 @@ class Navbar extends React.Component{
         );
 
         return(
-            <header style={{"overflow":"scroll"}}>
-                    <nav style={{"background":"#ABA0CB"}}>
-                        <ul id="slide-out" className="side-nav fixed">
+            <div>
+            <ul id="slide-out" className="side-nav fixed" style={{"width":"220px"}}>
                             <li>
-                                <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/logo_color_full.png" alt="ozz logo" height="80px" style={{"marginLeft":"20%","marginTop":"5%","padding":"0"}}/>
+                                <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/logo_color_full.png" alt="ozz logo" height="80px" style={{"marginLeft":"10%","marginTop":"5%","padding":"0"}}/>
                             </li>
                             <li><div className="divider"></div></li>
                             <li className="no-padding">
@@ -237,10 +236,9 @@ class Navbar extends React.Component{
                                 </ul>
                             </li><br/>
                         </ul>
-                        <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only"><i className="material-icons">menu</i></a>
-                    </nav>
-                    <Ozz config={config} messages={this.state.messages} clearBox={this.clearBox} sendMessage={this.sendMessage} json={this.state.json}></Ozz>
-            </header>
+                        <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only" style={{"position":"relative","zIndex":3,"color":"white","top":"45px"}}><i className="material-icons">menu</i></a>
+                        <Ozz config={config} messages={this.state.messages} clearBox={this.clearBox} sendMessage={this.sendMessage} json={this.state.json}></Ozz>
+                    </div>
         );
     }
 }

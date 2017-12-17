@@ -34,7 +34,7 @@
   <!--Import Font Awesome Font Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link rel="stylesheet" href="/css/prism.css">
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">-->
   <style>
@@ -113,8 +113,13 @@
       box-shadow: 0 1px 0 0 #ABA0CB;
    }
 
-   header, main, footer {
-      padding-left: 240px;
+   header, footer {
+      padding-left: 220px;
+    }
+
+
+   main {
+      padding-left: 220px;
     }
 
     @media only screen and (max-width : 992px) {
@@ -149,6 +154,11 @@
 
     .hoverize i{
       visibility:hidden;
+    }
+
+    i{ 
+      vertical-align: middle !important; 
+      padding-right: 5px;
     }
 
     .hoverize:hover i{
