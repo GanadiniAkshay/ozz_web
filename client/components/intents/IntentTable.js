@@ -164,6 +164,12 @@ class IntentTable extends React.Component{
                 this.setState({utterances:this.props.utterances.utterances});
             }
         );
+
+        this.props.addPattern(payload).then(
+            () => {
+                this.setState({"patterns":this.props.patterns.patterns});
+            }
+        );
     }
 
     onNameChange(e){

@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { browserHistory, Link } from 'react-router';
@@ -161,6 +162,7 @@ class IntentsPage extends React.Component{
         const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
 
         const intents = current_intents.map((current_intent,index) => {
+            var modified = moment(current_intent.modified).local().fromNow();//format('MMMM Do YYYY, h:mm:ss a');
             return (
                 <tr style={{"cursor":"pointer"}} key={index} name={current_intent.name} onClick={this.openIntent}>
                     <td width="50%" style={{"paddingLeft":"25px","textAlign":"left"}}><i className="material-icons">assignment</i><span>{current_intent.name}</span></td>
@@ -168,7 +170,7 @@ class IntentsPage extends React.Component{
                     <td>{current_intent.utterances}</td>
                     <td>{current_intent.responses} </td>
                     <td>{current_intent.calls}</td>
-                    <td>-</td>
+                    <td>{modified}</td>
                 </tr>
             )
         })
