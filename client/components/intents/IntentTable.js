@@ -272,7 +272,6 @@ class IntentTable extends React.Component{
                         <div className="col s12">
                             <ul className="tabs">
                                 <li className="tab col s3"><a href="#test1">ML Utterances</a></li>
-                                <li className="tab col s3"><a href="#test2">Simple Patterns</a></li>
                             </ul>
                         </div>
                         <div id="test1" className="col s12">
