@@ -13,7 +13,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import IntentCard from './IntentCard';
 import PropTypes from 'prop-types';
 
-class IntentsPage extends React.Component{
+class TestIntentsPage extends React.Component{
     constructor(props){
         super(props);
 
@@ -189,53 +189,6 @@ class IntentsPage extends React.Component{
                             <div className="col s7 m7">
                                 <h4 style={{"marginLeft":"25px"}}>Intents</h4>
                             </div>
-                            <div className="col s2 m2">
-                                <div className="file-field input-field" >
-                                    <a className="waves-effect waves-light btn modal-trigger" href="#intent_form" style={{'background':'white','color':'#58488a'}}>Add Intent</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="intent_form" className="modal">
-                        <div className="modal-content">
-                            <h4>Add Intent</h4>
-                            <div className="input-field col s12">
-                                <input id="intent" type="text" onKeyPress={this.addKeyIntent}/>
-                                <label htmlFor="intent">Intent Name</label>
-                            </div>
-                        </div>
-                        <div className="modal-footer">
-                            <a className="waves-effect waves-green btn-flat" onClick={this.addIntent}>{this.state.int_button}</a>
-                        </div>
-                    </div>
-                    <div className="fluid-container full">
-                        <div className="row">
-                            <div className="col s9 m9">
-                                <div className="card" style={{"zIndex":0}}>
-                                    <div className="card-content" style={{"margin":0,"padding":0,"border":0}}>
-                                        <br/>
-                                        <span className="card-title">
-                                            <h5 style={{"paddingLeft":"25px"}}>Intents</h5>
-                                        </span>
-                                        <table className="bordered highlight centered">
-                                            <thead>
-                                            <tr>
-                                                <th style={{"paddingLeft":"25px","textAlign":"left"}}>Name</th>
-                                                <th>Intents</th>
-                                                <th>Utterances</th>
-                                                <th>Responses</th>
-                                                <th>API Calls</th>
-                                                <th>Last Modified</th>
-                                            </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                {this.state.loader? loader: intents}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </main>
@@ -244,7 +197,7 @@ class IntentsPage extends React.Component{
     }
 }
 
-IntentsPage.propTypes = {
+TestIntentsPage.propTypes = {
     activeBot:PropTypes.object.isRequired,
     getBots:PropTypes.func.isRequired
 }
@@ -259,4 +212,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, { getBots, getIntents, addIntent, removeIntent })(IntentsPage);
+export default connect(mapStateToProps, { getBots, getIntents, addIntent, removeIntent })(TestIntentsPage);

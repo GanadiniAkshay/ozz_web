@@ -23,6 +23,7 @@ import LearningPage from './components/learning/LearningPage';
 import LearningDemoPage from './components/learning/LearningDemo';
 
 import IntentsPage from './components/intents/IntentsPage';
+import TestIntentsPage from './components/intents/TestIntentsPage';
 import IntentEditPage from './components/intents/IntentEditPage';
 
 import EntitiesPage from './components/entities/EntitiesPage';
@@ -64,6 +65,7 @@ export default (
         <Route path="bots/add" component={requireAuth(BotAddPage)}/>
         <Route path="bots/:botname/settings" component={requireBotAuth(SettingsPage)}/>
         <Route path="bots/:botname/intents"  component={requireBotAuth(IntentsPage)}/>
+        <Route path="bots/:botname/testintents"  component={requireBotAuth(TestIntentsPage)}/>
         <Route path="bots/:botname/intents/:intentname" component={requireBotAuth(IntentEditPage)}/>
         <Route path="bots/:botname/entities"  component={requireBotAuth(EntitiesPage)}/>
         <Route path="bots/:botname/entities/:entityname" component={requireBotAuth(EntityEditPage)} />
