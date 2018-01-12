@@ -11,6 +11,23 @@
     -webkit-transform: translate(-100%, 100%);
             transform: translate(-100%, 100%);
   }
+
+  .ozz-box{
+    outline: 0;
+    position: fixed;
+    right: 60px;
+    bottom: 60px;
+    display: block;
+    width: 100px;
+    height: 40px;
+    border: 0;
+    border-radius: 10%;
+    z-index: 1000;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16);
+    -webkit-transition: box-shadow 200ms ease;
+    transition: box-shadow 200ms ease;
+    cursor: pointer;
+  }
   
   .ozz-button {
     outline: 0;

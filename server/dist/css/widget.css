@@ -11,6 +11,58 @@
     -webkit-transform: translate(-100%, 100%);
             transform: translate(-100%, 100%);
   }
+
+  .ozz-box {
+    outline: 0;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    display: block;
+    width: 365px;
+    height: 100%;
+    border: 0;
+    border-left: 1px solid #e0e0e0;
+    background-color:rgb(248, 248, 248)
+  }
+
+  .ozz-heading{
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+    height: 65px;
+    position: relative;
+    overflow: hidden;
+    top:0px;
+    width: 365px;
+  }
+
+  .ozz-json{
+    background-color: black;
+    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
+    height: 250px;
+    width: 365px;
+    color: #FFF;
+    top:65px;
+  }
+
+  .ozz-input{
+    background-color: rgb(248, 248, 248);
+    border-top: 1px solid #e0e0e0;
+    height: 50px;
+    bottom: 0px;
+    width: 365px;
+    position: fixed;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .ozz-chat{
+    background-color: white;
+    height: 100%;
+    width: 365px;
+    overflow: scroll;
+  }
   
   .ozz-button {
     outline: 0;
@@ -147,7 +199,7 @@
     min-height: 8%;
     overflow: hidden;
     z-index: 1;
-    width: 50%;
+    width: 100%;
     padding-right: 2%;
     padding-left:0;
     padding-top: 0;

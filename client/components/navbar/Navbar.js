@@ -166,79 +166,79 @@ class Navbar extends React.Component{
 
         return(
             <div>
-            <ul id="slide-out" className="side-nav fixed" style={{"width":"220px"}}>
-                            <li>
-                                <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/logo_color_full.png" alt="ozz logo" height="80px" style={{"marginLeft":"10%","marginTop":"5%","padding":"0"}}/>
+                <ul id="slide-out" className="side-nav fixed" style={{"width":"220px"}}>
+                    <li>
+                        <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/logo_color_full.png" alt="ozz logo" height="80px" style={{"marginLeft":"10%","marginTop":"5%","padding":"0"}}/>
+                    </li>
+                    <li><div className="divider"></div></li>
+                    <li className="no-padding">
+                        {application_select}
+                    </li>
+                    <li><div className="divider"></div></li>
+                    <li className="no-padding">
+                        <ul>
+                            <li className="bold">
+                                {(this.props.bots.bots.length == 0)? intents_inactive : intents_active}
+                                <div className="collapsible-body">
+                                </div>
                             </li>
-                            <li><div className="divider"></div></li>
-                            <li className="no-padding">
-                                {application_select}
+                            <li className="bold">
+                                {(this.props.bots.bots.length == 0)? entities_inactive : entities_active}
+                                <div className="collapsible-body">
+                                </div>
                             </li>
-                            <li><div className="divider"></div></li>
-                            <li className="no-padding">
-                                <ul>
-                                    <li className="bold">
-                                        {(this.props.bots.bots.length == 0)? intents_inactive : intents_active}
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                    <li className="bold">
-                                        {(this.props.bots.bots.length == 0)? entities_inactive : entities_active}
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                    <li className="bold">
-                                        {(this.props.bots.bots.length == 0)? context_inactive : context_active}
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                    <li className="bold">
-                                        {(this.props.bots.bots.length == 0)? learning_inactive : learning_active}
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                    <li className="bold">
-                                        {(this.props.bots.bots.length == 0)? persona_inactive : persona_active}
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                    <li className="bold">
-                                        {(this.props.bots.bots.length == 0)? knowledge_inactive : knowledge_active}
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                    <li className="bold">
-                                        {(this.props.bots.bots.length == 0)? analytics_inactive : analytics_active}
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                </ul>
+                            <li className="bold">
+                                {(this.props.bots.bots.length == 0)? context_inactive : context_active}
+                                <div className="collapsible-body">
+                                </div>
                             </li>
-                            <li><div className="divider"></div></li>
-                            <li className="no-padding">
-                                <ul>
-                                    <li className="bold" onClick={(this.props.bots.bots.length == 0)? "" : this.startTrain} >
-                                        <Link className="collapsible-header waves-affect" id="train">{this.state.trainButton}<i className="material-icons">build</i></Link>
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                    <li><div className="divider"></div></li>
-                                    <li className="bold">
-                                        <Link className="collapsible-header waves-affect" id="logout">Account<i className="material-icons">account_circle</i></Link>
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                    <li className="bold" onClick={this.logout}>
-                                        <Link className="collapsible-header waves-affect" id="logout">Logout<i className="material-icons">settings_power</i></Link>
-                                        <div className="collapsible-body">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li><br/>
+                            <li className="bold">
+                                {(this.props.bots.bots.length == 0)? learning_inactive : learning_active}
+                                <div className="collapsible-body">
+                                </div>
+                            </li>
+                            <li className="bold">
+                                {(this.props.bots.bots.length == 0)? persona_inactive : persona_active}
+                                <div className="collapsible-body">
+                                </div>
+                            </li>
+                            <li className="bold">
+                                {(this.props.bots.bots.length == 0)? knowledge_inactive : knowledge_active}
+                                <div className="collapsible-body">
+                                </div>
+                            </li>
+                            <li className="bold">
+                                {(this.props.bots.bots.length == 0)? analytics_inactive : analytics_active}
+                                <div className="collapsible-body">
+                                </div>
+                            </li>
                         </ul>
-                        <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only" style={{"position":"relative","zIndex":3,"color":"white","top":"45px"}}><i className="material-icons">menu</i></a>
-                        <Ozz config={config} messages={this.state.messages} clearBox={this.clearBox} sendMessage={this.sendMessage} json={this.state.json}></Ozz>
-                    </div>
+                    </li>
+                    <li><div className="divider"></div></li>
+                    <li className="no-padding">
+                        <ul>
+                            <li className="bold" onClick={(this.props.bots.bots.length == 0)? "" : this.startTrain} >
+                                <Link className="collapsible-header waves-affect" id="train">{this.state.trainButton}<i className="material-icons">build</i></Link>
+                                <div className="collapsible-body">
+                                </div>
+                            </li>
+                            <li><div className="divider"></div></li>
+                            <li className="bold">
+                                <Link className="collapsible-header waves-affect" id="logout">Account<i className="material-icons">account_circle</i></Link>
+                                <div className="collapsible-body">
+                                </div>
+                            </li>
+                            <li className="bold" onClick={this.logout}>
+                                <Link className="collapsible-header waves-affect" id="logout">Logout<i className="material-icons">settings_power</i></Link>
+                                <div className="collapsible-body">
+                                </div>
+                            </li>
+                        </ul>
+                    </li><br/>
+                </ul>
+                <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only" style={{"position":"relative","zIndex":3,"color":"white","top":"45px"}}><i className="material-icons">menu</i></a>
+                <Ozz name={this.props.activeBot.name} config={config} messages={this.state.messages} clearBox={this.clearBox} sendMessage={this.sendMessage} json={this.state.json}></Ozz>
+            </div>
         );
     }
 }

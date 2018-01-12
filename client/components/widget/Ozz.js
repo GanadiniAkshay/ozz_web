@@ -1,10 +1,14 @@
 import React from 'react';
+import ReactJson from 'react-json-view';
 import {Motion, spring} from 'react-motion';
 
 import Button from './Button';
 import OzzBase from './OzzBase';
 
 import ChatTest from './ChatTest';
+
+import ChatList  from './ChatList';
+import OzzFooter from './OzzFooter';
 
 class Ozz extends React.Component{
     constructor(props){
@@ -43,18 +47,33 @@ class Ozz extends React.Component{
         });
     }
 
+    // {active ? <OzzBase active={active} config={config} messages={this.props.messages} clearBox={this.props.clearBox} sendMessage={this.props.sendMessage} json={this.props.json} isDemo={false}/> : false}
+
+    //             <Button 
+    //                 active={active}
+    //                 onClick={this._handleClick}
+    //                 color={config.color}
+    //             />
+
     render(){
         const {active, config} = this.state;
 
         return(
             <div className="ozz" id="ozz">
-                {active ? <OzzBase active={active} config={config} messages={this.props.messages} clearBox={this.props.clearBox} sendMessage={this.props.sendMessage} json={this.props.json} isDemo={false}/> : false}
-
-                <Button 
-                    active={active}
-                    onClick={this._handleClick}
-                    color={config.color}
-                />
+                <div className="ozz-box">
+                    <div className="ozz-heading">
+                        <p style={{"marginTop":"20px"}}>Test {this.props.name}</p>
+                    </div>
+                    <div className="ozz-json">
+                        <div style={{"marginLeft":"10%","marginTop":"15%"}}>
+                            <ReactJson src={this.props.json} displayDataTypes={false} theme="isotope" enableClipboard={false}/>
+                        </div>
+                    </div>
+                    <div className="ozz-chat">
+                        <ChatList color={config.color} messages={this.props.messages}/>
+                        <OzzFooter convoId={config.convoId} token={config.token} sendMessage={this.props.sendMessage}/>
+                    </div>
+                </div>
             </div>
         )
     }

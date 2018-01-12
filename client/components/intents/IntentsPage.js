@@ -170,7 +170,7 @@ class IntentsPage extends React.Component{
             var modified = moment(current_intent.modified).local().fromNow();//format('MMMM Do YYYY, h:mm:ss a');
             return (
                 <tr style={{"cursor":"pointer"}} key={index} name={current_intent.name} onClick={this.openIntent}>
-                    <td width="30%" style={{"paddingLeft":"25px","textAlign":"left"}}><i className="material-icons">assignment</i><span>{current_intent.name}</span></td>
+                    <td width="40%" style={{"paddingLeft":"25px","textAlign":"left"}}><i className="material-icons">assignment</i><span>{current_intent.name}</span></td>
                     <td>-</td>
                     <td>{current_intent.utterances}</td>
                     <td>{current_intent.responses} </td>
@@ -184,12 +184,12 @@ class IntentsPage extends React.Component{
             <div className="full">
                 <Navbar active="settings_none"/>
                 <main>
-                    <div className="fluid-container" style={{"backgroundColor":"rgb(88, 72, 138)","top":0,"position":"sticky","zIndex":2}}>
+                    <div className="fluid-container" style={{"backgroundColor":"rgb(88, 72, 138)","top":0,"position":"sticky","zIndex":2,"height":"65px"}}>
                         <div className="row" style={{"color":"white"}}>
-                            <div className="col s7 m7">
+                            <div className="col s9 m9">
                                 <h4 style={{"marginLeft":"25px"}}>Intents</h4>
                             </div>
-                            <div className="col s2 m2">
+                            <div className="col s3 m3">
                                 <div className="file-field input-field" >
                                     <a className="waves-effect waves-light btn modal-trigger" href="#intent_form" style={{'background':'white','color':'#58488a'}}>Add Intent</a>
                                 </div>
@@ -210,7 +210,7 @@ class IntentsPage extends React.Component{
                     </div>
                     <div className="fluid-container full">
                         <div className="row">
-                            <div className="col s9 m9">
+                            <div className="col s12 m12">
                                 <div className="card" style={{"zIndex":0}}>
                                     <div className="card-content" style={{"margin":0,"padding":0,"border":0}}>
                                         <br/>
