@@ -38,7 +38,6 @@ class IntentsPage extends React.Component{
          this.addKeyFolder = this.addKeyFolder.bind(this);
          this.openIntent = this.openIntent.bind(this);
          this.deleteIntent = this.deleteIntent.bind(this);
-         this.openTest = this.openTest.bind(this);
     }
 
     componentDidMount(){
