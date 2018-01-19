@@ -34,6 +34,8 @@ class IntentsPage extends React.Component{
          this.onSubmit = this.onSubmit.bind(this);
          this.addIntent = this.addIntent.bind(this);
          this.addKeyIntent = this.addKeyIntent.bind(this);
+         this.addFolder = this.addFolder.bind(this);
+         this.addKeyFolder = this.addKeyFolder.bind(this);
          this.openIntent = this.openIntent.bind(this);
          this.deleteIntent = this.deleteIntent.bind(this);
          this.openTest = this.openTest.bind(this);
@@ -88,6 +90,7 @@ class IntentsPage extends React.Component{
         payload['utterances'] = [];
         payload['responses'] = [];
         payload['has_entities'] = true;
+        payload['is_folder'] = false;
 
         this.props.addIntent(payload).then(
             () => {
@@ -97,29 +100,40 @@ class IntentsPage extends React.Component{
         )
     }
 
+    addFolder(e){
+        var intent_name = document.getElementById('folder').value;
+        this.setState({int_button:"Adding..."});
+
+        var payload = {};
+
+        payload['name'] =  intent_name;
+        payload['bot_guid'] = this.state.bot_guid;
+        payload['utterances'] = [];
+        payload['responses'] = [];
+        payload['has_entities'] = true;
+        payload['is_folder'] = true
+
+        this.props.addIntent(payload).then(
+            () => {
+                this.setState({int_button:"Add", activeIntents:this.props.activeIntents.activeIntents});
+                browserHistory.push('/bots/'+ this.state.name +'/intents/'+ intent_name);
+            }
+        )
+    }
+
+    addKeyFolder(e){
+        var key = e.which || e.keyCode;
+        
+        if (key && key == 13){
+            this.addFolder();
+        }
+    }
+
     addKeyIntent(e){
         var key = e.which || e.keyCode;
         
         if (key && key == 13){
-            var intent_name = document.getElementById('intent').value;
-            intent_name = intent_name.toLowerCase()
-            this.setState({int_button:"Adding..."});
-    
-            var payload = {};
-    
-            payload['name'] =  intent_name;
-            payload['bot_guid'] = this.state.bot_guid;
-            payload['utterances'] = [];
-            payload['responses'] = [];
-            payload['has_entities'] = true;
-    
-            this.props.addIntent(payload).then(
-                () => {
-                    this.setState({int_button:"Add", activeIntents:this.props.activeIntents.activeIntents});
-                    $('#intent_form').modal('close');
-                    browserHistory.push('/bots/'+ this.state.name +'/intents/'+ intent_name);
-                }
-            )
+            this.addIntent();
         }
     }
 
@@ -150,10 +164,6 @@ class IntentsPage extends React.Component{
         browserHistory.push(url_path);
     }
 
-    openTest(e){
-        console.log("test window opens");
-    }
-
 
     onSubmit(e){
         this.setState({ errors: {}, button:"saving..." });
@@ -166,34 +176,68 @@ class IntentsPage extends React.Component{
 
         const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
 
+        const folders = current_intents.map((current_intent,index) => {
+            var modified = moment(current_intent.modified).local().fromNow();//format('MMMM Do YYYY, h:mm:ss a');
+            if (current_intent.is_folder == true){
+                return (
+                    <tr style={{"cursor":"pointer"}} key={index} name={current_intent.name} onClick={this.openIntent}>
+                        <td width="40%" style={{"paddingLeft":"25px","textAlign":"left"}}><i className="material-icons">folder</i><span>{current_intent.name}</span></td>
+                        <td>{current_intent.count}</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>{modified}</td>
+                    </tr>
+                )
+            } 
+        })
         const intents = current_intents.map((current_intent,index) => {
             var modified = moment(current_intent.modified).local().fromNow();//format('MMMM Do YYYY, h:mm:ss a');
-            return (
-                <tr style={{"cursor":"pointer"}} key={index} name={current_intent.name} onClick={this.openIntent}>
-                    <td width="40%" style={{"paddingLeft":"25px","textAlign":"left"}}><i className="material-icons">assignment</i><span>{current_intent.name}</span></td>
-                    <td>-</td>
-                    <td>{current_intent.utterances}</td>
-                    <td>{current_intent.responses} </td>
-                    <td>{current_intent.calls}</td>
-                    <td>{modified}</td>
-                </tr>
-            )
+            if (current_intent.is_folder == false){
+                return (
+                    <tr style={{"cursor":"pointer"}} key={index} name={current_intent.name} onClick={this.openIntent}>
+                        <td width="40%" style={{"paddingLeft":"25px","textAlign":"left"}}><i className="material-icons">assignment</i><span>{current_intent.name}</span></td>
+                        <td>-</td>
+                        <td>{current_intent.utterances}</td>
+                        <td>{current_intent.responses} </td>
+                        <td>{current_intent.calls}</td>
+                        <td>{modified}</td>
+                    </tr>
+                )
+            }  
         })
 
         return (
             <div className="full">
                 <Navbar active="settings_none"/>
                 <main>
-                    <div className="fluid-container" style={{"backgroundColor":"rgb(88, 72, 138)","top":0,"position":"sticky","zIndex":2,"height":"65px"}}>
-                        <div className="row" style={{"color":"white"}}>
-                            <div className="col s9 m9">
+                    <div className="fluid-container" style={{"backgroundColor":"white","top":0,"position":"sticky","zIndex":2,"height":"65px"}}>
+                        <div className="row" style={{"color":"black"}}>
+                            <div className="col s6 m6">
                                 <h4 style={{"marginLeft":"25px"}}>Intents</h4>
                             </div>
                             <div className="col s3 m3">
                                 <div className="file-field input-field" >
-                                    <a className="waves-effect waves-light btn modal-trigger" href="#intent_form" style={{'background':'white','color':'#58488a'}}>Add Intent</a>
+                                    <a className="waves-effect waves-light btn modal-trigger" href="#folder_form" style={{'background':'#58488a','color':'white'}}>Add Folder</a>
                                 </div>
                             </div>
+                            <div className="col s3 m3">
+                                <div className="file-field input-field" >
+                                    <a className="waves-effect waves-light btn modal-trigger" href="#intent_form" style={{'background':'#58488a','color':'white'}}>Add Intent</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="folder_form" className="modal">
+                        <div className="modal-content">
+                            <h4>Add Folder</h4>
+                            <div className="input-field col s12">
+                                <input id="folder" type="text" onKeyPress={this.addKeyFolder}/>
+                                <label htmlFor="intent">Folder Name</label>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <a className="waves-effect waves-green btn-flat" onClick={this.addFolder}>{this.state.int_button}</a>
                         </div>
                     </div>
                     <div id="intent_form" className="modal">
@@ -230,6 +274,7 @@ class IntentsPage extends React.Component{
                                             </thead>
 
                                             <tbody>
+                                                {this.state.loader? loader: folders}
                                                 {this.state.loader? loader: intents}
                                             </tbody>
                                         </table>
