@@ -156,7 +156,7 @@ class Navbar extends React.Component{
         const application_select = (
             <ul className="collapsible collapsible-accordion">
                 <li className="bold no-padding">
-                    <a className="collapsible-header waves-affect" id="app"><b>{(this.props.bots.bots.length == 0)? '': this.props.activeBot.name}</b><i className="material-icons">arrow_drop_down</i><i className="material-icons" style={{"float":"right"}} onClick={this.openSettings}>settings</i></a>
+                    <a className="collapsible-header waves-affect" id="app"><b>{(this.props.bots.bots.length == 0)? '': this.props.activeBot.name}</b><i className="material-icons">arrow_drop_down</i><i className="material-icons" style={{"float":"right","margin":"0","padding":"0"}} onClick={this.openSettings}>settings</i></a>
                     <div className="collapsible-body">
                         {app_list}
                     </div>

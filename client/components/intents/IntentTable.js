@@ -299,31 +299,6 @@ class IntentTable extends React.Component{
                                 </div>
                             </div>
                         </div>
-                        <div id="test2" className="col s12">
-                            <div>
-                                <div>
-                                    <form className="col s12" id="json" encType="multipart/form-data" onSubmit={this.onPatternAdd}>
-                                        <div className="input-field">
-                                            <input autoComplete="off" id="pattern_input" type="text" placeholder="Add pattern" />
-                                        </div>
-                                        <div className="file-field input-field" >
-                                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right','marginTop':'-2%'}} onClick={this.onPatternAdd}>
-                                                <span>Add Pattern</span>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <br/><br/><br/>
-                            <br/><br/><br/>
-                            <div className="container">
-                                <div className="row">
-                                    <ul className="collapsible popout" data-collapsible="accordion" style={{"width":"100%"}}>
-                                        {patterns_list}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
