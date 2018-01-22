@@ -41,36 +41,36 @@ class IntentTable extends React.Component{
 
     componentDidMount(){
         $('ul.tabs').tabs();
-        this.props.getBots(this.state).then(
-            () => {
-                var current_bots = this.props.bots.bots;
+        // this.props.getBots(this.state).then(
+        //     () => {
+        //         var current_bots = this.props.bots.bots;
                 
-                var url_path = window.location.pathname.split('/');
-                var bot_name = decodeURI(url_path[2]);
-                var intent_name = decodeURI(url_path[4]);
+        //         var url_path = window.location.pathname.split('/');
+        //         var bot_name = decodeURI(url_path[2]);
+        //         var intent_name = decodeURI(url_path[4]);
 
-                var activeBot = current_bots.find(function(o){ return o.name == bot_name});
+        //         var activeBot = current_bots.find(function(o){ return o.name == bot_name});
                 
-                if (!activeBot){
-                    activeBot = current_bots[0];
-                    browserHistory.push('/bots/'+activeBot.name+'/intents');
-                }else{
-                    this.setState({bot_guid:activeBot.bot_guid, intent_name:intent_name, old_intent_name:intent_name});
+        //         if (!activeBot){
+        //             activeBot = current_bots[0];
+        //             browserHistory.push('/bots/'+activeBot.name+'/intents');
+        //         }else{
+        //             this.setState({bot_guid:activeBot.bot_guid, intent_name:intent_name, old_intent_name:intent_name});
 
-                    this.props.getUtterances(this.state).then(
-                        () => {
-                            this.setState({utterances:this.props.utterances.utterances});
-                        }
-                    )
+        //             // this.props.getUtterances(this.state).then(
+        //             //     () => {
+        //             //         this.setState({utterances:this.props.utterances.utterances});
+        //             //     }
+        //             // )
 
-                    this.props.getPatterns(this.state).then(
-                        () => {
-                            this.setState({patterns:this.props.patterns.patterns});
-                        }
-                    )
-                }
-            }
-        );
+        //             // this.props.getPatterns(this.state).then(
+        //             //     () => {
+        //             //         this.setState({patterns:this.props.patterns.patterns});
+        //             //     }
+        //             // )
+        //         }
+        //     }
+        // );
 
         $('.tooltipped').tooltip({delay: 50});
         $('#intent_form').modal('close');
