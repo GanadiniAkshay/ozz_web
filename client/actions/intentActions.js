@@ -31,7 +31,7 @@ export function deleteIntent(index){
 
 export function getIntents(payload){
     return dispatch => {
-        return axios.get(config.url + '/intents/'+ payload.bot_guid).then(res => {
+        return axios.get(config.url + '/intents/'+ payload.bot_guid + '?base=' + payload.base).then(res => {
             const intents = res.data.intents;
             dispatch(setActiveIntents(intents));
         })
@@ -40,7 +40,7 @@ export function getIntents(payload){
 
 export function addIntent(payload){
     return dispatch => {
-        return axios.post(config.url + '/intents/' + payload.bot_guid, payload).then(res => {
+        return axios.post(config.url + '/intents/' + payload.bot_guid+ '?base=' + payload.base, payload).then(res => {
             const success = res.data;
             dispatch(addNewIntent(payload.name));
         })

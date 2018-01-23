@@ -27,7 +27,7 @@ class IntentEditPage extends React.Component{
             intent_name:'',
             button:'save',
             utterances:'',
-            is_folder:true,
+            is_folder:null,
             disabled:true,
             loader:true,
             errors:{}
@@ -37,6 +37,7 @@ class IntentEditPage extends React.Component{
     }
 
     componentDidMount(){
+        console.log("IntentEditPage");
         this.props.getBots(this.state).then(
                 () => {
                     var current_bots = this.props.bots.bots;
@@ -77,20 +78,12 @@ class IntentEditPage extends React.Component{
         }
     }
 
-    // <main>
-    //                 <IntentTable />
-    //                 <ResponsesTable/>
-    //             </main>
-
     render(){
         const { errors } = this.state;
-        console.log(this.state.is_folder);
         return (
             <div className="full">
                 <Navbar active="settings_none"/>
-                <main>
-                    {this.state.is_folder?(<FolderTable/>):(<IntentTable/>)}
-                </main>
+                {this.state.is_folder == null?(<p></p>):this.state.is_folder?(<main><FolderTable/></main>):(<main><IntentTable bot_name={this.props.params.botname} intent_name={this.state.intent_name}/><ResponsesTable/></main>)}
             </div>
         )
     }

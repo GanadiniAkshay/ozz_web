@@ -74,6 +74,7 @@ export default (
         <Route path="bots/:botname/learn" component={requireBotAuth(LearningDemoPage)} />
         <Route path="bots/:botname/persona" component={requireBotAuth(PersonaPage)} />
         <Route path="bots/:botname/intents/:intentname/*" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*/*" component={requireBotAuth(IntentEditPage)} />
         <Route path="*" component={NotFound}/>
     </Route>
 )

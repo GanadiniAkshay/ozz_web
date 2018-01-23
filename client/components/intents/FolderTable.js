@@ -21,6 +21,7 @@ class FolderTable extends React.Component{
             id:'',
             bot_guid:'',
             name:'',
+            base:'/',
             json_button: 'Import JSON',
             activeIntents:[],
             int_button: 'Add',
@@ -38,6 +39,7 @@ class FolderTable extends React.Component{
          this.addKeyFolder = this.addKeyFolder.bind(this);
          this.openIntent = this.openIntent.bind(this);
          this.deleteIntent = this.deleteIntent.bind(this);
+         this.reloadIntents = this.reloadIntents.bind(this);
     }
 
     componentDidMount(){
@@ -48,14 +50,25 @@ class FolderTable extends React.Component{
                     var url_path = window.location.pathname.split('/');
                     var bot_name = decodeURI(url_path[2]);
 
+                    var base = '/';
+
+                    var items = url_path.slice(4);
+
+                    if (items.length == 0){
+                        this.setState({"base":base});
+                    }else{
+                        base = '/'+items.join('/');
+                        this.setState({"base":base});
+                    }
+
                     var activeBot = current_bots.find(function(o){ return o.name == bot_name});
+
+                    this.setState({name:activeBot.name,id:activeBot.id,bot_guid:activeBot.bot_guid});
 
                     if (!activeBot){
                         activeBot = current_bots[0];
                         browserHistory.push('/bots/'+activeBot.name+'/intents');
                     }else{
-                        this.setState({name:activeBot.name,id:activeBot.id,bot_guid:activeBot.bot_guid});
-
                         this.props.getIntents(this.state).then(
                             () => {
                                 this.setState({loader:false,activeIntents:this.props.activeIntents.activeIntents})
@@ -71,7 +84,15 @@ class FolderTable extends React.Component{
         });
     }
     
-    
+    reloadIntents(){
+        console.log("Reloading with " + this.props.base);
+        var payload = {"bot_guid":this.state.bot_guid,"base":this.props.base}
+        this.props.getIntents(this.state).then(
+            () => {
+                this.setState({loader:false,activeIntents:this.props.activeIntents.activeIntents})
+            }
+        )
+    }
 
 
     onChange(e){
@@ -90,13 +111,16 @@ class FolderTable extends React.Component{
         payload['responses'] = [];
         payload['has_entities'] = true;
         payload['is_folder'] = false;
+        payload['base'] = this.state.base;
 
         this.props.addIntent(payload).then(
             () => {
                 this.setState({int_button:"Add", activeIntents:this.props.activeIntents.activeIntents});
-                browserHistory.push('/bots/'+ this.state.name +'/intents/'+ intent_name);
+                browserHistory.push('/bots/'+ this.state.name +'/intents'+ this.state.base +'/' + intent_name);
             }
         )
+
+        $('#intent_form').modal('close');
     }
 
     addFolder(e){
@@ -111,13 +135,15 @@ class FolderTable extends React.Component{
         payload['responses'] = [];
         payload['has_entities'] = true;
         payload['is_folder'] = true
+        payload['base'] = this.state.base;
 
         this.props.addIntent(payload).then(
             () => {
                 this.setState({int_button:"Add", activeIntents:this.props.activeIntents.activeIntents});
-                browserHistory.push('/bots/'+ this.state.name +'/intents/'+ intent_name);
+                browserHistory.push('/bots/'+ this.state.name +'/intents'+ this.state.base +'/' + intent_name);
             }
         )
+        $('#folder_form').modal('close');
     }
 
     addKeyFolder(e){
@@ -256,7 +282,7 @@ class FolderTable extends React.Component{
                                 <div className="card-content" style={{"margin":0,"padding":0,"border":0}}>
                                     <br/>
                                     <span className="card-title">
-                                        <h5 style={{"paddingLeft":"25px"}}>Intents</h5>
+                                        <h5 style={{"paddingLeft":"25px"}}>{this.state.base}</h5>
                                     </span>
                                     <table className="bordered highlight centered">
                                         <thead>
