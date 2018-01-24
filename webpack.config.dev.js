@@ -7,6 +7,9 @@ export default {
         'webpack-hot-middleware/client',
         path.join(__dirname, '/client/index.js')
     ],
+    node:{
+        'fs':'empty'
+    },
     output: {
         path: '/',
         publicPath: '/'
@@ -25,7 +28,11 @@ export default {
                         path.join(__dirname, 'client'),
                         path.join(__dirname,'server/shared')
                     ],
-                loaders: [ 'react-hot', 'babel' ]
+                loaders: [ 'react-hot', 'babel']
+            },
+            {
+                test: /\.json$/,
+                loaders: ['json-loader']
             },
             {
                 test: /\.css$/,  

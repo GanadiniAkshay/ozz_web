@@ -18,7 +18,7 @@ module.exports = {
                               path.join(__dirname, 'client'),
                               path.join(__dirname,'server/shared')
                     ],
-            loaders: [ 'babel' ]
+            loaders: [ 'babel', 'json' ]
           },
           {
               test: /\.css$/,  

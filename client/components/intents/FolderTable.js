@@ -57,7 +57,7 @@ class FolderTable extends React.Component{
                     if (items.length == 0){
                         this.setState({"base":base});
                     }else{
-                        base = '/'+items.join('/');
+                        base = decodeURI('/'+items.join('/'));
                         this.setState({"base":base});
                     }
 
@@ -85,7 +85,6 @@ class FolderTable extends React.Component{
     }
     
     reloadIntents(){
-        console.log("Reloading with " + this.props.base);
         var payload = {"bot_guid":this.state.bot_guid,"base":this.props.base}
         this.props.getIntents(this.state).then(
             () => {

@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import config from '../../config';
 
+const env = process.env.NODE_ENV;
+
 import User from '../models/users';
 
 export default (req,res,next) => {

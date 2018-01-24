@@ -37,7 +37,6 @@ class IntentEditPage extends React.Component{
     }
 
     componentDidMount(){
-        console.log("IntentEditPage");
         this.props.getBots(this.state).then(
                 () => {
                     var current_bots = this.props.bots.bots;
@@ -47,14 +46,10 @@ class IntentEditPage extends React.Component{
                     var intent_name = this.props.params.intentname;
 
                     //check if multi path
-                    var path = this.props.params.splat;
-
-                    if (path){
-                        intent_name = intent_name + '.' + path.split('/').join('.');
+                    if (url_path.length > 5){
+                        intent_name = intent_name + '.' + url_path.slice(5).join('.');
                     }
-
-                    console.log(intent_name);
-
+                    
                     var activeBot = current_bots.find(function(o){ return o.name == bot_name});
 
                     if (!activeBot){
@@ -78,12 +73,13 @@ class IntentEditPage extends React.Component{
         }
     }
 
+    //<ResponsesTable/>
     render(){
         const { errors } = this.state;
         return (
             <div className="full">
                 <Navbar active="settings_none"/>
-                {this.state.is_folder == null?(<p></p>):this.state.is_folder?(<main><FolderTable/></main>):(<main><IntentTable bot_name={this.props.params.botname} intent_name={this.state.intent_name}/><ResponsesTable/></main>)}
+                {this.state.is_folder == null?(<p></p>):this.state.is_folder?(<main><FolderTable/></main>):(<main><IntentTable bot_name={this.props.params.botname} intent_name={this.state.intent_name}/><ResponsesTable bot_name={this.props.params.botname} intent_name={this.state.intent_name}/></main>)}
             </div>
         )
     }

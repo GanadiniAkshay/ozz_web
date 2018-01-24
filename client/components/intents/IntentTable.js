@@ -35,9 +35,7 @@ class IntentTable extends React.Component{
         this.onNameChangeConfirm = this.onNameChangeConfirm.bind(this);
     }
 
-    componentWillMount(){
-        
-    }
+    
 
     componentDidMount(){
         $('ul.tabs').tabs();

@@ -73,8 +73,17 @@ export default (
         <Route path="bots/:botname/knowledge" component={requireBotAuth(KnowledgePage)} />
         <Route path="bots/:botname/learn" component={requireBotAuth(LearningDemoPage)} />
         <Route path="bots/:botname/persona" component={requireBotAuth(PersonaPage)} />
-        <Route path="bots/:botname/intents/:intentname/*" component={requireBotAuth(IntentEditPage)} />
-        <Route path="bots/:botname/intents/:intentname/*/*" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path/*:path" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path/*:path/*:path" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path/*:path/*:path/*:path" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path/*:path/*:path/*:path/*:path" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path/*:path/*:path/*:path/*:path/*:path" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path/*:path/*:path/*:path/*:path/*:path/*:path" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path/*:path/*:path/*:path/*:path/*:path/*:path/*:path" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path/*:path/*:path/*:path/*:path/*:path/*:path/*:path/*:path" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path/*:path/*:path/*:path/*:path/*:path/*:path/*:path/*:path/*:path" component={requireBotAuth(IntentEditPage)} />
+        <Route path="bots/:botname/intents/:intentname/*:path/*:path/*:path/*:path/*:path/*:path/*:path/*:path/*:path/*:path/*:path" component={requireBotAuth(IntentEditPage)} />
         <Route path="*" component={NotFound}/>
     </Route>
 )

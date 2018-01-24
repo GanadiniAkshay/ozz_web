@@ -92,7 +92,6 @@ export function removeUtterances(index){
 }
 
 export function getUtterances(payload){
-    console.log(payload);
     return dispatch => {
         return axios.get(config.url + '/intents/' + payload.bot_guid + '/' + payload.intent_name).then(res => {
             const utterances = res.data.utterances;

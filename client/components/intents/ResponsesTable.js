@@ -36,8 +36,8 @@ class ResponsesTable extends React.Component{
                 var current_bots = this.props.bots.bots;
                 
                 var url_path = window.location.pathname.split('/');
-                var bot_name = decodeURI(url_path[2]);
-                var intent_name = decodeURI(url_path[4]);
+                var bot_name = this.props.bot_name;
+                var intent_name = this.props.intent_name;
 
                 var activeBot = current_bots.find(function(o){ return o.name == bot_name});
                 

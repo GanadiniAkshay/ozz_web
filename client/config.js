@@ -1,5 +1,3 @@
-// Development Config
-export const config = {"url":"http://localhost:5000/api"};
+import backend from  './backend.json';
 
-// Production Config
-//export const config = {"url":"/api"};
+export const config = {"url":backend.url};

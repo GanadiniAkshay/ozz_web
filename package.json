@@ -4,7 +4,9 @@
   "description": "The react frontend for ozz",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch server --exec babel-node -- server/devIndex.js",
+    "dev":"npm run prep && npm run server",
+    "prep": "node dev.js",
+    "server": "nodemon --watch server --exec babel-node -- server/devIndex.js",
     "build": "NODE_ENV=production node_modules/.bin/webpack",
     "start": "node server.js",
     "deploy": "node deploy.js"
@@ -25,9 +27,11 @@
     "dsmorse-gridster": "^0.7.0",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
+    "fs": "0.0.1-security",
     "gridstack": "^0.3.0",
     "jquery-ui-dist": "^1.12.1",
     "js-file-download": "^0.4.1",
+    "jsonfile": "^4.0.0",
     "jsonwebtoken": "^7.2.1",
     "lodash": "^4.17.4",
     "material-ui": "^0.17.0",
@@ -54,6 +58,7 @@
   "devDependencies": {
     "babel-loader": "^6.2.10",
     "http-server": "^0.9.0",
+    "json-loader": "^0.5.7",
     "node-cmd": "^3.0.0",
     "nodemon": "^1.11.0",
     "prompt": "^1.0.0",

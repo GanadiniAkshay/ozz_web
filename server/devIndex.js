@@ -5,8 +5,6 @@ import mongoose from 'mongoose';
 
 import config from '../config';
 
-
-
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -31,7 +29,6 @@ import events from './routes/events';
 // mongoose.Promise = global.Promise;
 
 // mongoose.connect(config.database, options);
-
 
 let app = express();
 
