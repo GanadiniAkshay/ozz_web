@@ -18,12 +18,16 @@ module.exports = {
                               path.join(__dirname, 'client'),
                               path.join(__dirname,'server/shared')
                     ],
-            loaders: [ 'babel', 'json' ]
+            loaders: [ 'babel' ]
           },
           {
               test: /\.css$/,  
               include: /node_modules/,  
               loaders: ['style-loader', 'css-loader'],
+         },
+         {
+              test: /\.json$/,
+              loaders: ['json-loader']
          }
     ]
   },

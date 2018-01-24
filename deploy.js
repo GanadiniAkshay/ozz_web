@@ -36,6 +36,9 @@ var get_new_version = function(){
         var config = JSON.parse(fs.readFileSync('./releases/release.json', 'utf8'));
         console.log("Starting Build...")
         console.log(config);
+
+        var client_config = JSON.parse(fs.readFileSync('./client/backend.json', 'utf8'));
+        console.log(client_config);
         //Build the Distribution
         cmd.get(
             'npm run build',
