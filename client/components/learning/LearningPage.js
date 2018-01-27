@@ -100,7 +100,7 @@ class LearningPage extends React.Component{
     }
 
     render(){
-        const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/loader.gif" alt="loader animation" style={{'marginTop':'35%','marginLeft':'45%'}}/>);
+        const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.10.22/img/loader.gif" alt="loader animation" style={{'marginTop':'35%','marginLeft':'45%'}}/>);
 
         const messages = [];
 

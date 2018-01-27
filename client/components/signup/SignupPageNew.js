@@ -22,7 +22,7 @@ class SignupPage extends React.Component{
                     <div className="col s4 full-height" style={{backgroundColor: '#fafafa', padding: '2% 0 0 2%'}}>
                         <div>
                             <Link to="/">
-                                <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.13/img/logo_color_full_2.png" alt="ozz_logo" height="80px" />
+                                <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.10.22/img/logo_color_full_2.png" alt="ozz_logo" height="80px" />
                             </Link>
                             <div className="row" style={{margin: '15% 0 0 4%'}}>
                                 <span style={{fontSize: 28, display: 'block'}}>Sign Up</span>
@@ -35,7 +35,7 @@ class SignupPage extends React.Component{
                         </div>
                     </div>
                     <div className="col s8 full-height" style={{padding: 0}}>
-                        <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.13/img/pexels6.jpg" style={{height: '100%', width: '100%'}}></img>
+                        <img src="https://d1wi3kcd7kachl.cloudfront.net/v0.10.22/img/pexels6.jpg" style={{height: '100%', width: '100%'}}></img>
                     </div>
                 </div>
 

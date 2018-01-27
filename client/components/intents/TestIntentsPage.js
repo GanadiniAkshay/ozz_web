@@ -164,7 +164,7 @@ class TestIntentsPage extends React.Component{
         const { errors } = this.state;
         const current_intents = this.state.activeIntents;
 
-        const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
+        const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.10.22/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
 
         const intents = current_intents.map((current_intent,index) => {
             var modified = moment(current_intent.modified).local().fromNow();//format('MMMM Do YYYY, h:mm:ss a');

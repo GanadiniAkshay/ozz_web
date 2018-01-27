@@ -134,7 +134,7 @@ class EntitiesPage extends React.Component{
         const { errors } = this.state;
         const current_entities = this.state.activeEntities;
         
-        const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
+        const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.10.22/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
 
         const entities = current_entities.map((current_entity,index) => {
             return (

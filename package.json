@@ -4,7 +4,7 @@
   "description": "The react frontend for ozz",
   "main": "index.js",
   "scripts": {
-    "dev":"npm run prep && npm run server",
+    "dev": "npm run prep && npm run server",
     "prep": "node dev.js",
     "server": "nodemon --watch server --exec babel-node -- server/devIndex.js",
     "build": "NODE_ENV=production node_modules/.bin/webpack",

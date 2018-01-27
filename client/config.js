@@ -1,3 +1,3 @@
 import backend from  './backend.json';
 
-export const config = {"url":'/api'};
+export const config = {"url":backend.url};

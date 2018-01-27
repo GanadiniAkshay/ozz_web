@@ -289,3 +289,23 @@ i{
   border: 0 !important;
   color: white !important;
 }
+
+.switch label input[type=checkbox]:checked+.lever {
+  background-color: #58488a !important;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: #58488a !important;
+}
+
+.no_sort{
+  border:0
+}
+
+.descending{
+  border-top: #58488a 1px solid;
+}
+
+.ascending{
+  border-bottom: #58488a 1px solid;
+}

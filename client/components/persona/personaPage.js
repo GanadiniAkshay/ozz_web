@@ -7,6 +7,8 @@ import { browserHistory, Link} from 'react-router';
 
 import PropTypes from 'prop-types';
 
+import {config} from '../../config';
+
 class PersonaPage extends React.Component{
     constructor(props){
         super(props);
@@ -20,6 +22,9 @@ class PersonaPage extends React.Component{
         this.changeMillenial = this.changeMillenial.bind(this);
         this.changeAverage = this.changeAverage.bind(this);
         this.changeProfessional = this.changeProfessional.bind(this);
+        this.importMillenial = this.importMillenial.bind(this);
+        this.importAvg = this.importAvg.bind(this);
+        this.importProfessional = this.importProfessional.bind(this);
     }
 
     componentWillMount(){
@@ -84,6 +89,60 @@ class PersonaPage extends React.Component{
 
         this.props.updateBot(bot);
     }
+
+    importMillenial(){
+        var bot_guid = this.props.activeBot.bot_guid;
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": config.url + '/import/' + bot_guid + "/millenial",
+            "method": "GET",
+            "headers": {
+              "Cache-Control": "no-cache",
+              "Authorization": "Bearer " + localStorage.jwtToken
+            }
+          }
+          
+        $.ajax(settings).done(function (response) {
+            document.getElementById('millenial_button').innerText = "Imported";
+        });
+    }
+
+    importAvg(){
+        document.getElementById('avg_button').innerText = "Imported";
+        var bot_guid = this.props.activeBot.bot_guid;
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": config.url + '/import/' + bot_guid + "/average",
+            "method": "GET",
+            "headers": {
+              "Cache-Control": "no-cache"
+            }
+          }
+          
+        $.ajax(settings).done(function (response) {
+        console.log(response);
+        });
+    }
+
+    importProfessional(){
+        document.getElementById('professional_button').innerText = "Imported";
+        var bot_guid = this.props.activeBot.bot_guid;
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": config.url + '/import/' + bot_guid + "/professional",
+            "method": "GET",
+            "headers": {
+              "Cache-Control": "no-cache"
+            }
+          }
+          
+        $.ajax(settings).done(function (response) {
+        console.log(response);
+        });
+    }
     
     render(){
         document.body.style.backgroundColor = '#F8F8F8';
@@ -96,7 +155,7 @@ class PersonaPage extends React.Component{
                         <h4>Persona</h4>
 
                         <div className="row">
-                            <div className="col s4 card" style={{"minHeight":"550px","maxHeight":"550px"}}>
+                            <div className="col s4 card" style={{"minHeight":"650px","maxHeight":"650px"}}>
                                 <div className="card-content" style={{"textAlign":"center"}}>
                                     <h4>Millenial</h4>
                                     <img src="https://robohash.org/PJO.png?set=set1&size=150x150"/>
@@ -111,9 +170,11 @@ class PersonaPage extends React.Component{
                                         Yes
                                         </label>
                                     </div>
+                                    <br/>
+                                    <button id="millenial_button" style={{'background':'#58488a','color':'white'}} onClick={this.importMillenial}>Import</button>
                                 </div>
                             </div>
-                            <div className="col s4 card" style={{"minHeight":"550px","maxHeight":"550px"}}>
+                            <div className="col s4 card" style={{"minHeight":"650px","maxHeight":"650px"}}>
                                 <div className="card-content" style={{"textAlign":"center"}}>
                                     <h4>Average Joe</h4>
                                     <img src="https://robohash.org/IGX.png?set=set1&size=150x150"/>
@@ -128,9 +189,11 @@ class PersonaPage extends React.Component{
                                         Yes
                                         </label>
                                     </div>
+                                    <br/>
+                                    <button id="avg_button" style={{'background':'#58488a','color':'white'}} onClick={this.importAvg}>Import</button>
                                 </div>
                             </div>
-                            <div className="col s4 card" style={{"minHeight":"550px","maxHeight":"550px"}}>
+                            <div className="col s4 card" style={{"minHeight":"650px","maxHeight":"650px"}}>
                                 <div className="card-content" style={{"textAlign":"center"}}>
                                     <h4>Professional</h4>
                                     <img src="https://robohash.org/5K6.png?set=set2&size=150x150"/>
@@ -145,6 +208,8 @@ class PersonaPage extends React.Component{
                                         Yes
                                         </label>
                                     </div>
+                                    <br/>
+                                    <button id="professional_button" style={{'background':'#58488a','color':'white'}} onClick={this.importProfessional}>Import</button>
                                 </div>
                             </div>
                         </div>

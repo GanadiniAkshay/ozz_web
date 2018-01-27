@@ -40,7 +40,7 @@ export default () => {
 
                 
                 <div className="col-6 sidedevices">
-                   <img width="100%" style={{"marginLeft":"25%"}} src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/robot.jpg"/>
+                   <img width="100%" style={{"marginLeft":"25%"}} src="https://d1wi3kcd7kachl.cloudfront.net/v0.10.22/img/robot.jpg"/>
                 </div>
             </div>
         </header>

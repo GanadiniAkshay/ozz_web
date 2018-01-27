@@ -143,7 +143,7 @@ class EntityEditPage extends React.Component{
         const name = this.state.name;
 
         const examples = Object.entries(this.state.examples);
-        const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.6.10/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
+        const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.10.22/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
 
         const list = examples.map((example,index)=>{
             const synonyms = example[1].map((synonym, index) => {
