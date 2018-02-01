@@ -21,6 +21,7 @@ class Ozz extends React.Component{
         };
     
         this._handleClick = this._handleClick.bind(this);
+        this.clearWindow  = this.clearWindow.bind(this);
     }
 
     componentDidMount() {
@@ -40,6 +41,10 @@ class Ozz extends React.Component{
     componentWillUnmount(){
         this.mounted = false;
     }
+
+    clearWindow(){
+		this.props.clearBox();
+	}
 
     _handleClick() {
         this.setState({
@@ -62,7 +67,7 @@ class Ozz extends React.Component{
             <div className="ozz" id="ozz">
                 <div className="ozz-box">
                     <div className="ozz-heading">
-                        <p style={{"marginTop":"20px"}}>Test {this.props.name}</p>
+                        <p style={{"marginTop":"20px"}}>Test {this.props.name} <i className="material-icons right" onClick={this.clearWindow.bind(this)} style={{"cursor":"pointer"}}>refresh</i></p>
                     </div>
                     <div className="ozz-json">
                         <div style={{"marginLeft":"10%","marginTop":"15%"}}>
