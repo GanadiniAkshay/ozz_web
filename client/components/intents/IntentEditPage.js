@@ -47,7 +47,8 @@ class IntentEditPage extends React.Component{
 
                     //check if multi path
                     if (url_path.length > 5){
-                        intent_name = intent_name + '.' + url_path.slice(5).join('.');
+                        intent_name = intent_name + '.' + decodeURIComponent(url_path.slice(5).join('.'));
+                        console.log(intent_name)
                     }
                     
                     var activeBot = current_bots.find(function(o){ return o.name == bot_name});

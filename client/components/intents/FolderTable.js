@@ -147,7 +147,12 @@ class FolderTable extends React.Component{
         this.props.addIntent(payload).then(
             () => {
                 this.setState({int_button:"Add", activeIntents:this.props.activeIntents.activeIntents});
-                browserHistory.push('/bots/'+ this.state.name +'/intents'+ this.state.base +'/' + intent_name);
+                if (this.state.base == '/'){
+                    browserHistory.push('/bots/'+ this.state.name +'/intents'+ this.state.base + intent_name);
+                }else{
+                    browserHistory.push('/bots/'+ this.state.name +'/intents'+ this.state.base +'/' + intent_name);
+                }
+                
             }
         )
         $('#folder_form').modal('close');
