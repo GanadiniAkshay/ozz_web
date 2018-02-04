@@ -54,6 +54,7 @@ class FolderTable extends React.Component{
          this.response_count_state_change = this.response_count_state_change.bind(this);
          this.api_count_state_change = this.api_count_state_change.bind(this);
          this.modified_state_change = this.modified_state_change.bind(this);
+         this.navigate_folder = this.navigate_folder.bind(this);
     }
 
     componentDidMount(){
@@ -197,6 +198,24 @@ class FolderTable extends React.Component{
     changeFolderView(e){
         var checked = document.getElementById("switch").checked;
         this.setState({show_folder:checked});
+    }
+
+    navigate_folder(e){
+        var clicked = e.currentTarget.id;
+        var folders = this.state.base.split('/').slice(1);
+
+        var link = '/bots/' + this.state.name + '/intents'
+
+        for (var i=0;i<folders.length;i++){
+            if (folders[i]== clicked){
+                link += '/' + folders[i];
+                break;
+            }else{
+                link += '/' + folders[i];
+            }
+        }
+
+        browserHistory.push(link);
     }
 
     openIntent(e){
@@ -449,6 +468,14 @@ class FolderTable extends React.Component{
 
         const loader = (<img src="https://d1wi3kcd7kachl.cloudfront.net/v0.10.22/img/loader.gif" alt="loader animation" style={{'marginTop':'15%','marginLeft':'25%'}}/>);
 
+        const bases = this.state.base.split('/').slice(1);
+        
+        const heading = bases.map((current_folder, index) => {
+            return (
+                <Link key={index} id={current_folder} style={{"cursor":"pointer","color":"rgb(88, 72, 138)"}} onClick={this.navigate_folder}>/{current_folder}</Link>
+            )
+        })
+
         const folders = current_intents.map((current_intent,index) => {
             var modified = moment(current_intent.modified).local().fromNow();//format('MMMM Do YYYY, h:mm:ss a');
             if (current_intent.is_folder == true){
@@ -530,7 +557,10 @@ class FolderTable extends React.Component{
                                 <div className="card-content" style={{"margin":0,"padding":0,"border":0}}>
                                     <br/>
                                     <span className="card-title">
-                                        <h5 style={{"paddingLeft":"25px"}}>{this.state.base}</h5>
+                                        <h5 style={{"paddingLeft":"25px"}}>
+                                            <Link to={'/bots/' + this.state.name + '/intents'} style={{"color":"rgb(88, 72, 138)"}}>..</Link>
+                                            {heading}
+                                        </h5>
                                     </span>
                                     <div className="switch" style={{"paddingLeft":"25px"}}>
                                         <label>Show Folders
