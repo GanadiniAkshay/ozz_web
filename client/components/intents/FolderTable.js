@@ -459,6 +459,28 @@ class FolderTable extends React.Component{
                 ele.className = "ascending";
                 break;
         }
+
+        var current_intents = this.state.activeIntents;
+
+        var new_intents = current_intents.sort(function(a,b){
+            if(a.modified<b.modified){
+                if (current_state == 1){
+                    return -1
+                }else if (current_state == 2){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            }else{
+                if (current_state == 1){
+                    return 1
+                }else if (current_state == 2){
+                    return -1;
+                }else{
+                    return 0;
+                }
+            }
+        });
     }
 
 
