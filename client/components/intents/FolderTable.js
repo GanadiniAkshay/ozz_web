@@ -236,19 +236,6 @@ class FolderTable extends React.Component{
     name_state_change(){
         var current_state = (this.state.name_state + 1)%3;
         this.setState({name_state:current_state});
-        var ele =document.getElementById('name_header');
-        switch (current_state){
-             
-            case 0:
-                ele.className = "no_sort";
-                break;
-            case 1:
-                ele.className = "descending";
-                break;
-            case 2:
-                ele.className = "ascending";
-                break;
-        }
 
         var current_intents = this.state.activeIntents;
 
@@ -278,19 +265,6 @@ class FolderTable extends React.Component{
     intent_count_state_change(){
         var current_state = (this.state.intent_count_state + 1)%3;
         this.setState({intent_count_state:current_state});
-        var ele =document.getElementById('intent_header');
-        switch (current_state){
-             
-            case 0:
-                ele.className = "no_sort";
-                break;
-            case 1:
-                ele.className = "descending";
-                break;
-            case 2:
-                ele.className = "ascending";
-                break;
-        }
 
         var current_intents = this.state.activeIntents;
 
@@ -320,19 +294,6 @@ class FolderTable extends React.Component{
     utterance_count_state_change(){
         var current_state = (this.state.utterance_count_state + 1)%3;
         this.setState({utterance_count_state:current_state});
-        var ele =document.getElementById('utterance_header');
-        switch (current_state){
-             
-            case 0:
-                ele.className = "no_sort";
-                break;
-            case 1:
-                ele.className = "descending";
-                break;
-            case 2:
-                ele.className = "ascending";
-                break;
-        }
 
         var current_intents = this.state.activeIntents;
 
@@ -362,19 +323,6 @@ class FolderTable extends React.Component{
     response_count_state_change(){
         var current_state = (this.state.response_count_state + 1)%3;
         this.setState({response_count_state:current_state});
-        var ele =document.getElementById('response_header');
-        switch (current_state){
-             
-            case 0:
-                ele.className = "no_sort";
-                break;
-            case 1:
-                ele.className = "descending";
-                break;
-            case 2:
-                ele.className = "ascending";
-                break;
-        }
 
         var current_intents = this.state.activeIntents;
 
@@ -404,19 +352,6 @@ class FolderTable extends React.Component{
     api_count_state_change(){
         var current_state = (this.state.api_count_state +1)%3;
         this.setState({api_count_state:current_state});
-        var ele =document.getElementById('api_header');
-        switch (current_state){
-             
-            case 0:
-                ele.className = "no_sort";
-                break;
-            case 1:
-                ele.className = "descending";
-                break;
-            case 2:
-                ele.className = "ascending";
-                break;
-        }
 
         var current_intents = this.state.activeIntents;
 
@@ -446,19 +381,6 @@ class FolderTable extends React.Component{
     modified_state_change(){
         var current_state = (this.state.modified_state+1)%3;
         this.setState({modified_state:current_state});
-        var ele =document.getElementById('modified_header');
-        switch (current_state){
-             
-            case 0:
-                ele.className = "no_sort";
-                break;
-            case 1:
-                ele.className = "descending";
-                break;
-            case 2:
-                ele.className = "ascending";
-                break;
-        }
 
         var current_intents = this.state.activeIntents;
 
@@ -594,12 +516,36 @@ class FolderTable extends React.Component{
                                     <table className="bordered highlight centered">
                                         <thead>
                                         <tr style={{"cursor":"pointer"}}>
-                                            <th id="name_header" className="no_sort"style={{"paddingLeft":"25px","textAlign":"left"}} onClick={this.name_state_change}>Name</th>
-                                            <th id="intent_header" className="no_sort" onClick={this.intent_count_state_change}>Intents</th>
-                                            <th id="utterance_header" className="no_sort" onClick={this.utterance_count_state_change}>Utterances</th>
-                                            <th id="response_header" className="no_sort" onClick={this.response_count_state_change}>Responses</th>
-                                            <th id="api_header" className="no_sort" onClick={this.api_count_state_change}>API Calls</th>
-                                            <th id="modified_header" className="no_sort" onClick={this.modified_state_change}>Last Modified</th>
+                                            <th id="name_header" className="no_sort"style={{"paddingLeft":"25px","textAlign":"left"}} onClick={this.name_state_change}>
+                                                Name 
+                                                {this.state.name_state == 1?<i className="material-icons">keyboard_arrow_up</i>:null }
+                                                {this.state.name_state == 2?<i className="material-icons">keyboard_arrow_down</i>:null }
+                                            </th>
+                                            <th id="intent_header" className="no_sort" onClick={this.intent_count_state_change}>
+                                                Intents
+                                                {this.state.intent_count_state == 1?<i className="material-icons">keyboard_arrow_up</i>:null }
+                                                {this.state.intent_count_state == 2?<i className="material-icons">keyboard_arrow_down</i>:null }
+                                            </th>
+                                            <th id="utterance_header" className="no_sort" onClick={this.utterance_count_state_change}>
+                                                Utterances
+                                                {this.state.utterance_count_state == 1?<i className="material-icons">keyboard_arrow_up</i>:null }
+                                                {this.state.utterance_count_state == 2?<i className="material-icons">keyboard_arrow_down</i>:null }
+                                            </th>
+                                            <th id="response_header" className="no_sort" onClick={this.response_count_state_change}>
+                                                Responses
+                                                {this.state.response_count_state == 1?<i className="material-icons">keyboard_arrow_up</i>:null }
+                                                {this.state.response_count_state == 2?<i className="material-icons">keyboard_arrow_down</i>:null }
+                                            </th>
+                                            <th id="api_header" className="no_sort" onClick={this.api_count_state_change}>
+                                                API Calls
+                                                {this.state.api_count_state == 1?<i className="material-icons">keyboard_arrow_up</i>:null }
+                                                {this.state.api_count_state == 2?<i className="material-icons">keyboard_arrow_down</i>:null }
+                                            </th>
+                                            <th id="modified_header" className="no_sort" onClick={this.modified_state_change}>
+                                                Last Modified
+                                                {this.state.modified_state == 1?<i className="material-icons">keyboard_arrow_up</i>:null }
+                                                {this.state.modified_state == 2?<i className="material-icons">keyboard_arrow_down</i>:null }
+                                            </th>
                                         </tr>
                                         </thead>
 
