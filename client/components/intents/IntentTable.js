@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { browserHistory, Link } from 'react-router'; 
 
 import { getBots } from '../../actions/botActions';
-import { getUtterances, changeUtterances, addUtterance, dropUtterances, getPatterns, addPattern, dropPattern } from '../../actions/intentActions';
+import { removeIntent, getUtterances, changeUtterances, addUtterance, dropUtterances, getPatterns, addPattern, dropPattern } from '../../actions/intentActions';
 
 import Navbar from '../navbar/Navbar';
 import PropTypes from 'prop-types';
@@ -33,6 +33,8 @@ class IntentTable extends React.Component{
         this.onPatternDelete_ = this.onPatternDelete_.bind(this);
         this.onNameChange = this.onNameChange.bind(this);
         this.onNameChangeConfirm = this.onNameChangeConfirm.bind(this);
+        this.deleteIntent = this.deleteIntent.bind(this);
+        this.cancelRemove = this.cancelRemove.bind(this);
     }
 
     
@@ -75,6 +77,11 @@ class IntentTable extends React.Component{
 
         $(document).ready(function(){
             $('.collapsible').collapsible();
+        });
+
+        $(document).ready(function(){
+            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
         });
     }
 
@@ -192,6 +199,26 @@ class IntentTable extends React.Component{
         }
     }
 
+    deleteIntent(e){
+        var name = this.state.intent_name;
+        var payload = {};
+        
+        payload['intent'] =  name;
+        payload['bot_guid'] = this.state.bot_guid;
+
+        $("#delete_form").modal('close');
+        this.props.removeIntent(payload).then(
+            () => {
+                var path = '/' + window.location.href.split('/').slice(3,-1).join('/');
+                browserHistory.push(path);
+            }
+        )
+    }
+    
+    cancelRemove(e){
+        $("#delete_form").modal('close');
+    }
+
     render(){
         var utterances = this.state.utterances;
         var patterns   = this.state.patterns;
@@ -260,17 +287,44 @@ class IntentTable extends React.Component{
         
         return (
             <div>
-                <div className="container">
-                    <h3>
-                            <div className="input-field-none" style={{"height":"100%"}}>
-                                <input autoComplete="off" type="text" value={this.state.intent_name} style={{"fontSize":"1em","height":"100%"}} onChange={this.onNameChange} onKeyPress={this.onNameChangeConfirm}/>
-                            </div>
-                    </h3>
+                <div className="fluid-container" style={{"backgroundColor":"white","top":0,"position":"sticky","zIndex":2,"height":"65px"}}>
+                    <div className="row" style={{"color":"black"}}>
+                        <div className="col s9 m9">
+                            <h5 style={{"marginLeft":"25px"}}>
+                                <div className="input-field-none" style={{"height":"100%"}}>
+                                    <input autoComplete="off" type="text" value={this.state.intent_name} style={{"fontSize":"1em","height":"100%"}} onChange={this.onNameChange} onKeyPress={this.onNameChangeConfirm}/>
+                                </div>
+                            </h5>
+                        </div>
+                        <div className="col s2 m2">
+                            <h5 style={{"marginLeft":"25px"}}>
+                                <div className="input-field-none" style={{"height":"100%"}}>
+                                    <a className="waves-effect waves-light btn modal-trigger" href="#delete_form" style={{'background':'#58488a','color':'white'}}><i className="material-icons">delete</i></a>
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div id="delete_form" className="modal">
+                        <div className="modal-content">
+                            <h4>Delete {this.state.intent_name}</h4>
+                            <p>This will delete the intent permanently, are you sure?</p>
+                            <br/>
+                            <div className="row">
+                                <div className="col s3 btn waves-effect waves-light" style={{'background':'#ef5350','color':'white'}} onClick={this.deleteIntent}>
+                                    Confirm Delete
+                                </div>
+                                <div className="col s3 offset-s1 btn waves-effect waves-light"  style={{'background':'#58488a','color':'white'}} onClick={this.cancelRemove}>
+                                    Cancel
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                <br/><br/>
+                <div className="fluid-container" style={{"padding":"10px"}}>
                     <div className="row">
                         <div className="col s12">
-                            <ul className="tabs">
-                                <li className="tab col s3"><a href="#test1">ML Utterances</a></li>
-                            </ul>
+                            <h5>Utterances</h5>
                         </div>
                         <div id="test1" className="col s12">
                             <div>
@@ -289,7 +343,7 @@ class IntentTable extends React.Component{
                             </div>
                             <br/><br/><br/>
                             <br/><br/><br/>
-                            <div className="container">
+                            <div className="fluid-container">
                                 <div className="row">
                                     <ul className="collapsible popout" data-collapsible="accordion">
                                         {utterance_list}
@@ -318,4 +372,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, { getBots, getUtterances, changeUtterances, addUtterance, dropUtterances, getPatterns, addPattern, dropPattern})(IntentTable);
+export default connect(mapStateToProps, {removeIntent, getBots, getUtterances, changeUtterances, addUtterance, dropUtterances, getPatterns, addPattern, dropPattern})(IntentTable);

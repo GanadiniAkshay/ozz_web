@@ -22,10 +22,9 @@ export function addNewIntent(name){
     }
 }
 
-export function deleteIntent(index){
+export function deleteIntent(){
     return {
-        type: REMOVE_INTENT,
-        index
+        type: REMOVE_INTENT
     }
 }
 
@@ -51,7 +50,7 @@ export function removeIntent(payload){
     return dispatch => {
         return axios.delete(config.url + '/intents/' + payload.bot_guid, {"params":payload}).then(res => {
             const success = res.data;
-            dispatch(deleteIntent(payload.index));
+            dispatch(deleteIntent());
         })
     }
 }

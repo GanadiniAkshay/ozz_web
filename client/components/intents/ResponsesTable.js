@@ -137,23 +137,25 @@ class ResponsesTable extends React.Component{
         });
 
         return (
-            <div>
-                <div className="container">
-                    <div>
-                        <form className="col s8 offset-s2" id="json" encType="multipart/form-data" onSubmit={this.onResponseAdd}>
-                            <div className="input-field">
-                                <input id="response" type="text" placeholder="Add response" />
-                            </div>
-                            <div className="file-field input-field" >
-                                <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right','marginTop':'-2%'}} onClick={this.onResponseAdd}>
-                                    <span>Add Response</span>
-                                </div>
-                            </div>
-                        </form>
+            <div className="fluid-container" style={{"padding":"20px"}}>
+                <div className="row">
+                    <div className="col s12">
+                        <h5>Responses</h5>
                     </div>
                 </div>
-                <br/><br/><br/>
-                <div className="container">
+                <div className="row">
+                    <form className="col s12" id="json" encType="multipart/form-data" onSubmit={this.onResponseAdd}>
+                        <div className="input-field">
+                            <input id="response" type="text" placeholder="Add response" />
+                        </div>
+                        <div className="file-field input-field" >
+                            <div className="btn waves-effect waves-light" style={{'background':'#58488a','color':'white','float':'right','marginTop':'-2%'}} onClick={this.onResponseAdd}>
+                                <span>Add Response</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div className="fluid-container" style={{"padding":"20px"}}>
                     <div className="row">
                         <ul className="collection">
                             {response_list}

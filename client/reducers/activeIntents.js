@@ -16,11 +16,9 @@ export default (state= initialState, action={}) => {
                     state.activeIntents.concat([{"calls":0,"utterances":0,"responses":0,"name":action.name}])
             };
         case REMOVE_INTENT:
-            var index = parseInt(action.index);
             return {
                 activeIntents:
-                    state.activeIntents.slice(0,index)
-                        .concat(state.activeIntents.slice(index+1))
+                    state.activeIntents
             }
         default: return state;
     }
