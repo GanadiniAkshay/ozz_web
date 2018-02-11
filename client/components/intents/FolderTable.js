@@ -176,21 +176,17 @@ class FolderTable extends React.Component{
     }
 
     deleteIntent(e){
-        var button = e.currentTarget;
-        var values = button.attributes.name.value.split('|*|*|');
-
-        var name = values[0];
-        var index = values[1];
+        var name = this.state.base.split('/').join('.')+'%';
         var payload = {};
         
         payload['intent'] =  name;
         payload['bot_guid'] = this.state.bot_guid;
-        payload['index'] = index;
 
-        $("#deleteModal"+name).modal('close');
+        $("#delete_form").modal('close');
         this.props.removeIntent(payload).then(
             () => {
-                this.setState({activeIntents:this.props.activeIntents.activeIntents});
+                var path = '/' + window.location.href.split('/').slice(3,-1).join('/');
+                browserHistory.push(path);
             }
         )
     }
@@ -420,6 +416,28 @@ class FolderTable extends React.Component{
             )
         })
 
+        const current_folder = this.state.base.split('/').pop();
+
+        const folder_edit = (
+            <div className="container" style={{"width":"100%"}}>
+                <div className="row">
+                    <div className="col s1 m1" style={{"paddingRight":"0","paddingTop":"1%"}}>
+                        <i className="material-icons">edit</i>
+                    </div>
+                    <div className="col s9 m9" style={{"padding":"0","marginLeft":"-25px"}}>
+                        <h5 style={{"margin":"0"}}>
+                            <div className="input-field-none">
+                                <input autoComplete="off" type="text" value={current_folder} style={{"fontSize":"1em","margin":"0"}}/>
+                            </div>
+                        </h5>
+                    </div>
+                    <div className="col s2 m2" style={{"paddingRight":"0","paddingTop":"1%"}}>
+                        <a className="waves-effect waves-light btn modal-trigger" href="#delete_form" style={{'background':'#58488a','color':'white'}}><i className="material-icons">delete</i></a>
+                    </div>
+                </div>
+            </div>
+        )
+
         const folders = current_intents.map((current_intent,index) => {
             var modified = moment(current_intent.modified).local().fromNow();//format('MMMM Do YYYY, h:mm:ss a');
             if (current_intent.is_folder == true){
@@ -513,6 +531,8 @@ class FolderTable extends React.Component{
                                         </label>
                                     </div>
                                     <br/>
+                                    {this.state.base == '/'? null :folder_edit}
+                                    <hr/>
                                     <table className="bordered highlight centered">
                                         <thead>
                                         <tr style={{"cursor":"pointer"}}>
@@ -557,6 +577,21 @@ class FolderTable extends React.Component{
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div id="delete_form" className="modal">
+                    <div className="modal-content">
+                        <h4>Delete {this.state.intent_name}</h4>
+                        <p>This will delete the folder and all containing intents and folders permanently, are you sure?</p>
+                        <br/>
+                        <div className="row">
+                            <div className="col s3 btn waves-effect waves-light" style={{'background':'#ef5350','color':'white'}} onClick={this.deleteIntent}>
+                                Confirm Delete
+                            </div>
+                            <div className="col s3 offset-s1 btn waves-effect waves-light"  style={{'background':'#58488a','color':'white'}} onClick={this.cancelRemove}>
+                                Cancel
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>
