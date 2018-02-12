@@ -13,6 +13,8 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import IntentCard from './IntentCard';
 import PropTypes from 'prop-types';
 
+import { config } from '../../config';
+
 
 class FolderTable extends React.Component{
     constructor(props){
@@ -25,6 +27,7 @@ class FolderTable extends React.Component{
             base:'/',
             json_button: 'Import JSON',
             activeIntents:[],
+            folder_name:"",
             int_button: 'Add',
             show_folder: true,
             name_state:0,
@@ -55,6 +58,8 @@ class FolderTable extends React.Component{
          this.api_count_state_change = this.api_count_state_change.bind(this);
          this.modified_state_change = this.modified_state_change.bind(this);
          this.navigate_folder = this.navigate_folder.bind(this);
+         this.onNameChange = this.onNameChange.bind(this);
+         this.onNameChangeConfirm = this.onNameChangeConfirm.bind(this);
     }
 
     componentDidMount(){
@@ -75,10 +80,10 @@ class FolderTable extends React.Component{
                         base = decodeURI('/'+items.join('/'));
                         this.setState({"base":base});
                     }
-
+                    const current_folder = this.state.base.split('/').pop();
                     var activeBot = current_bots.find(function(o){ return o.name == bot_name});
 
-                    this.setState({name:activeBot.name,id:activeBot.id,bot_guid:activeBot.bot_guid});
+                    this.setState({name:activeBot.name,id:activeBot.id,bot_guid:activeBot.bot_guid,folder_name:current_folder,old_folder_name:current_folder+'%'});
 
                     if (!activeBot){
                         activeBot = current_bots[0];
@@ -87,6 +92,7 @@ class FolderTable extends React.Component{
                         this.props.getIntents(this.state).then(
                             () => {
                                 this.setState({loader:false,activeIntents:this.props.activeIntents.activeIntents})
+                                
                             }
                         )
                     }
@@ -225,6 +231,32 @@ class FolderTable extends React.Component{
     onSubmit(e){
         this.setState({ errors: {}, button:"saving..." });
         e.preventDefault();
+    }
+
+    onNameChange(e){
+        this.setState({folder_name:e.target.value});
+    }
+
+    onNameChangeConfirm(e){
+        var key = e.which || e.keyCode;
+        if (key === 13){
+            var url = config.url + '/intents/' +this.state.bot_guid;
+            
+            var payload = {}
+            payload["old_name"] = this.state.old_folder_name;
+            payload["new_name"] = this.state.folder_name;
+    
+            axios.put(url,payload).then(
+                (res) => {
+                    var old_name = this.state.old_folder_name.slice(0,-1);
+                    var new_base = this.state.base.replace(old_name,this.state.folder_name);
+                    this.setState({old_folder_name:this.state.folder_name,base:new_base});
+                    var path = '/' + window.location.href.split('/').slice(3,-1).join('/') + '/' + this.state.folder_name;
+                    browserHistory.push(path);
+                },
+                (error) => {console.log(error)}
+            )
+        }
     }
 
     //change the current state for sort type of name.
@@ -416,8 +448,6 @@ class FolderTable extends React.Component{
             )
         })
 
-        const current_folder = this.state.base.split('/').pop();
-
         const folder_edit = (
             <div className="container" style={{"width":"100%"}}>
                 <div className="row">
@@ -427,7 +457,7 @@ class FolderTable extends React.Component{
                     <div className="col s9 m9" style={{"padding":"0","marginLeft":"-25px"}}>
                         <h5 style={{"margin":"0"}}>
                             <div className="input-field-none">
-                                <input autoComplete="off" type="text" value={current_folder} style={{"fontSize":"1em","margin":"0"}}/>
+                                <input autoComplete="off" type="text" value={this.state.folder_name} style={{"fontSize":"1em","margin":"0"}} onChange={this.onNameChange} onKeyPress={this.onNameChangeConfirm}/>
                             </div>
                         </h5>
                     </div>
