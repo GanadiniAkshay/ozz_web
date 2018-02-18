@@ -54,7 +54,7 @@ class ChatList extends React.Component{
 
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
-                <div className="ozz-list">
+                <div className="ozz-list" style={{"overflow":"scroll"}}>
                     {messages}
                 </div>
             </MuiThemeProvider>

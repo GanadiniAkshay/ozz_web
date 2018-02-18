@@ -63,6 +63,9 @@ class Ozz extends React.Component{
     render(){
         const {active, config} = this.state;
 
+        // <ChatList color={config.color} messages={this.props.messages} />
+        // <OzzFooter convoId={config.convoId} token={config.token} sendMessage={this.props.sendMessage}/>
+
         return(
             <div className="ozz" id="ozz">
                 <div className="ozz-box">
@@ -74,8 +77,8 @@ class Ozz extends React.Component{
                             <ReactJson src={this.props.json} displayDataTypes={false} theme="isotope" enableClipboard={false}/>
                         </div>
                     </div>
-                    <div className="ozz-chat">
-                        <ChatList color={config.color} messages={this.props.messages}/>
+                    <div className="ozz-window">
+                        <ChatList color={config.color} messages={this.props.messages} />
                         <OzzFooter convoId={config.convoId} token={config.token} sendMessage={this.props.sendMessage}/>
                     </div>
                 </div>

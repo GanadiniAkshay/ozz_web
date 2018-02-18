@@ -41,10 +41,22 @@
     background-color: black;
     border-bottom: 1px solid #e0e0e0;
     border-top: 1px solid #e0e0e0;
-    height: 250px;
+    height: 350px;
     width: 365px;
     color: #FFF;
     top:65px;
+    overflow: scroll;
+  }
+
+  .ozz-window{
+    background-color: white;
+    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
+    height: 400px;
+    width: 365px;
+    color: #FFF;
+    top:65px;
+    overflow: scroll;
   }
 
   .ozz-input{
@@ -160,7 +172,6 @@
     width: 100%;
     position: relative;
     background:white;
-    overflow: auto;
     overflow-x: auto;
     flex-grow:1 
   }
