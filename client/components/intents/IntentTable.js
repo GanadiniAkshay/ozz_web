@@ -289,7 +289,14 @@ class IntentTable extends React.Component{
             <div>
                 <div className="fluid-container" style={{"backgroundColor":"white","top":0,"position":"sticky","zIndex":2,"height":"65px"}}>
                     <div className="row" style={{"color":"black"}}>
-                        <div className="col s9 m9">
+                        <div className="col s2 m2">
+                            <h5>
+                                <div className="input-field-none" style={{"height":"100%"}}>
+                                    <a className="waves-effect waves-light btn" style={{'background':'#58488a','color':'white'}} onClick={browserHistory.goBack}><i className="material-icons">keyboard_backspace</i></a>
+                                </div>
+                            </h5>
+                        </div>
+                        <div className="col s7 m7">
                             <h5 style={{"marginLeft":"25px"}}>
                                 <div className="input-field-none" style={{"height":"100%"}}>
                                     <input autoComplete="off" type="text" value={this.state.intent_name} style={{"fontSize":"1em","height":"100%"}} onChange={this.onNameChange} onKeyPress={this.onNameChangeConfirm}/>
