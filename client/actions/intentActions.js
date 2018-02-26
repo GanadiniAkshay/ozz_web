@@ -55,6 +55,12 @@ export function removeIntent(payload){
     }
 }
 
+export function removeFolders(payload){
+    return dispatch => {
+        return axios.delete(config.url + '/folders/' + payload.bot_guid, {"params":payload});
+    }
+}
+
 /*======================================================================*/
 //                     Handle Utterances                                //
 /*======================================================================*/

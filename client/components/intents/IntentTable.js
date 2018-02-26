@@ -313,20 +313,20 @@ class IntentTable extends React.Component{
                     </div>
                 </div>
                 <div id="delete_form" className="modal">
-                        <div className="modal-content">
-                            <h4>Delete {this.state.intent_name}</h4>
-                            <p>This will delete the intent permanently, are you sure?</p>
-                            <br/>
-                            <div className="row">
-                                <div className="col s3 btn waves-effect waves-light" style={{'background':'#ef5350','color':'white'}} onClick={this.deleteIntent}>
-                                    Confirm Delete
-                                </div>
-                                <div className="col s3 offset-s1 btn waves-effect waves-light"  style={{'background':'#58488a','color':'white'}} onClick={this.cancelRemove}>
-                                    Cancel
-                                </div>
-                            </div>  
-                        </div>
+                    <div className="modal-content">
+                        <h4>Delete {this.state.intent_name}</h4>
+                        <p>This will delete the intent permanently, are you sure?</p>
+                        <br/>
+                        <div className="row">
+                            <div className="col s3 btn waves-effect waves-light" style={{'background':'#ef5350','color':'white'}} onClick={this.deleteIntent}>
+                                Confirm Delete
+                            </div>
+                            <div className="col s3 offset-s1 btn waves-effect waves-light"  style={{'background':'#58488a','color':'white'}} onClick={this.cancelRemove}>
+                                Cancel
+                            </div>
+                        </div>  
                     </div>
+                </div>
                 <br/><br/>
                 <div className="fluid-container" style={{"padding":"10px"}}>
                     <div className="row">

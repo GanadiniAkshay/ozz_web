@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { browserHistory, Link } from 'react-router';
 
 import { getBots } from '../../actions/botActions';
-import { getIntents, addIntent, removeIntent } from '../../actions/intentActions';
+import { getIntents, addIntent, removeIntent, removeFolders } from '../../actions/intentActions';
 
 import Navbar from '../navbar/Navbar';
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -30,7 +30,9 @@ class FolderTable extends React.Component{
             folder_name:"",
             int_button: 'Add',
             show_folder: true,
+            show_multi: false,
             name_state:0,
+            is_selected:[],
             intent_count_state:0,
             utterance_count_state:0,
             response_count_state:0,
@@ -60,6 +62,10 @@ class FolderTable extends React.Component{
          this.navigate_folder = this.navigate_folder.bind(this);
          this.onNameChange = this.onNameChange.bind(this);
          this.onNameChangeConfirm = this.onNameChangeConfirm.bind(this);
+         this.multiSelect = this.multiSelect.bind(this);
+         this.changeMultiSelect = this.changeMultiSelect.bind(this);
+         this.cancelFoldersRemove = this.cancelFoldersRemove.bind(this);
+         this.deleteFolders = this.deleteFolders.bind(this);
     }
 
     componentDidMount(){
@@ -93,6 +99,10 @@ class FolderTable extends React.Component{
                             () => {
                                 this.setState({loader:false,activeIntents:this.props.activeIntents.activeIntents})
                                 
+                            }
+                        ).catch(
+                            () => {
+                                console.log('here');
                             }
                         )
                     }
@@ -194,6 +204,10 @@ class FolderTable extends React.Component{
                 var path = '/' + window.location.href.split('/').slice(3,-1).join('/');
                 browserHistory.push(path);
             }
+        ).catch(
+           () => {
+               console.log('here');
+           } 
         )
     }
 
@@ -227,7 +241,6 @@ class FolderTable extends React.Component{
         browserHistory.push(url_path);
     }
 
-
     onSubmit(e){
         this.setState({ errors: {}, button:"saving..." });
         e.preventDefault();
@@ -235,6 +248,34 @@ class FolderTable extends React.Component{
 
     onNameChange(e){
         this.setState({folder_name:e.target.value});
+    }
+
+    multiSelect(e){
+        var folder_name = e.target.id.slice(2);
+        var event_type  = e.target.id.slice(0,1);
+
+        if (event_type == 'l'){
+            var input = document.getElementById('i_' + folder_name);
+            input.checked = !input.checked;
+            var is_selected = this.state.is_selected;
+
+            if (input.checked == true){
+                if (!is_selected.includes(folder_name)){
+                    is_selected.push(folder_name);
+                }
+            }else{
+                var index = is_selected.indexOf(folder_name);
+                if (index !== -1) is_selected.splice(index,1);
+            }
+            this.setState({is_selected:is_selected});
+        }else{
+            var url_path = window.location.pathname+"/"+folder_name;
+            browserHistory.push(url_path);
+        }
+    }
+
+    changeMultiSelect(){
+        this.setState({show_multi:!this.state.show_multi});
     }
 
     onNameChangeConfirm(e){
@@ -433,6 +474,36 @@ class FolderTable extends React.Component{
         });
     }
 
+    cancelFoldersRemove(e){
+        $("#del_form").modal('close');
+    }
+
+    deleteFolders(e){
+        var folders = this.state.is_selected;
+        var payload = {};
+        
+        payload['folders'] =  folders;
+        payload['bot_guid'] = this.state.bot_guid;
+        payload['base'] = this.state.base;
+
+        $("#delete_form").modal('close');
+
+        if (this.state.is_selected.length == this.state.activeIntents.length){
+            this.props.removeFolders(payload).then(
+                () => {
+                    var path = '/' + window.location.href.split('/').slice(3,-1).join('/');
+                    browserHistory.push(path);
+                }
+            ) 
+        }else{
+            this.props.removeFolders(payload).then(
+                () => {
+                    window.location.reload();
+                }
+            ) 
+        }
+    }
+
 
     render(){
         const { errors } = this.state;
@@ -468,12 +539,35 @@ class FolderTable extends React.Component{
             </div>
         )
 
-        const folders = current_intents.map((current_intent,index) => {
+        const selected_folders = this.state.is_selected.map((folder_name,index) => {
+            return (
+                    <li key={index}><b><i className="material-icons">folder</i>{folder_name}</b></li>
+            )
+            
+        });
+
+        const error_message = (
+            <li><b>No folders selected</b></li>
+        )
+
+        const folder_del_button = (
+            <div className="col s3 btn waves-effect waves-light" style={{'background':'#ef5350','color':'white'}} onClick={this.deleteFolders}>
+                Confirm Delete
+            </div>
+                            
+        )
+
+        const folders_multi = current_intents.map((current_intent,index) => {
             var modified = moment(current_intent.modified).local().fromNow();//format('MMMM Do YYYY, h:mm:ss a');
             if (current_intent.is_folder == true){
                 return (
-                    <tr style={{"cursor":"pointer"}} key={index} name={current_intent.name} onClick={this.openIntent}>
-                        <td width="40%" style={{"paddingLeft":"25px","textAlign":"left"}}><i className="material-icons">folder</i><span>{current_intent.name}</span></td>
+                    <tr style={{"cursor":"pointer"}} key={index} name={current_intent.name} >
+                        <td width="40%" style={{"paddingLeft":"25px","textAlign":"left","color":"black"}} id={'t_' + current_intent.name} onClick={this.multiSelect}>
+                            <input type="checkbox" id={'i_' + current_intent.name}/>
+                            <label style={{"color":"black"}} id={'l_' + current_intent.name}>
+                                <i className="material-icons" id={'m_' + current_intent.name}>folder</i><span id={'s_' + current_intent.name}>{current_intent.name}</span>   
+                            </label>                         
+                        </td>
                         <td>{current_intent.count}</td>
                         <td>-</td>
                         <td>-</td>
@@ -482,7 +576,26 @@ class FolderTable extends React.Component{
                     </tr>
                 )
             } 
-        })
+        });
+
+        const folders = current_intents.map((current_intent,index) => {
+            var modified = moment(current_intent.modified).local().fromNow();//format('MMMM Do YYYY, h:mm:ss a');
+            if (current_intent.is_folder == true){
+                return (
+                    <tr style={{"cursor":"pointer"}} key={index} name={current_intent.name} >
+                        <td width="40%" style={{"paddingLeft":"25px","textAlign":"left","color":"black"}} id={'t_' + current_intent.name} onClick={this.multiSelect}>
+                            <i className="material-icons" id={'m_' + current_intent.name}>folder</i><span id={'s_' + current_intent.name}>{current_intent.name}</span>                            
+                        </td>
+                        <td>{current_intent.count}</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>{modified}</td>
+                    </tr>
+                )
+            } 
+        });
+
         const intents = current_intents.map((current_intent,index) => {
             var modified = moment(current_intent.modified).local().fromNow();//format('MMMM Do YYYY, h:mm:ss a');
             if (current_intent.is_folder == false){
@@ -498,6 +611,20 @@ class FolderTable extends React.Component{
                 )
             }  
         })
+
+        const del_button = (
+            <a className="waves-effect waves-light btn modal-trigger" href="#del_form" style={{'background':'#58488a','color':'white','marginRight':'30px','float':'right'}}>Delete Selection</a>
+        )
+        
+        const multi_select = (
+            <div className="switch" style={{"paddingLeft":"25px"}}>
+                <label>Show Multiple Select
+                    <input id="switch" type="checkbox" onChange={this.changeMultiSelect}/>
+                    <span className="lever"></span>
+                </label>
+                {this.state.show_multi?del_button:null}
+            </div>
+        )
 
         return (
             <div>
@@ -560,6 +687,7 @@ class FolderTable extends React.Component{
                                             <span className="lever"></span>
                                         </label>
                                     </div>
+                                    {this.state.show_folder?multi_select:null}
                                     <br/>
                                     {this.state.base == '/'? null :folder_edit}
                                     <hr/>
@@ -600,7 +728,9 @@ class FolderTable extends React.Component{
                                         </thead>
 
                                         <tbody>
-                                            {this.state.show_folder?(folders):null}
+                                            {this.state.show_folder?
+                                                (this.state.show_multi?folders_multi:folders)
+                                                :null}
                                             {this.state.loader? loader: intents}
                                         </tbody>
                                     </table>
@@ -619,6 +749,23 @@ class FolderTable extends React.Component{
                                 Confirm Delete
                             </div>
                             <div className="col s3 offset-s1 btn waves-effect waves-light"  style={{'background':'#58488a','color':'white'}} onClick={this.cancelRemove}>
+                                Cancel
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div id="del_form" className="modal">
+                    <div className="modal-content">
+                        <h4>Delete Folders</h4>
+                        <p>This will delete the following folders and all it's contents permanently, are you sure?</p>
+                        <br/>
+                        <ul>
+                            {this.state.is_selected.length == 0?error_message:selected_folders}
+                        </ul>
+                        <br/>
+                        <div className="row">
+                            {this.state.is_selected.length == 0?null:folder_del_button}
+                            <div className="col s3 offset-s1 btn waves-effect waves-light"  style={{'background':'#58488a','color':'white'}} onClick={this.cancelFoldersRemove}>
                                 Cancel
                             </div>
                         </div>  
@@ -644,4 +791,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, { getBots, getIntents, addIntent, removeIntent })(FolderTable);
+export default connect(mapStateToProps, { getBots, getIntents, addIntent, removeIntent, removeFolders })(FolderTable);
