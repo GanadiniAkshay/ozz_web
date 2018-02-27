@@ -1,11 +1,14 @@
 import React from 'react'
 import remove from 'lodash/remove'
+import axios from 'axios';
 import { browserHistory, Link } from 'react-router';
 
 import { connect } from 'react-redux';
 import { logout } from '../../actions/loginActions';
 import { beginTraining } from '../../actions/trainActions';
 import { sendMessage, clearBox } from '../../actions/testActions';
+import { updateBot } from '../../actions/botActions';
+import Request from 'axios-request-handler';
 
 import Ozz from '../widget/Ozz';
 import { config } from '../../config';
@@ -20,6 +23,9 @@ class Navbar extends React.Component{
         this.state = {
             'isBase':true,
             'trainButton':"Train",
+            'isTraining':false,
+            'trainStarted':false,
+            'lastTrained':null,
             'json':{},
             'messages':[]
         }
@@ -68,19 +74,71 @@ class Navbar extends React.Component{
     }
     
     startTrain(e){
-        var $toastContent = $('<span>Training   <i class="fa fa-gear fa-spin" style="font-size:24px;margin-top:4%"></i></span>');
-        Materialize.toast($toastContent, 30000);
-        this.setState({trainButton:"Training..."});
+        var $toastContent = $('<span>Added to Queue</span>');
+        Materialize.toast($toastContent, 2000);
+        this.setState({trainButton:"Training...",isTraining:true});
 
         var payload = {}
         payload['bot_guid'] = this.props.activeBot.bot_guid;
 
-        this.props.beginTraining(payload).then(
-            () => {
-                this.setState({trainButton:"Train"});
-                $('.toast').remove()
+        axios.get(config.url + '/train/' + payload.bot_guid).then( res => {
+            const data = res.data;
+            this.pollStatus(data.job_id);
+        });
+
+        // this.props.beginTraining(payload).then(
+        //     () => {
+        //         this.setState({trainButton:"Train"});
+        //         $('.toast').remove()
+        //     }
+        // )
+    }
+
+
+    pollStatus(job_id){
+        const host = config.url.split("/")[2];
+        const url = "/status/" + job_id;
+        const trainer = new Request(url);
+
+        var flag = false;
+
+        trainer.poll(5000).get((response) => {
+            var status = response.data.status;
+
+            if (status == 'started'){
+                if (this.state.trainStarted == false){
+                    var $toastContent = $('<span>Training Started</span>');
+                    Materialize.toast($toastContent, 2000);
+
+                    this.setState({trainStarted:true});
+                }
             }
-        )
+
+            if (status == 'finished'){
+                var waitUntil = new Date().getTime() + 5000;
+                while(new Date().getTime() < waitUntil) true;
+                
+                var $toastContent = $('<span>Training Completed</span>');
+                Materialize.toast($toastContent, 2000);
+
+                var now = new Date();
+                this.setState({lastTrained:now});
+
+                console.log(response.data.result);
+                //console.log(this.props.activeBot);
+
+                var result = response.data.result;
+                var bot = this.props.activeBot;
+                bot['words'] = result["words"]
+                bot['active_model'] = result['active_model']
+                bot['last_trained'] = new Date();
+                bot['train_time'] = result["train_time"]
+                this.props.updateBot(bot);
+                this.setState({trainButton:"Train",isTraining:false,trainStarted:false});
+                return false;
+            }
+            // you can cancel polling by returning false
+        });
     }
 
     openSettings(e){
@@ -93,6 +151,8 @@ class Navbar extends React.Component{
         // Initialize collapsible (uncomment the line below if you use the dropdown variation)
         $('.collapsible').collapsible();
         $('.modal').modal();
+
+        this.setState({'lastTrained':this.props.activeBot.last_trained});
     }
 
     render(){
@@ -237,7 +297,7 @@ class Navbar extends React.Component{
                     </li><br/>
                 </ul>
                 <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only" style={{"position":"relative","zIndex":3,"color":"white","top":"45px"}}><i className="material-icons">menu</i></a>
-                <Ozz name={this.props.activeBot.name} config={config} messages={this.state.messages} clearBox={this.clearBox} sendMessage={this.sendMessage} json={this.state.json}></Ozz>
+                <Ozz name={this.props.activeBot.name} last_trained={this.state.lastTrained} config={config} messages={this.state.messages} clearBox={this.clearBox} sendMessage={this.sendMessage} json={this.state.json} isTraining={this.state.isTraining}></Ozz>
             </div>
         );
     }
@@ -259,4 +319,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, { logout, beginTraining, sendMessage, clearBox })(Navbar);
+export default connect(mapStateToProps, { logout, beginTraining, sendMessage, clearBox, updateBot })(Navbar);

@@ -41,7 +41,7 @@ export function updateBot(paylod){
         return axios.put(config.url + '/bots/' + paylod.bot_guid, paylod).then(res => {
             dispatch(setActiveBot(paylod));
         })
-    }
+    } 
 }
 
 export function deleteBot(payload){

@@ -66,8 +66,9 @@ class OzzFooter extends React.Component{
                    <div className="message-bar">
                        <TextField id="message-bar"
                                   ref='messager'
+                                  disabled={this.props.last_trained == null || this.props.isTraining}
                                   multiLine={true} 
-                                  hintText='Send a message...' 
+                                  hintText={this.props.last_trained == null? 'Train before testing' : this.props.isTraining? 'Training...' :'Send a message...' }
                                   underlineFocusStyle={style}
                                   onKeyPress={this._handleEnter.bind(this)}/>
                    </div>
