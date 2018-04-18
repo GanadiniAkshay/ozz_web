@@ -96,14 +96,20 @@ class Navbar extends React.Component{
 
 
     pollStatus(job_id){
-        const host = config.url.split("/")[2];
-        const url = "/status/" + job_id;
+        var url = "/status/" + job_id;
+        if (config.url == 'http://localhost:5000/api'){
+            console.log('here');
+            url = "http://localhost:5000/status/" + job_id;
+        }
+        console.log(url)
         const trainer = new Request(url);
 
         var flag = false;
 
         trainer.poll(5000).get((response) => {
             var status = response.data.status;
+
+            console.log(response.data);
 
             if (status == 'started'){
                 if (this.state.trainStarted == false){
@@ -297,7 +303,7 @@ class Navbar extends React.Component{
                     </li><br/>
                 </ul>
                 <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only" style={{"position":"relative","zIndex":3,"color":"white","top":"45px"}}><i className="material-icons">menu</i></a>
-                <Ozz name={this.props.activeBot.name} last_trained={this.state.lastTrained} config={config} messages={this.state.messages} clearBox={this.clearBox} sendMessage={this.sendMessage} json={this.state.json} isTraining={this.state.isTraining}></Ozz>
+                <Ozz name={this.props.activeBot.name} last_trained={this.props.activeBot.last_trained} config={config} messages={this.state.messages} clearBox={this.clearBox} sendMessage={this.sendMessage} json={this.state.json} isTraining={this.state.isTraining}></Ozz>
             </div>
         );
     }
